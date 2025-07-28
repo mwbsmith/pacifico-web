@@ -20,16 +20,21 @@ import {
   Globe,
   ChevronDown,
   Menu,
+  ChevronUp,
+  DollarSign,
 } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
 export default function PacificoHomepage() {
   const [scrollY, setScrollY] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [tuitionOpen, setTuitionOpen] = useState(false)
+  const tuitionRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,6 +63,19 @@ export default function PacificoHomepage() {
     const element = document.querySelector(href)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
+  const handleTuitionClick = () => {
+    setTuitionOpen(!tuitionOpen)
+    if (!tuitionOpen) {
+      // Small delay to allow the content to expand before scrolling
+      setTimeout(() => {
+        tuitionRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        })
+      }, 100)
     }
   }
 
@@ -106,6 +124,9 @@ export default function PacificoHomepage() {
                 <Link href="#about" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md">
                   About
                 </Link>
+                <Link href="#admissions" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md">
+                  Admissions
+                </Link>
                 <Link href="#calendar" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md">
                   Calendar
                 </Link>
@@ -130,12 +151,6 @@ export default function PacificoHomepage() {
                     <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-gray-50">
                       <span className="text-lg">🇺🇸</span>
                       <span>English</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild className="flex items-center gap-2 cursor-pointer hover:bg-gray-50">
-                      <Link href="/es">
-                        <span className="text-lg">🇪🇸</span>
-                        <span>Español</span>
-                      </Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -173,6 +188,12 @@ export default function PacificoHomepage() {
                           About
                         </button>
                         <button
+                          onClick={() => handleNavClick("#admissions")}
+                          className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2"
+                        >
+                          Admissions
+                        </button>
+                        <button
                           onClick={() => handleNavClick("#calendar")}
                           className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2"
                         >
@@ -193,13 +214,6 @@ export default function PacificoHomepage() {
                             <span className="text-xl">🇺🇸</span>
                             <span className="text-gray-800">English</span>
                           </button>
-                          <Link
-                            href="/es"
-                            className="flex items-center gap-3 w-full text-left p-2 rounded-lg hover:bg-gray-100 transition-colors"
-                          >
-                            <span className="text-xl">🇪🇸</span>
-                            <span className="text-gray-800">Español</span>
-                          </Link>
                         </div>
                       </div>
                     </div>
@@ -328,6 +342,275 @@ export default function PacificoHomepage() {
                 </CardDescription>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Admissions Section */}
+      <section id="admissions" className="py-16 bg-gradient-to-r from-amber-100 to-orange-100">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="flex justify-center items-center space-x-2 mb-4">
+              <User className="h-8 w-8 text-amber-600" />
+              <h2 className="text-4xl font-bold text-gray-800">Admissions</h2>
+              <Heart className="h-8 w-8 text-orange-600" />
+            </div>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Join our nurturing learning community where children develop their full potential through Waldorf-inspired
+              education in the heart of Costa Rica.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-6">
+            <Card className="bg-white/90 backdrop-blur-sm border-2 border-orange-200 shadow-lg">
+              <CardHeader className="text-center">
+                <CardTitle className="text-3xl text-orange-700 mb-2">Visit Our School</CardTitle>
+                <CardDescription className="text-lg text-gray-600">
+                  Experience our Waldorf-inspired learning environment
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="text-center space-y-4">
+                  <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-lg border border-yellow-200">
+                    <h4 className="text-xl font-semibold text-orange-700 mb-3">Schedule Your Visit</h4>
+                    <p className="text-gray-600 mb-4">
+                      Come see our beautiful campus nestled in the Costa Rican jungle and meet our dedicated teachers.
+                      We offer personalized tours for prospective families.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Button
+                        size="lg"
+                        className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-lg"
+                      >
+                        <Phone className="mr-2 h-5 w-5" />
+                        Call +506 8762 6927
+                      </Button>
+                      <Collapsible open={tuitionOpen} onOpenChange={setTuitionOpen}>
+                        <CollapsibleTrigger asChild>
+                          <Button
+                            size="lg"
+                            variant="outline"
+                            className="border-2 border-orange-500 text-orange-700 hover:bg-orange-50 bg-transparent"
+                            onClick={handleTuitionClick}
+                          >
+                            <DollarSign className="mr-2 h-5 w-5" />
+                            2025 Tuition & Fees
+                            {tuitionOpen ? (
+                              <ChevronUp className="ml-2 h-4 w-4" />
+                            ) : (
+                              <ChevronDown className="ml-2 h-4 w-4" />
+                            )}
+                          </Button>
+                        </CollapsibleTrigger>
+                      </Collapsible>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h4 className="text-lg font-semibold text-gray-800">What to Expect During Your Visit:</h4>
+                    <div className="grid gap-3">
+                      <div className="flex items-start space-x-3 text-left">
+                        <div className="bg-blue-100 p-2 rounded-full">
+                          <User className="h-4 w-4 text-blue-600" />
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-800">Meet Our Teachers</p>
+                          <p className="text-sm text-gray-600">
+                            Connect with our experienced Waldorf-trained educators
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start space-x-3 text-left">
+                        <div className="bg-green-100 p-2 rounded-full">
+                          <Leaf className="h-4 w-4 text-green-600" />
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-800">Explore Our Campus</p>
+                          <p className="text-sm text-gray-600">
+                            Tour our natural outdoor classrooms and learning spaces
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start space-x-3 text-left">
+                        <div className="bg-purple-100 p-2 rounded-full">
+                          <Heart className="h-4 w-4 text-purple-600" />
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-800">Learn Our Philosophy</p>
+                          <p className="text-sm text-gray-600">
+                            Understand our approach to nurturing head, heart, and hands
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-teal-50 to-blue-50 p-4 rounded-lg border border-teal-200">
+                    <h4 className="font-semibold text-teal-700 mb-2">Application Process</h4>
+                    <ol className="text-sm text-gray-600 space-y-1 text-left">
+                      <li>1. Schedule and attend a campus visit</li>
+                      <li>2. Submit completed application form</li>
+                      <li>3. Child assessment and family interview</li>
+                      <li>4. Enrollment confirmation and fee payment</li>
+                    </ol>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Collapsible Tuition Table */}
+            <Collapsible open={tuitionOpen} onOpenChange={setTuitionOpen}>
+              <CollapsibleContent className="space-y-0" ref={tuitionRef}>
+                <Card className="bg-white/95 backdrop-blur-sm border-2 border-green-200 shadow-lg">
+                  <CardHeader className="text-center">
+                    <CardTitle className="text-2xl text-green-700 flex items-center justify-center gap-2">
+                      <DollarSign className="h-6 w-6" />
+                      2025 Tuition & Fees
+                    </CardTitle>
+                    <CardDescription>Complete pricing information for the 2025 academic year</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="overflow-x-auto">
+                      <table className="w-full border-collapse">
+                        <thead>
+                          <tr className="bg-gradient-to-r from-green-50 to-emerald-50">
+                            <th className="border border-green-200 p-3 text-left font-semibold text-green-800">
+                              Program
+                            </th>
+                            <th className="border border-green-200 p-3 text-left font-semibold text-green-800">
+                              Schedule
+                            </th>
+                            <th className="border border-green-200 p-3 text-right font-semibold text-green-800">
+                              Annual Tuition
+                            </th>
+                            <th className="border border-green-200 p-3 text-right font-semibold text-green-800">
+                              Monthly
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className="bg-blue-50">
+                            <td colSpan="4" className="border border-gray-200 p-3 font-bold text-blue-700 text-center">
+                              Full Day (8:00 AM - 2:15 PM)
+                            </td>
+                          </tr>
+                          <tr className="hover:bg-blue-50 transition-colors">
+                            <td className="border border-gray-200 p-3 font-medium text-blue-700">
+                              Kindergarten (3 days/week)
+                            </td>
+                            <td className="border border-gray-200 p-3 text-gray-600">Mon, Wed, Fri</td>
+                            <td className="border border-gray-200 p-3 text-right font-bold text-blue-700">$5,200</td>
+                            <td className="border border-gray-200 p-3 text-right text-gray-600">$520</td>
+                          </tr>
+                          <tr className="hover:bg-green-50 transition-colors">
+                            <td className="border border-gray-200 p-3 font-medium text-green-700">
+                              Kindergarten (5 days/week)
+                            </td>
+                            <td className="border border-gray-200 p-3 text-gray-600">Monday - Friday</td>
+                            <td className="border border-gray-200 p-3 text-right font-bold text-green-700">$6,950</td>
+                            <td className="border border-gray-200 p-3 text-right text-gray-600">$695</td>
+                          </tr>
+                          <tr className="hover:bg-purple-50 transition-colors">
+                            <td className="border border-gray-200 p-3 font-medium text-purple-700">Grades 1-8</td>
+                            <td className="border border-gray-200 p-3 text-gray-600">Monday - Friday</td>
+                            <td className="border border-gray-200 p-3 text-right font-bold text-purple-700">$6,950</td>
+                            <td className="border border-gray-200 p-3 text-right text-gray-600">$695</td>
+                          </tr>
+                          <tr className="bg-amber-50">
+                            <td colSpan="4" className="border border-gray-200 p-3 font-bold text-amber-700 text-center">
+                              Half Day (8:00 AM - 1:00 PM)
+                            </td>
+                          </tr>
+                          <tr className="hover:bg-orange-50 transition-colors">
+                            <td className="border border-gray-200 p-3 font-medium text-orange-700">
+                              Kindergarten (3 days/week)
+                            </td>
+                            <td className="border border-gray-200 p-3 text-gray-600">Mon, Wed, Fri</td>
+                            <td className="border border-gray-200 p-3 text-right font-bold text-orange-700">$4,050</td>
+                            <td className="border border-gray-200 p-3 text-right text-gray-600">$405</td>
+                          </tr>
+                          <tr className="hover:bg-yellow-50 transition-colors">
+                            <td className="border border-gray-200 p-3 font-medium text-yellow-700">
+                              Kindergarten (5 days/week)
+                            </td>
+                            <td className="border border-gray-200 p-3 text-gray-600">Monday - Friday</td>
+                            <td className="border border-gray-200 p-3 text-right font-bold text-yellow-700">$5,800</td>
+                            <td className="border border-gray-200 p-3 text-right text-gray-600">$580</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div className="mt-6 grid md:grid-cols-2 gap-6">
+                      <div className="space-y-4">
+                        <h4 className="text-lg font-semibold text-gray-800">One-time and Annual Fees</h4>
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center p-3 bg-orange-50 rounded-lg border border-orange-200">
+                            <span className="text-gray-700">New Student Registration (one-time)</span>
+                            <span className="font-bold text-orange-700">$500</span>
+                          </div>
+                          <div className="flex justify-between items-center p-3 bg-red-50 rounded-lg border border-red-200">
+                            <span className="text-gray-700">Enrollment Fee (annual)</span>
+                            <span className="font-bold text-red-700">$550</span>
+                          </div>
+                          <div className="flex justify-between items-center p-3 bg-teal-50 rounded-lg border border-teal-200">
+                            <span className="text-gray-700">Materials Fee - Kindergarten (annual)</span>
+                            <span className="font-bold text-teal-700">$300</span>
+                          </div>
+                          <div className="flex justify-between items-center p-3 bg-indigo-50 rounded-lg border border-indigo-200">
+                            <span className="text-gray-700">Materials Fee - Grades (annual)</span>
+                            <span className="font-bold text-indigo-700">$350</span>
+                          </div>
+                          <div className="flex justify-between items-center p-3 bg-pink-50 rounded-lg border border-pink-200">
+                            <span className="text-gray-700">Insurance (annual)</span>
+                            <span className="font-bold text-pink-700">$20</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-4">
+                        <h4 className="text-lg font-semibold text-gray-800">Payment Options</h4>
+                        <div className="space-y-2">
+                          <div className="p-3 bg-green-50 rounded-lg border border-green-200">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="font-medium text-green-700">100% Tuition by August 1st</span>
+                              <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+                                5% Discount
+                              </span>
+                            </div>
+                            <p className="text-sm text-gray-600">Pay full tuition by August 1st and save 5%</p>
+                          </div>
+                          <div className="p-3 bg-blue-50 rounded-lg border border-blue-200">
+                            <span className="font-medium text-blue-700">10 Monthly Payments</span>
+                            <p className="text-sm text-gray-600">Due 1st of each month, first payment August 1st</p>
+                          </div>
+                          <div className="p-3 bg-pink-50 rounded-lg border border-pink-200">
+                            <span className="font-medium text-pink-700">Financial Aid Available</span>
+                            <p className="text-sm text-gray-600">Contact us for need-based assistance</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 p-4 bg-gradient-to-r from-teal-50 to-blue-50 rounded-lg border border-teal-200 text-center">
+                      <p className="text-teal-700 font-medium mb-2">Questions about tuition and fees?</p>
+                      <div className="flex flex-col sm:flex-row gap-2 justify-center">
+                        <Button size="sm" className="bg-teal-600 hover:bg-teal-700 text-white">
+                          Call +506 8762 6927
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="border-teal-600 text-teal-700 hover:bg-teal-50 bg-transparent"
+                        >
+                          Email admissions@waldorf.cr
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </CollapsibleContent>
+            </Collapsible>
           </div>
         </div>
       </section>
@@ -679,6 +962,11 @@ export default function PacificoHomepage() {
                 <li>
                   <Link href="#about" className="hover:text-teal-300 transition-colors">
                     About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#admissions" className="hover:text-teal-300 transition-colors">
+                    Admissions
                   </Link>
                 </li>
                 <li>
