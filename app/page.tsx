@@ -358,10 +358,6 @@ export default function PacificoHomepage() {
               <h2 className="text-4xl font-bold text-gray-800">Admissions</h2>
               <Heart className="h-8 w-8 text-orange-600" />
             </div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Join our nurturing learning community where children develop their full potential through Waldorf-inspired
-              education in the heart of Costa Rica.
-            </p>
           </div>
 
           <div className="max-w-4xl mx-auto space-y-6">
@@ -386,10 +382,10 @@ export default function PacificoHomepage() {
                         size="lg"
                         className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-lg"
                       >
-                        <Link href="/admissions/application#top">
+                        <a href="https://wa.me/50687626927" target="_blank" rel="noopener noreferrer">
                           <Phone className="mr-2 h-5 w-5" />
                           Call +506 8762 6927
-                        </Link>
+                        </a>
                       </Button>
                       <Collapsible open={tuitionOpen} onOpenChange={setTuitionOpen}>
                         <CollapsibleTrigger asChild>
@@ -454,10 +450,12 @@ export default function PacificoHomepage() {
                   <div className="bg-gradient-to-r from-teal-50 to-blue-50 p-4 rounded-lg border border-teal-200">
                     <h4 className="font-semibold text-teal-700 mb-2">Application Process</h4>
                     <ol className="text-sm text-gray-600 space-y-1 text-left">
-                      <li>1. Schedule and attend a campus visit</li>
-                      <li>2. Submit completed application form</li>
-                      <li>3. Child assessment and family interview</li>
-                      <li>4. Enrollment confirmation and fee payment</li>
+                      <li>1. Submit application form</li>
+                      <li>
+                        2. Schedule a tour of our campus or schedule a call if you are not currently in Costa Rica
+                      </li>
+                      <li>3. Family interview</li>
+                      <li>4. Enrollment confirmation and payment of fees</li>
                     </ol>
                   </div>
                 </div>
@@ -601,8 +599,10 @@ export default function PacificoHomepage() {
                     <div className="mt-6 p-4 bg-gradient-to-r from-teal-50 to-blue-50 rounded-lg border border-teal-200 text-center">
                       <p className="text-teal-700 font-medium mb-2">Questions about tuition and fees?</p>
                       <div className="flex flex-col sm:flex-row gap-2 justify-center">
-                        <Button size="sm" className="bg-teal-600 hover:bg-teal-700 text-white">
-                          Call +506 8762 6927
+                        <Button asChild size="sm" className="bg-teal-600 hover:bg-teal-700 text-white">
+                          <a href="https://wa.me/50687626927" target="_blank" rel="noopener noreferrer">
+                            Call +506 8762 6927
+                          </a>
                         </Button>
                         <Button
                           size="sm"
@@ -644,11 +644,19 @@ export default function PacificoHomepage() {
                 </a>
               </Button>
               <Button
+                asChild
                 variant="outline"
                 className="border-2 border-purple-500 text-purple-700 hover:bg-purple-50 bg-transparent"
               >
-                <Download className="mr-2 h-5 w-5" />
-                Download Printable Calendar
+                <a
+                  href="/documents/pacifico-internacional-2025-2026-calendar.pdf"
+                  download="Pacifico_Internacional_2025-2026_School_Calendar.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Download className="mr-2 h-5 w-5" />
+                  Download Printable Calendar
+                </a>
               </Button>
             </div>
           </div>
@@ -887,6 +895,9 @@ export default function PacificoHomepage() {
                     </p>
                     <p>
                       <span className="font-semibold">Extended Care (Kindergarten):</span> Until 2:15 PM
+                    </p>
+                    <p>
+                      <span className="font-semibold">Office (Monday - Friday):</span> 7:30 AM - 2:30 PM
                     </p>
                   </div>
                 </CardContent>
