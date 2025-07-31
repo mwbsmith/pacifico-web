@@ -21,7 +21,7 @@ import {
   ChevronDown,
   Menu,
   ChevronUp,
-  DollarSign,
+  GraduationCap,
 } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -260,12 +260,15 @@ export default function PacificoHomepage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
+                  asChild
                   size="lg"
                   variant="outline"
                   className="border-2 border-yellow-300 text-yellow-300 hover:bg-yellow-300 hover:text-gray-900 bg-transparent backdrop-blur-sm"
                 >
-                  <Calendar className="mr-2 h-5 w-5" />
-                  Schedule a Visit or Call
+                  <Link href="/admissions/application#top">
+                    <Calendar className="mr-2 h-5 w-5" />
+                    Schedule a Visit or Call
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -379,11 +382,14 @@ export default function PacificoHomepage() {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                       <Button
+                        asChild
                         size="lg"
                         className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-lg"
                       >
-                        <Phone className="mr-2 h-5 w-5" />
-                        Call +506 8762 6927
+                        <Link href="/admissions/application#top">
+                          <Phone className="mr-2 h-5 w-5" />
+                          Call +506 8762 6927
+                        </Link>
                       </Button>
                       <Collapsible open={tuitionOpen} onOpenChange={setTuitionOpen}>
                         <CollapsibleTrigger asChild>
@@ -393,7 +399,7 @@ export default function PacificoHomepage() {
                             className="border-2 border-orange-500 text-orange-700 hover:bg-orange-50 bg-transparent"
                             onClick={handleTuitionClick}
                           >
-                            <DollarSign className="mr-2 h-5 w-5" />
+                            <GraduationCap className="mr-2 h-5 w-5" />
                             2025 Tuition & Fees
                             {tuitionOpen ? (
                               <ChevronUp className="ml-2 h-4 w-4" />
@@ -464,7 +470,7 @@ export default function PacificoHomepage() {
                 <Card className="bg-white/95 backdrop-blur-sm border-2 border-green-200 shadow-lg">
                   <CardHeader className="text-center">
                     <CardTitle className="text-2xl text-green-700 flex items-center justify-center gap-2">
-                      <DollarSign className="h-6 w-6" />
+                      <GraduationCap className="h-6 w-6" />
                       2025 Tuition & Fees
                     </CardTitle>
                     <CardDescription>Complete pricing information for the 2025 academic year</CardDescription>
@@ -498,7 +504,7 @@ export default function PacificoHomepage() {
                             <td className="border border-gray-200 p-3 font-medium text-blue-700">
                               Kindergarten (3 days/week)
                             </td>
-                            <td className="border border-gray-200 p-3 text-gray-600">Mon, Wed, Fri</td>
+                            <td className="border border-gray-200 p-3 text-gray-600">Any 3 of 5</td>
                             <td className="border border-gray-200 p-3 text-right font-bold text-blue-700">$5,200</td>
                             <td className="border border-gray-200 p-3 text-right text-gray-600">$520</td>
                           </tr>
@@ -525,7 +531,7 @@ export default function PacificoHomepage() {
                             <td className="border border-gray-200 p-3 font-medium text-orange-700">
                               Kindergarten (3 days/week)
                             </td>
-                            <td className="border border-gray-200 p-3 text-gray-600">Mon, Wed, Fri</td>
+                            <td className="border border-gray-200 p-3 text-gray-600">Any 3 of 5</td>
                             <td className="border border-gray-200 p-3 text-right font-bold text-orange-700">$4,050</td>
                             <td className="border border-gray-200 p-3 text-right text-gray-600">$405</td>
                           </tr>
