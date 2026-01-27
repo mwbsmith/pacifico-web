@@ -1,0 +1,489 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { Menu, Globe, ChevronDown, Mail, Phone, MapPin } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+
+export default function CareersPage() {
+  const [language, setLanguage] = useState("en")
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [scrollY, setScrollY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const headerLogoOpacity = Math.min(scrollY / 300, 1)
+
+  const handleNavClick = (href: string) => {
+    setMobileMenuOpen(false)
+    if (href.startsWith("#")) {
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" })
+      }
+    }
+  }
+
+  const t = (key: string) => {
+    const translations: Record<string, Record<string, string>> = {
+      en: {
+        about: "About",
+        admissions: "Admissions",
+        calendar: "Calendar",
+        contact: "Contact",
+        workWithUs: "Work With Us!",
+        heroTitle: "Join Our Team",
+        heroSubtitle: "Be part of a nurturing community dedicated to Waldorf-inspired education",
+        title: "Career Opportunities",
+        subtitle: "We are growing and searching for Lead Teachers in",
+        earlyChildhood: "Early Childhood",
+        lowerGrades: "Lower Grades",
+        middleSchool: "Middle School",
+        whyJoin: "Why Join Pacífico Internacional?",
+        reason1Title: "Waldorf-Inspired Education",
+        reason1Desc: "Be part of a school that honors the whole child through head, heart, and hands learning.",
+        reason2Title: "Beautiful Natural Setting",
+        reason2Desc: "Work in a stunning jungle campus in Guanacaste, Costa Rica.",
+        reason3Title: "Supportive Community",
+        reason3Desc: "Join a close-knit team of dedicated educators and families.",
+        reason4Title: "Professional Growth",
+        reason4Desc: "Opportunities for ongoing training and development in Waldorf pedagogy.",
+        applyTitle: "How to Apply",
+        applyDesc: "If you are passionate about Waldorf education and want to make a difference in children's lives, we would love to hear from you.",
+        sendResume: "Please send your resume and cover letter to:",
+        footerDescription: "Nurturing the whole child through Waldorf-inspired education in the heart of Guanacaste.",
+        quickLinks: "Quick Links",
+        aboutUs: "About Us",
+        schoolCalendar: "School Calendar",
+        familyHandbook: "Family Handbook",
+        connectWithUs: "Connect With Us",
+        footerCopyright: "Pacífico Internacional. All rights reserved.",
+      },
+      es: {
+        about: "Acerca de",
+        admissions: "Admisiones",
+        calendar: "Calendario",
+        contact: "Contacto",
+        workWithUs: "¡Trabaja con nosotros!",
+        heroTitle: "Únete a Nuestro Equipo",
+        heroSubtitle: "Sé parte de una comunidad dedicada a la educación inspirada en Waldorf",
+        title: "Oportunidades de Empleo",
+        subtitle: "Estamos creciendo y buscando Maestros Líderes en",
+        earlyChildhood: "Educación Temprana",
+        lowerGrades: "Grados Inferiores",
+        middleSchool: "Escuela Secundaria",
+        whyJoin: "¿Por qué unirse a Pacífico Internacional?",
+        reason1Title: "Educación Inspirada en Waldorf",
+        reason1Desc: "Sé parte de una escuela que honra al niño integral a través del aprendizaje de cabeza, corazón y manos.",
+        reason2Title: "Hermoso Entorno Natural",
+        reason2Desc: "Trabaja en un impresionante campus en la selva de Guanacaste, Costa Rica.",
+        reason3Title: "Comunidad de Apoyo",
+        reason3Desc: "Únete a un equipo cercano de educadores y familias dedicadas.",
+        reason4Title: "Crecimiento Profesional",
+        reason4Desc: "Oportunidades de capacitación continua y desarrollo en pedagogía Waldorf.",
+        applyTitle: "Cómo Aplicar",
+        applyDesc: "Si te apasiona la educación Waldorf y quieres hacer una diferencia en la vida de los niños, nos encantaría saber de ti.",
+        sendResume: "Por favor envía tu currículum y carta de presentación a:",
+        footerDescription: "Nutriendo al niño integral a través de la educación inspirada en Waldorf en el corazón de Guanacaste.",
+        quickLinks: "Enlaces Rápidos",
+        aboutUs: "Acerca de Nosotros",
+        schoolCalendar: "Calendario Escolar",
+        familyHandbook: "Manual Familiar",
+        connectWithUs: "Conéctate con Nosotros",
+        footerCopyright: "Pacífico Internacional. Todos los derechos reservados.",
+      },
+    }
+    return translations[language]?.[key] || key
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
+      {/* Header */}
+      <nav className="fixed top-0 left-0 right-0 z-30 bg-black/20 backdrop-blur-sm transition-all duration-300">
+        <div className="container mx-auto px-4 py-6 md:py-8">
+            <div className="flex items-center justify-between">
+            {/* Left - Work With Us Link */}
+            <div className="hidden md:flex items-center">
+              <Link href="/careers" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md flex items-center gap-1">
+                {language === "en" ? "Work With Us!" : "¡Trabaja con nosotros!"}
+                <span className="bg-yellow-400 text-teal-800 text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase animate-pulse">
+                  {language === "en" ? "New" : "Nuevo"}
+                </span>
+              </Link>
+            </div>
+            <div className="md:hidden w-8"></div>
+
+            {/* Header Logo - centered */}
+            <Link
+              href="/"
+              className="absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300"
+              style={{ opacity: headerLogoOpacity }}
+            >
+              <Image
+                src="/images/pacifico-logo.png"
+                alt="Pacífico Internacional - Educación Inspirada en Waldorf"
+                width={100}
+                height={100}
+                className="drop-shadow-lg w-[60px] h-[60px] md:w-[100px] md:h-[100px]"
+              />
+            </Link>
+
+            {/* Desktop Navigation and Language Selector */}
+            <div className="hidden md:flex items-center space-x-6">
+              <Link href="/#about" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md">
+                {t("about")}
+              </Link>
+              <Link href="/#admissions" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md">
+                {t("admissions")}
+              </Link>
+              <Link href="/#calendar" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md">
+                {t("calendar")}
+              </Link>
+<Link href="/#contact" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md">
+              {t("contact")}
+            </Link>
+
+            {/* Language Selector */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="text-white hover:text-yellow-200 hover:bg-white/10">
+                    <Globe className="h-4 w-4 mr-2" />
+                    {language.toUpperCase()}
+                    <ChevronDown className="h-4 w-4 ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onClick={() => setLanguage("en")}>English</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLanguage("es")}>Español</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+
+            {/* Mobile Menu */}
+            <div className="md:hidden">
+              <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                    <Menu className="h-6 w-6" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[300px] bg-white">
+                  <div className="flex flex-col space-y-4 mt-8">
+                    <div className="space-y-2">
+                      <Link
+                        href="/#about"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2"
+                      >
+                        {t("about")}
+                      </Link>
+                      <Link
+                        href="/#admissions"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2"
+                      >
+                        {t("admissions")}
+                      </Link>
+                      <Link
+                        href="/#calendar"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2"
+                      >
+                        {t("calendar")}
+                      </Link>
+                      <Link
+                        href="/#contact"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2"
+                      >
+                        {t("contact")}
+                      </Link>
+                      <Link
+                        href="/careers"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block w-full text-left text-lg text-teal-600 font-semibold transition-colors py-2 flex items-center gap-2"
+                      >
+                        {language === "en" ? "Work With Us!" : "¡Trabaja con nosotros!"}
+                        <span className="bg-yellow-400 text-teal-800 text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase">
+                          {language === "en" ? "New" : "Nuevo"}
+                        </span>
+                      </Link>
+                    </div>
+
+                    <div className="pt-4 border-t border-gray-200">
+                      <button
+                        onClick={() => setLanguage(language === "en" ? "es" : "en")}
+                        className="flex items-center text-gray-600 hover:text-teal-600 transition-colors py-2"
+                      >
+                        <Globe className="h-4 w-4 mr-2" />
+                        {language === "en" ? "Español" : "English"}
+                      </button>
+                    </div>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative">
+        <div className="relative h-[500px] overflow-hidden">
+          <Image
+            src="/images/faculty-group-photo.jpeg"
+            alt="Pacífico Internacional Faculty"
+            fill
+            className="object-cover object-[center_25%]"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+              {t("heroTitle")}
+            </h1>
+            <p className="text-xl text-white/90 max-w-2xl drop-shadow-md">
+              {t("heroSubtitle")}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            {/* Intro and Apply Now */}
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">{t("title")}</h2>
+              
+              {/* Apply Now Button - Top */}
+              <a
+                href="https://forms.gle/YPSwqP1vm66PmfhH9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-teal-600 text-white px-8 py-4 rounded-lg hover:bg-teal-700 transition-colors font-semibold text-lg mb-8"
+              >
+                {language === "en" ? "Apply Now" : "Aplicar Ahora"}
+              </a>
+
+              {/* About the School */}
+              <div className="bg-amber-50 p-6 rounded-xl border border-amber-200 mb-12 text-left">
+                <p className="text-gray-700 leading-relaxed">
+                  {language === "en"
+                    ? "Pacifico Internacional is a Waldorf Inspired School located outside of Tamarindo on the Pacific northwest coast of Costa Rica. It's an area rich in beauty, located a short distance to beaches with amazing waves and sunsets. We are also located close to Liberia Airport and national parks."
+                    : "Pacífico Internacional es una escuela de inspiración Waldorf ubicada en las afueras de Tamarindo, en la costa noroeste del Pacífico de Costa Rica. Es un área rica en belleza, ubicada a poca distancia de playas con olas increíbles y atardeceres espectaculares. También estamos cerca del Aeropuerto de Liberia y parques nacionales."}
+                </p>
+              </div>
+            </div>
+
+            {/* Job Descriptions */}
+            <div className="space-y-12">
+              {/* Job 1: Lead Teacher - Lower Grades */}
+              <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                <h3 className="text-2xl font-bold text-teal-700 mb-4">
+                  {language === "en" ? "1) Lead Teacher - Lower Grades" : "1) Maestro Líder - Grados Inferiores"}
+                </h3>
+                <p className="text-gray-700 mb-6">
+                  {language === "en"
+                    ? "We are looking for a trained and experienced Waldorf Teacher to join our talented faculty as a Lead Teacher in the Lower Grades."
+                    : "Buscamos un maestro Waldorf capacitado y experimentado para unirse a nuestro talentoso equipo docente como Maestro Líder en los Grados Inferiores."}
+                </p>
+                
+                <h4 className="font-semibold text-gray-800 mb-3">
+                  {language === "en" ? "Main responsibilities include (but are not limited to):" : "Las responsabilidades principales incluyen (pero no se limitan a):"}
+                </h4>
+                <ul className="list-disc list-inside text-gray-600 space-y-2 mb-6 ml-4">
+                  <li>{language === "en" ? "Plan and teach Main Lesson blocks for the relevant grade(s)." : "Planificar y enseñar bloques de Lección Principal para los grados correspondientes."}</li>
+                  <li>{language === "en" ? "Teach every subject in accordance with the Waldorf Pedagogy and with an artistic approach." : "Enseñar todas las materias de acuerdo con la Pedagogía Waldorf y con un enfoque artístico."}</li>
+                  <li>{language === "en" ? "Support the academic and artistic development of the students." : "Apoyar el desarrollo académico y artístico de los estudiantes."}</li>
+                  <li>{language === "en" ? "Create and care for the classroom." : "Crear y cuidar el aula."}</li>
+                  <li>{language === "en" ? "Administrative aspects of being the lead teacher including organizing pedagogical meetings with parents, writing of end of year reports, organizing field trips, supporting the admission of students." : "Aspectos administrativos de ser el maestro líder, incluyendo organizar reuniones pedagógicas con padres, redactar informes de fin de año, organizar excursiones y apoyar la admisión de estudiantes."}</li>
+                  <li>{language === "en" ? "Help in planning festivals and events at the school." : "Ayudar en la planificación de festivales y eventos en la escuela."}</li>
+                </ul>
+
+                <h4 className="font-semibold text-gray-800 mb-3">
+                  {language === "en" ? "Minimum Qualifications" : "Requisitos Mínimos"}
+                </h4>
+                <ul className="list-disc list-inside text-gray-600 space-y-2 mb-6 ml-4">
+                  <li>{language === "en" ? "Completion of, or current enrollment in, a Waldorf Teacher Training program" : "Finalización o inscripción actual en un programa de Formación de Maestros Waldorf"}</li>
+                  <li>{language === "en" ? "Bachelor's degree from an accredited university" : "Título de licenciatura de una universidad acreditada"}</li>
+                  <li>{language === "en" ? "Previous Waldorf experience" : "Experiencia previa en Waldorf"}</li>
+                  <li>{language === "en" ? "Fluency in either English or Spanish and competency in the other" : "Fluidez en inglés o español y competencia en el otro idioma"}</li>
+                  <li>{language === "en" ? "A special interest and talent in musical would be an added benefit" : "Un interés especial y talento en música sería un beneficio adicional"}</li>
+                </ul>
+
+                <a
+                  href="https://forms.gle/YPSwqP1vm66PmfhH9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-amber-500 text-white px-6 py-3 rounded-lg hover:bg-amber-600 transition-colors font-semibold"
+                >
+                  {language === "en" ? "Apply Now" : "Aplicar Ahora"}
+                </a>
+              </div>
+
+              {/* Job 2: Lead Teacher - Middle School */}
+              <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                <h3 className="text-2xl font-bold text-teal-700 mb-4">
+                  {language === "en" ? "2) Lead Teacher - Middle School" : "2) Maestro Líder - Escuela Secundaria"}
+                </h3>
+                <p className="text-gray-700 mb-6">
+                  {language === "en"
+                    ? "We are looking for a trained and experienced Waldorf Teacher to join our talented faculty as a Lead Teacher in our growing Middle School."
+                    : "Buscamos un maestro Waldorf capacitado y experimentado para unirse a nuestro talentoso equipo docente como Maestro Líder en nuestra creciente Escuela Secundaria."}
+                </p>
+                
+                <h4 className="font-semibold text-gray-800 mb-3">
+                  {language === "en" ? "Main responsibilities include (but are not limited to):" : "Las responsabilidades principales incluyen (pero no se limitan a):"}
+                </h4>
+                <ul className="list-disc list-inside text-gray-600 space-y-2 mb-6 ml-4">
+                  <li>{language === "en" ? "Plan and teach Main Lesson blocks for the relevant grade(s)." : "Planificar y enseñar bloques de Lección Principal para los grados correspondientes."}</li>
+                  <li>{language === "en" ? "Teach every subject in accordance with the Waldorf Pedagogy and with an artistic approach." : "Enseñar todas las materias de acuerdo con la Pedagogía Waldorf y con un enfoque artístico."}</li>
+                  <li>{language === "en" ? "Support the academic and artistic development of the students." : "Apoyar el desarrollo académico y artístico de los estudiantes."}</li>
+                  <li>{language === "en" ? "Create and care for the classroom." : "Crear y cuidar el aula."}</li>
+                  <li>{language === "en" ? "Administrative aspects of being the lead teacher including organizing pedagogical meetings with parents, writing of end of year reports, organizing field trips, supporting the admission of students." : "Aspectos administrativos de ser el maestro líder, incluyendo organizar reuniones pedagógicas con padres, redactar informes de fin de año, organizar excursiones y apoyar la admisión de estudiantes."}</li>
+                  <li>{language === "en" ? "Help in planning festivals and events at the school." : "Ayudar en la planificación de festivales y eventos en la escuela."}</li>
+                </ul>
+
+                <h4 className="font-semibold text-gray-800 mb-3">
+                  {language === "en" ? "Minimum Qualifications" : "Requisitos Mínimos"}
+                </h4>
+                <ul className="list-disc list-inside text-gray-600 space-y-2 mb-6 ml-4">
+                  <li>{language === "en" ? "Completion of, or current enrollment in, a Waldorf Teacher Training program" : "Finalización o inscripción actual en un programa de Formación de Maestros Waldorf"}</li>
+                  <li>{language === "en" ? "Bachelor's degree from an accredited university" : "Título de licenciatura de una universidad acreditada"}</li>
+                  <li>{language === "en" ? "Previous Waldorf experience" : "Experiencia previa en Waldorf"}</li>
+                  <li>{language === "en" ? "Fluency in either English or Spanish and competency in the other" : "Fluidez en inglés o español y competencia en el otro idioma"}</li>
+                  <li>{language === "en" ? "A special interest and talent in musical would be an added benefit" : "Un interés especial y talento en música sería un beneficio adicional"}</li>
+                </ul>
+
+                <a
+                  href="https://forms.gle/YPSwqP1vm66PmfhH9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-amber-500 text-white px-6 py-3 rounded-lg hover:bg-amber-600 transition-colors font-semibold"
+                >
+                  {language === "en" ? "Apply Now" : "Aplicar Ahora"}
+                </a>
+              </div>
+
+              {/* Job 3: Lead Teacher - Early Childhood */}
+              <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                <h3 className="text-2xl font-bold text-teal-700 mb-4">
+                  {language === "en" ? "3) Lead Teacher - Early Childhood" : "3) Maestro Líder - Educación Temprana"}
+                </h3>
+                <p className="text-gray-700 mb-6">
+                  {language === "en"
+                    ? "As we are expanding our Early Childhood program, we are looking for a trained and experienced Waldorf Teacher to join our talented faculty as a Lead teacher for an Early Childhood class."
+                    : "A medida que expandimos nuestro programa de Educación Temprana, buscamos un maestro Waldorf capacitado y experimentado para unirse a nuestro talentoso equipo docente como Maestro Líder para una clase de Educación Temprana."}
+                </p>
+                
+                <h4 className="font-semibold text-gray-800 mb-3">
+                  {language === "en" ? "Main responsibilities include (but are not limited to):" : "Las responsabilidades principales incluyen (pero no se limitan a):"}
+                </h4>
+                <ul className="list-disc list-inside text-gray-600 space-y-2 mb-6 ml-4">
+                  <li>{language === "en" ? "Plan rhythm in collaboration with other Early Childhood Teachers, Early Childhood Chair and Head of School, ensuring that Waldorf movement, music and activities are incorporated into the rhythm" : "Planificar el ritmo en colaboración con otros maestros de Educación Temprana, el Coordinador de Educación Temprana y el Director, asegurando que el movimiento, la música y las actividades Waldorf se incorporen al ritmo"}</li>
+                  <li>{language === "en" ? "Create and care for the classroom." : "Crear y cuidar el aula."}</li>
+                  <li>{language === "en" ? "Administrative aspects of being the lead teacher, including organizing pedagogical meetings with parents, writing of end of year reports, organizing field trips, supporting the admission of students." : "Aspectos administrativos de ser el maestro líder, incluyendo organizar reuniones pedagógicas con padres, redactar informes de fin de año, organizar excursiones y apoyar la admisión de estudiantes."}</li>
+                  <li>{language === "en" ? "Help in planning festivals and events at the school." : "Ayudar en la planificación de festivales y eventos en la escuela."}</li>
+                </ul>
+
+                <h4 className="font-semibold text-gray-800 mb-3">
+                  {language === "en" ? "Minimum Qualifications" : "Requisitos Mínimos"}
+                </h4>
+                <ul className="list-disc list-inside text-gray-600 space-y-2 mb-6 ml-4">
+                  <li>{language === "en" ? "Completion of, or current enrollment in, a Waldorf Teacher Training program" : "Finalización o inscripción actual en un programa de Formación de Maestros Waldorf"}</li>
+                  <li>{language === "en" ? "Bachelor's degree from an accredited university" : "Título de licenciatura de una universidad acreditada"}</li>
+                  <li>{language === "en" ? "Previous Waldorf experience, preferably in the Early Childhood program" : "Experiencia previa en Waldorf, preferiblemente en el programa de Educación Temprana"}</li>
+                  <li>{language === "en" ? "Fluency in either English or Spanish and competency in the other" : "Fluidez en inglés o español y competencia en el otro idioma"}</li>
+                  <li>{language === "en" ? "A special interest and talent in musical would be an added benefit" : "Un interés especial y talento en música sería un beneficio adicional"}</li>
+                </ul>
+
+                <a
+                  href="https://forms.gle/YPSwqP1vm66PmfhH9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-amber-500 text-white px-6 py-3 rounded-lg hover:bg-amber-600 transition-colors font-semibold"
+                >
+                  {language === "en" ? "Apply Now" : "Aplicar Ahora"}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <div className="flex items-center space-x-3 mb-4">
+                <Image
+                  src="/images/pacifico-logo.png"
+                  alt="Pacífico Internacional"
+                  width={40}
+                  height={40}
+                  className="rounded-full"
+                />
+                <span className="text-xl font-bold">Pacífico Internacional</span>
+              </div>
+              <p className="text-gray-400">{t("footerDescription")}</p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">{t("quickLinks")}</h4>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/#about" className="text-gray-400 hover:text-white transition-colors">
+                    {t("aboutUs")}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/calendar" className="text-gray-400 hover:text-white transition-colors">
+                    {t("schoolCalendar")}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/documents/family-handbook-2025-2026.pdf"
+                    target="_blank"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    {t("familyHandbook")}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">{t("connectWithUs")}</h4>
+              <div className="space-y-2">
+                <a href="tel:+50687626927" className="flex items-center gap-2 text-gray-400 hover:text-white">
+                  <Phone className="h-4 w-4" />
+                  +506 8762 6927
+                </a>
+                <a href="mailto:info@waldorf.cr" className="flex items-center gap-2 text-gray-400 hover:text-white">
+                  <Mail className="h-4 w-4" />
+                  info@waldorf.cr
+                </a>
+                <div className="flex items-start gap-2 text-gray-400">
+                  <MapPin className="h-4 w-4 mt-1 flex-shrink-0" />
+                  <span>Cañafistula, Guanacaste, Costa Rica</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; {new Date().getFullYear()} {t("footerCopyright")}</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}

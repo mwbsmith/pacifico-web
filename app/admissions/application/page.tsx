@@ -1,100 +1,82 @@
 "use client"
 
-import type React from "react"
-
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Label } from "@/components/ui/label"
 import {
-  ArrowLeft,
-  User,
   Mail,
+  MapPin,
   Phone,
-  Calendar,
-  Heart,
-  Send,
-  FileText,
-  Users,
-  GraduationCap,
-  BookOpen,
+  Clock,
   Globe,
   ChevronDown,
   Menu,
+  GraduationCap,
+  ArrowLeft,
+  FileText,
+  Users,
+  Baby,
+  School,
+  Home,
 } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useState, useEffect } from "react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import Image from "next/image"
+import Link from "next/link"
+import { useEffect, useState, useRef } from "react"
 
-export default function AdmissionsApplicationPage() {
+export default function ApplicationPage() {
+  const [scrollY, setScrollY] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [formData, setFormData] = useState({
-    // Basic Information
-    familiarWithWaldorf: "",
-    schoolYear: "",
-
-    // Student Information
-    studentFullName: "",
-    dateOfBirth: "",
-    currentGrade: "",
-    currentSchool: "",
-
-    // Mother Information
-    motherFullName: "",
-    motherWhatsapp: "",
-    motherEmail: "",
-    motherOccupation: "",
-    motherAddress: "",
-
-    // Father Information
-    fatherFullName: "",
-    fatherWhatsapp: "",
-    fatherEmail: "",
-    fatherOccupation: "",
-    fatherAddress: "",
-
-    // School Information
-    howDidYouHear: "",
-    previousWaldorf: "",
-    previousWaldorfDetails: "",
-    studentLanguages: "",
-
-    // Educational Goals
-    educationalGoals: "",
-    familyRole: "",
-    childHobbies: "",
-    educationalExperience: "",
-    compensatoryWork: "",
-    specialNeeds: "",
-
-    // Technology
-    electronicDevices: "",
-    limitElectronics: "",
-
-    // Volunteer
-    volunteerContribution: "",
-
-    // Agreement
-    agreeToAccuracy: false,
-  })
+  const [tuitionOpen, setTuitionOpen] = useState(false)
+  const tuitionRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // Scroll to top when page loads, especially when coming from a link with #top
-    if (window.location.hash === "#top" || window.location.pathname === "/admissions/application") {
-      window.scrollTo({ top: 0, behavior: "smooth" })
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
     }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission here
-    console.log("Form submitted:", formData)
+  // Calculate logo animation based on scroll
+  const maxScroll = 400
+  const progress = Math.min(scrollY / maxScroll, 1)
+
+  // Logo starts in hero center and moves to header - responsive sizing
+  const logoScale = 1 - progress * 0.7 // From 1 to 0.3 (150px to 100px on mobile, 250px to 100px on desktop)
+  const logoY = -(progress * 60) // Move up 60vh
+  const logoOpacity = scrollY > maxScroll ? 0 : 1
+
+  // Header logo appears when main logo is hidden
+  const headerLogoOpacity = scrollY > maxScroll ? 1 : 0
+
+  const handleNavClick = (href: string) => {
+    setMobileMenuOpen(false)
+    // Smooth scroll to section
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
+  const handleTuitionClick = () => {
+    setTuitionOpen(!tuitionOpen)
+    if (!tuitionOpen) {
+      // Small delay to allow the content to expand before scrolling
+      setTimeout(() => {
+        tuitionRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        })
+      }, 100)
+    }
   }
 
   return (
@@ -104,8 +86,8 @@ export default function AdmissionsApplicationPage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/mayo-celebration.jpg"
-            alt="Children celebrating May Day with flower crowns and colorful ribbons at Pacifico Internacional"
+            src="/images/waldorf-classroom.jpg"
+            alt="Waldorf classroom with students learning"
             fill
             className="object-cover"
             priority
@@ -123,11 +105,14 @@ export default function AdmissionsApplicationPage() {
               {/* Left spacer */}
               <div className="w-8"></div>
 
-              {/* Header Logo */}
-              <div className="absolute left-1/2 transform -translate-x-1/2">
+              {/* Header Logo - appears when scrolled */}
+              <div
+                className="absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300"
+                style={{ opacity: headerLogoOpacity }}
+              >
                 <Image
                   src="/images/pacifico-logo.png"
-                  alt="Pacifico Internacional - Educación Inspirada en Waldorf"
+                  alt="Pacífico Internacional - Educación Inspirada en Waldorf"
                   width={100}
                   height={100}
                   className="drop-shadow-lg w-[60px] h-[60px] md:w-[100px] md:h-[100px]"
@@ -184,13 +169,13 @@ export default function AdmissionsApplicationPage() {
                       <div className="flex items-center space-x-3 mb-6">
                         <Image
                           src="/images/pacifico-logo.png"
-                          alt="Pacifico Internacional"
+                          alt="Pacífico Internacional"
                           width={40}
                           height={40}
                           className="rounded-full"
                         />
                         <div>
-                          <h3 className="font-bold text-gray-800">Pacifico Internacional</h3>
+                          <h3 className="font-bold text-gray-800">Pacífico Internacional</h3>
                           <p className="text-sm text-gray-600">Educación Inspirada en Waldorf</p>
                         </div>
                       </div>
@@ -247,15 +232,34 @@ export default function AdmissionsApplicationPage() {
           <div className="flex items-center justify-center text-center">
             <div className="space-y-8 max-w-4xl mx-auto">
               <h2 className="text-5xl md:text-7xl font-bold text-white leading-tight">
-                Join Our
+                Apply to
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-green-300">
                   {" "}
-                  Learning Community
+                  Pacífico Internacional
                 </span>
               </h2>
 
+              {/* Animated Logo */}
+              <div className="flex justify-center mb-6 relative">
+                <div
+                  className="transition-all duration-300 ease-out"
+                  style={{
+                    transform: `translateY(${logoY}vh) scale(${logoScale})`,
+                    opacity: logoOpacity,
+                  }}
+                >
+                  <Image
+                    src="/images/pacifico-logo.png"
+                    alt="Pacífico Internacional - Educación Inspirada en Waldorf"
+                    width={250}
+                    height={250}
+                    className="drop-shadow-2xl w-[150px] h-[150px] md:w-[250px] md:h-[250px]"
+                  />
+                </div>
+              </div>
+
               <p className="text-xl md:text-2xl text-gray-100 leading-relaxed">
-                Begin your family's journey with Waldorf-inspired education in the heart of Costa Rica's natural beauty.
+                Begin your child's journey with our Waldorf-inspired education in the heart of Costa Rica.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
@@ -275,608 +279,619 @@ export default function AdmissionsApplicationPage() {
         </div>
         {/* Decorative elements - Fixed positioning */}
         <div className="fixed top-20 left-4 md:left-10 text-yellow-400/70 opacity-60 z-50">
-          <div className="text-3xl md:text-4xl animate-bounce">🌸</div>
+          <div className="text-3xl md:text-4xl animate-bounce">🐒</div>
         </div>
         <div className="absolute bottom-10 right-4 md:right-10 text-orange-400/70 opacity-60 z-10">
-          <div className="text-4xl md:text-5xl animate-pulse">🎭</div>
+          <div className="text-4xl md:text-5xl animate-pulse">🐵</div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          {/* Introduction Card */}
-          <Card className="bg-white/90 backdrop-blur-sm border-2 border-teal-200 shadow-lg mb-8">
-            <CardHeader className="text-center">
-              <div className="flex justify-center items-center gap-2 mb-4">
-                <Heart className="h-8 w-8 text-teal-600" />
-                <CardTitle className="text-3xl text-teal-700">Welcome to Our Community</CardTitle>
-                <Heart className="h-8 w-8 text-teal-600" />
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="bg-gradient-to-r from-teal-50 to-blue-50 p-6 rounded-lg border border-teal-200">
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  <strong>Thank you for your interest in Pacifico Internacional.</strong> Pacifico Internacional has a
-                  vibrant learning environment in which we provide a holistic education that holds deep reverence and
-                  broad understanding of the development of the child as a physical, intellectual, social and spiritual
-                  being.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  While we do not discriminate for any reason, we also recognize that Waldorf education is not for
-                  everyone. It is a commitment of parents to support the efforts being made at school - for example, by
-                  limiting time spent using electronics at home, participating in the Volunteer Work Program, spending
-                  quality and focused time with children, and teaching and reinforcing the good values we all treasure.
-                </p>
-              </div>
+      {/* Application Form Section */}
+      <section className="py-16 bg-gradient-to-r from-emerald-100 to-teal-100">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="flex justify-center items-center space-x-2 mb-4">
+              <FileText className="h-8 w-8 text-green-600" />
+              <h2 className="text-4xl font-bold text-gray-800">Application Form</h2>
+              <Users className="h-8 w-8 text-blue-600" />
+            </div>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Please complete this application form to begin the admissions process for your child at Pacífico
+              Internacional.
+            </p>
+          </div>
 
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="flex items-center gap-3 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                  <div className="bg-blue-500 text-white p-2 rounded-full">
-                    <Phone className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-blue-700">Call Us</p>
-                    <p className="text-sm text-gray-600">+506 8762 6927</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-4 bg-green-50 rounded-lg border border-green-200">
-                  <div className="bg-green-500 text-white p-2 rounded-full">
-                    <Mail className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-green-700">Email Us</p>
-                    <p className="text-sm text-gray-600">admissions@waldorf.cr</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-4 bg-purple-50 rounded-lg border border-purple-200">
-                  <div className="bg-purple-500 text-white p-2 rounded-full">
-                    <Calendar className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-purple-700">Visit Us</p>
-                    <p className="text-sm text-gray-600">Schedule a tour</p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="max-w-4xl mx-auto">
+            <Card className="bg-white/90 backdrop-blur-sm border-2 border-teal-200 shadow-lg">
+              <CardHeader>
+                <CardTitle className="text-2xl text-teal-700 flex items-center gap-2">
+                  <School className="h-6 w-6" />
+                  Student Application
+                </CardTitle>
+                <CardDescription>
+                  All fields marked with * are required. Please fill out this form completely and accurately.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form className="space-y-8">
+                  {/* Student Information */}
+                  <div className="space-y-6">
+                    <h3 className="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-2 flex items-center gap-2">
+                      <Baby className="h-5 w-5 text-blue-600" />
+                      Student Information
+                    </h3>
 
-          {/* Application Form */}
-          <Card className="bg-white/90 backdrop-blur-sm border-2 border-orange-200 shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-2xl text-orange-700 flex items-center gap-2">
-                <FileText className="h-6 w-6" />
-                Application Form
-              </CardTitle>
-              <CardDescription>
-                Please fill out this form completely. We will contact you within 24 hours to schedule your visit.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-8">
-                {/* Basic Information */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 mb-4">
-                    <BookOpen className="h-5 w-5 text-purple-600" />
-                    <h3 className="text-xl font-semibold text-purple-700">Basic Information</h3>
-                  </div>
-                  <div>
-                    <Label className="text-sm font-medium text-gray-700 mb-3 block">
-                      Are you familiar with the pedagogy of a Waldorf School? *
-                    </Label>
-                    <RadioGroup
-                      value={formData.familiarWithWaldorf}
-                      onValueChange={(value) => setFormData({ ...formData, familiarWithWaldorf: value })}
-                      className="space-y-2"
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="yes" id="familiar-yes" />
-                        <Label htmlFor="familiar-yes">Yes</Label>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="student-first-name">Student's First Name *</Label>
+                        <Input id="student-first-name" placeholder="Enter first name" required />
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="no" id="familiar-no" />
-                        <Label htmlFor="familiar-no">No</Label>
+                      <div>
+                        <Label htmlFor="student-last-name">Student's Last Name *</Label>
+                        <Input id="student-last-name" placeholder="Enter last name" required />
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="somewhat" id="familiar-somewhat" />
-                        <Label htmlFor="familiar-somewhat">Somewhat</Label>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <div>
+                        <Label htmlFor="birth-date">Date of Birth *</Label>
+                        <Input id="birth-date" type="date" required />
                       </div>
-                    </RadioGroup>
-                  </div>
-                  <div>
-                    <Label htmlFor="schoolYear" className="text-sm font-medium text-gray-700">
-                      For which school year are you applying? *
-                    </Label>
-                    <Select
-                      value={formData.schoolYear}
-                      onValueChange={(value) => setFormData({ ...formData, schoolYear: value })}
-                    >
-                      <SelectTrigger className="border-2 border-gray-200 focus:border-teal-500">
-                        <SelectValue placeholder="Select school year" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="2025-2026">School year 2025-2026 (Starts in August 2025)</SelectItem>
-                        <SelectItem value="2026-2027">School year 2026-2027 (Starts in August 2026)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                {/* Student Information */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 mb-4">
-                    <User className="h-5 w-5 text-green-600" />
-                    <h3 className="text-xl font-semibold text-green-700">Student Information</h3>
-                  </div>
-                  <div>
-                    <Label htmlFor="studentFullName" className="text-sm font-medium text-gray-700">
-                      Student's Full Name *
-                    </Label>
-                    <Input
-                      id="studentFullName"
-                      placeholder="Student's complete full name"
-                      className="border-2 border-gray-200 focus:border-teal-500"
-                      value={formData.studentFullName}
-                      onChange={(e) => setFormData({ ...formData, studentFullName: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="dateOfBirth" className="text-sm font-medium text-gray-700">
-                        Date of Birth (DD/MM/YY) *
-                      </Label>
-                      <Input
-                        id="dateOfBirth"
-                        placeholder="DD/MM/YY"
-                        className="border-2 border-gray-200 focus:border-teal-500"
-                        value={formData.dateOfBirth}
-                        onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="currentGrade" className="text-sm font-medium text-gray-700">
-                        Current Grade or Last Grade Completed *
-                      </Label>
-                      <Input
-                        id="currentGrade"
-                        placeholder="e.g., Kindergarten, Grade 1, etc."
-                        className="border-2 border-gray-200 focus:border-teal-500"
-                        value={formData.currentGrade}
-                        onChange={(e) => setFormData({ ...formData, currentGrade: e.target.value })}
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <Label htmlFor="currentSchool" className="text-sm font-medium text-gray-700">
-                      Current School (or last school attended) *
-                    </Label>
-                    <Input
-                      id="currentSchool"
-                      placeholder="Name of current or previous school"
-                      className="border-2 border-gray-200 focus:border-teal-500"
-                      value={formData.currentSchool}
-                      onChange={(e) => setFormData({ ...formData, currentSchool: e.target.value })}
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* Mother Information */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Users className="h-5 w-5 text-pink-600" />
-                    <h3 className="text-xl font-semibold text-pink-700">Mother's Information</h3>
-                  </div>
-                  <div>
-                    <Label htmlFor="motherFullName" className="text-sm font-medium text-gray-700">
-                      Mother's Full Name *
-                    </Label>
-                    <Input
-                      id="motherFullName"
-                      placeholder="Mother's complete full name"
-                      className="border-2 border-gray-200 focus:border-teal-500"
-                      value={formData.motherFullName}
-                      onChange={(e) => setFormData({ ...formData, motherFullName: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="motherWhatsapp" className="text-sm font-medium text-gray-700">
-                        Mother's WhatsApp Number *
-                      </Label>
-                      <Input
-                        id="motherWhatsapp"
-                        placeholder="+506 1234 5678"
-                        className="border-2 border-gray-200 focus:border-teal-500"
-                        value={formData.motherWhatsapp}
-                        onChange={(e) => setFormData({ ...formData, motherWhatsapp: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="motherEmail" className="text-sm font-medium text-gray-700">
-                        Mother's E-mail *
-                      </Label>
-                      <Input
-                        id="motherEmail"
-                        type="email"
-                        placeholder="mother@example.com"
-                        className="border-2 border-gray-200 focus:border-teal-500"
-                        value={formData.motherEmail}
-                        onChange={(e) => setFormData({ ...formData, motherEmail: e.target.value })}
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <Label htmlFor="motherOccupation" className="text-sm font-medium text-gray-700">
-                      Occupation of Mother *
-                    </Label>
-                    <Input
-                      id="motherOccupation"
-                      placeholder="Mother's occupation"
-                      className="border-2 border-gray-200 focus:border-teal-500"
-                      value={formData.motherOccupation}
-                      onChange={(e) => setFormData({ ...formData, motherOccupation: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="motherAddress" className="text-sm font-medium text-gray-700">
-                      Physical Address *
-                    </Label>
-                    <Textarea
-                      id="motherAddress"
-                      placeholder="Complete physical address"
-                      className="border-2 border-gray-200 focus:border-teal-500"
-                      value={formData.motherAddress}
-                      onChange={(e) => setFormData({ ...formData, motherAddress: e.target.value })}
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* Father Information */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Users className="h-5 w-5 text-blue-600" />
-                    <h3 className="text-xl font-semibold text-blue-700">Father's Information</h3>
-                  </div>
-                  <div>
-                    <Label htmlFor="fatherFullName" className="text-sm font-medium text-gray-700">
-                      Father's Full Name *
-                    </Label>
-                    <Input
-                      id="fatherFullName"
-                      placeholder="Father's complete full name"
-                      className="border-2 border-gray-200 focus:border-teal-500"
-                      value={formData.fatherFullName}
-                      onChange={(e) => setFormData({ ...formData, fatherFullName: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="fatherWhatsapp" className="text-sm font-medium text-gray-700">
-                        Father's WhatsApp Number *
-                      </Label>
-                      <Input
-                        id="fatherWhatsapp"
-                        placeholder="+506 1234 5678"
-                        className="border-2 border-gray-200 focus:border-teal-500"
-                        value={formData.fatherWhatsapp}
-                        onChange={(e) => setFormData({ ...formData, fatherWhatsapp: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="fatherEmail" className="text-sm font-medium text-gray-700">
-                        Father's E-mail *
-                      </Label>
-                      <Input
-                        id="fatherEmail"
-                        type="email"
-                        placeholder="father@example.com"
-                        className="border-2 border-gray-200 focus:border-teal-500"
-                        value={formData.fatherEmail}
-                        onChange={(e) => setFormData({ ...formData, fatherEmail: e.target.value })}
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <Label htmlFor="fatherOccupation" className="text-sm font-medium text-gray-700">
-                      Occupation of Father *
-                    </Label>
-                    <Input
-                      id="fatherOccupation"
-                      placeholder="Father's occupation"
-                      className="border-2 border-gray-200 focus:border-teal-500"
-                      value={formData.fatherOccupation}
-                      onChange={(e) => setFormData({ ...formData, fatherOccupation: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="fatherAddress" className="text-sm font-medium text-gray-700">
-                      Physical Address *
-                    </Label>
-                    <Textarea
-                      id="fatherAddress"
-                      placeholder="Complete physical address"
-                      className="border-2 border-gray-200 focus:border-teal-500"
-                      value={formData.fatherAddress}
-                      onChange={(e) => setFormData({ ...formData, fatherAddress: e.target.value })}
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* School Background */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 mb-4">
-                    <GraduationCap className="h-5 w-5 text-indigo-600" />
-                    <h3 className="text-xl font-semibold text-indigo-700">School Background</h3>
-                  </div>
-                  <div>
-                    <Label htmlFor="howDidYouHear" className="text-sm font-medium text-gray-700">
-                      How did you hear about Pacific Waldorf School? *
-                    </Label>
-                    <Input
-                      id="howDidYouHear"
-                      placeholder="e.g., Friend referral, Google search, social media, etc."
-                      className="border-2 border-gray-200 focus:border-teal-500"
-                      value={formData.howDidYouHear}
-                      onChange={(e) => setFormData({ ...formData, howDidYouHear: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Label className="text-sm font-medium text-gray-700 mb-3 block">
-                      Is your child currently enrolled in, or has your child attended a Waldorf school in the past? *
-                    </Label>
-                    <RadioGroup
-                      value={formData.previousWaldorf}
-                      onValueChange={(value) => setFormData({ ...formData, previousWaldorf: value })}
-                      className="space-y-2"
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="yes" id="waldorf-yes" />
-                        <Label htmlFor="waldorf-yes">Yes</Label>
+                      <div>
+                        <Label htmlFor="gender">Gender *</Label>
+                        <Select required>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select gender" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="male">Male</SelectItem>
+                            <SelectItem value="female">Female</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                            <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="no" id="waldorf-no" />
-                        <Label htmlFor="waldorf-no">No</Label>
+                      <div>
+                        <Label htmlFor="nationality">Nationality *</Label>
+                        <Input id="nationality" placeholder="Enter nationality" required />
                       </div>
-                    </RadioGroup>
-                  </div>
-                  {formData.previousWaldorf === "yes" && (
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="grade-applying">Grade Applying For *</Label>
+                        <Select required>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select grade" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="kindergarten-3-day">Kindergarten (3 days/week)</SelectItem>
+                            <SelectItem value="kindergarten-5-day">Kindergarten (5 days/week)</SelectItem>
+                            <SelectItem value="grade-1">Grade 1</SelectItem>
+                            <SelectItem value="grade-2">Grade 2</SelectItem>
+                            <SelectItem value="grade-3">Grade 3</SelectItem>
+                            <SelectItem value="grade-4">Grade 4</SelectItem>
+                            <SelectItem value="grade-5">Grade 5</SelectItem>
+                            <SelectItem value="grade-6">Grade 6</SelectItem>
+                            <SelectItem value="grade-7">Grade 7</SelectItem>
+                            <SelectItem value="grade-8">Grade 8</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="start-date">Desired Start Date *</Label>
+                        <Input id="start-date" type="date" required />
+                      </div>
+                    </div>
+
                     <div>
-                      <Label htmlFor="previousWaldorfDetails" className="text-sm font-medium text-gray-700">
-                        If yes, which school(s) and on what date(s)?
-                      </Label>
+                      <Label htmlFor="previous-school">Previous School (if applicable)</Label>
+                      <Input id="previous-school" placeholder="Name of previous school" />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="special-needs">Special Needs or Learning Differences</Label>
                       <Textarea
-                        id="previousWaldorfDetails"
-                        placeholder="Please provide school names and dates attended"
-                        className="border-2 border-gray-200 focus:border-teal-500"
-                        value={formData.previousWaldorfDetails}
-                        onChange={(e) => setFormData({ ...formData, previousWaldorfDetails: e.target.value })}
+                        id="special-needs"
+                        placeholder="Please describe any special needs, learning differences, or accommodations your child may require..."
+                        className="min-h-[100px]"
                       />
                     </div>
-                  )}
-                  <div>
-                    <Label htmlFor="studentLanguages" className="text-sm font-medium text-gray-700">
-                      What language(s) does the student speak? *
-                    </Label>
-                    <Input
-                      id="studentLanguages"
-                      placeholder="e.g., English, Spanish, etc."
-                      className="border-2 border-gray-200 focus:border-teal-500"
-                      value={formData.studentLanguages}
-                      onChange={(e) => setFormData({ ...formData, studentLanguages: e.target.value })}
-                      required
-                    />
-                    <p className="text-sm text-amber-600 mt-1">
-                      <strong>Please take note:</strong> For grades 4th and up must have English and Spanish.
-                    </p>
                   </div>
-                </div>
 
-                {/* Educational Goals */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Heart className="h-5 w-5 text-red-600" />
-                    <h3 className="text-xl font-semibold text-red-700">Educational Goals & Experience</h3>
-                  </div>
-                  <div>
-                    <Label htmlFor="educationalGoals" className="text-sm font-medium text-gray-700">
-                      What are your goals for your child's education, and how do you think PWS can facilitate these
-                      goals? *
-                    </Label>
-                    <Textarea
-                      id="educationalGoals"
-                      placeholder="Please describe your educational goals and expectations..."
-                      className="border-2 border-gray-200 focus:border-teal-500 min-h-[100px]"
-                      value={formData.educationalGoals}
-                      onChange={(e) => setFormData({ ...formData, educationalGoals: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="familyRole" className="text-sm font-medium text-gray-700">
-                      What role can we expect the family to play in facilitating the achievement of these educational
-                      goals? *
-                    </Label>
-                    <Textarea
-                      id="familyRole"
-                      placeholder="Please describe how your family will support your child's education..."
-                      className="border-2 border-gray-200 focus:border-teal-500 min-h-[100px]"
-                      value={formData.familyRole}
-                      onChange={(e) => setFormData({ ...formData, familyRole: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="childHobbies" className="text-sm font-medium text-gray-700">
-                      What are your child's favorite hobbies or sports, interests, abilities and/or talents? *
-                    </Label>
-                    <Textarea
-                      id="childHobbies"
-                      placeholder="Please describe your child's interests, hobbies, and talents..."
-                      className="border-2 border-gray-200 focus:border-teal-500 min-h-[100px]"
-                      value={formData.childHobbies}
-                      onChange={(e) => setFormData({ ...formData, childHobbies: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="educationalExperience" className="text-sm font-medium text-gray-700">
-                      Please describe your child's educational experience so far. What have you been successful at? What
-                      have been the challenges? *
-                    </Label>
-                    <Textarea
-                      id="educationalExperience"
-                      placeholder="Please describe successes and challenges in your child's education..."
-                      className="border-2 border-gray-200 focus:border-teal-500 min-h-[100px]"
-                      value={formData.educationalExperience}
-                      onChange={(e) => setFormData({ ...formData, educationalExperience: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="compensatoryWork" className="text-sm font-medium text-gray-700">
-                      Has your child had to do compensatory work or special tutoring in the last two years? Please
-                      explain. *
-                    </Label>
-                    <Textarea
-                      id="compensatoryWork"
-                      placeholder="Please describe any additional support your child has received..."
-                      className="border-2 border-gray-200 focus:border-teal-500 min-h-[100px]"
-                      value={formData.compensatoryWork}
-                      onChange={(e) => setFormData({ ...formData, compensatoryWork: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="specialNeeds" className="text-sm font-medium text-gray-700">
-                      Does your child have special educational, medical and/or psychological needs? Has he/she undergone
-                      testing or evaluation related to his/her social or academic performance? *
-                    </Label>
-                    <Textarea
-                      id="specialNeeds"
-                      placeholder="Please describe any special needs or evaluations. If yes, please send copies of evaluations to info@waldorf.cr"
-                      className="border-2 border-gray-200 focus:border-teal-500 min-h-[100px]"
-                      value={formData.specialNeeds}
-                      onChange={(e) => setFormData({ ...formData, specialNeeds: e.target.value })}
-                      required
-                    />
-                    <p className="text-sm text-blue-600 mt-1">
-                      If yes, please send copies of such evaluations to our office at <strong>info@waldorf.cr</strong>
-                    </p>
-                  </div>
-                </div>
+                  {/* Parent/Guardian Information */}
+                  <div className="space-y-6">
+                    <h3 className="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-2 flex items-center gap-2">
+                      <Users className="h-5 w-5 text-green-600" />
+                      Parent/Guardian Information
+                    </h3>
 
-                {/* Technology Usage */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Phone className="h-5 w-5 text-orange-600" />
-                    <h3 className="text-xl font-semibold text-orange-700">Technology Usage</h3>
-                  </div>
-                  <div>
-                    <Label htmlFor="electronicDevices" className="text-sm font-medium text-gray-700">
-                      What electronic devices does your child own or use and how often does he/she use them? *
-                    </Label>
-                    <Textarea
-                      id="electronicDevices"
-                      placeholder="Please describe devices (tablets, phones, computers, gaming systems) and frequency of use..."
-                      className="border-2 border-gray-200 focus:border-teal-500 min-h-[100px]"
-                      value={formData.electronicDevices}
-                      onChange={(e) => setFormData({ ...formData, electronicDevices: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="limitElectronics" className="text-sm font-medium text-gray-700">
-                      If you regularly use electronic devices, would you be willing to limit their use? If not, why not?
-                      *
-                    </Label>
-                    <Textarea
-                      id="limitElectronics"
-                      placeholder="Please explain your willingness to limit electronic device usage..."
-                      className="border-2 border-gray-200 focus:border-teal-500 min-h-[100px]"
-                      value={formData.limitElectronics}
-                      onChange={(e) => setFormData({ ...formData, limitElectronics: e.target.value })}
-                      required
-                    />
-                  </div>
-                </div>
+                    {/* Primary Parent/Guardian */}
+                    <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                      <h4 className="text-lg font-medium text-blue-700 mb-4">Primary Parent/Guardian</h4>
 
-                {/* Volunteer Program */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Users className="h-5 w-5 text-green-600" />
-                    <h3 className="text-xl font-semibold text-green-700">Parent Volunteer Program</h3>
-                  </div>
-                  <div>
-                    <Label htmlFor="volunteerContribution" className="text-sm font-medium text-gray-700">
-                      As part of our parent volunteer program, we would like to know how you believe you can contribute
-                      to the benefit of the school. *
-                    </Label>
-                    <Textarea
-                      id="volunteerContribution"
-                      placeholder="Please describe your skills, interests, and how you can contribute to our school community..."
-                      className="border-2 border-gray-200 focus:border-teal-500 min-h-[100px]"
-                      value={formData.volunteerContribution}
-                      onChange={(e) => setFormData({ ...formData, volunteerContribution: e.target.value })}
-                      required
-                    />
-                  </div>
-                </div>
+                      <div className="grid md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                          <Label htmlFor="parent1-first-name">First Name *</Label>
+                          <Input id="parent1-first-name" placeholder="Enter first name" required />
+                        </div>
+                        <div>
+                          <Label htmlFor="parent1-last-name">Last Name *</Label>
+                          <Input id="parent1-last-name" placeholder="Enter last name" required />
+                        </div>
+                      </div>
 
-                {/* Agreement */}
-                <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-red-700">Declaration</h3>
-                  <div className="p-4 bg-red-50 rounded-lg border border-red-200">
-                    <div className="flex items-start space-x-3">
-                      <Checkbox
-                        id="agreeToAccuracy"
-                        checked={formData.agreeToAccuracy}
-                        onCheckedChange={(checked) => setFormData({ ...formData, agreeToAccuracy: checked as boolean })}
-                        className="mt-1"
+                      <div className="grid md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                          <Label htmlFor="parent1-email">Email Address *</Label>
+                          <Input id="parent1-email" type="email" placeholder="Enter email address" required />
+                        </div>
+                        <div>
+                          <Label htmlFor="parent1-phone">Phone Number *</Label>
+                          <Input id="parent1-phone" type="tel" placeholder="Enter phone number" required />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="parent1-relationship">Relationship to Student *</Label>
+                          <Select required>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select relationship" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="mother">Mother</SelectItem>
+                              <SelectItem value="father">Father</SelectItem>
+                              <SelectItem value="guardian">Guardian</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div>
+                          <Label htmlFor="parent1-occupation">Occupation</Label>
+                          <Input id="parent1-occupation" placeholder="Enter occupation" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Secondary Parent/Guardian */}
+                    <div className="bg-green-50 p-6 rounded-lg border border-green-200">
+                      <h4 className="text-lg font-medium text-green-700 mb-4">Secondary Parent/Guardian (Optional)</h4>
+
+                      <div className="grid md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                          <Label htmlFor="parent2-first-name">First Name</Label>
+                          <Input id="parent2-first-name" placeholder="Enter first name" />
+                        </div>
+                        <div>
+                          <Label htmlFor="parent2-last-name">Last Name</Label>
+                          <Input id="parent2-last-name" placeholder="Enter last name" />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                          <Label htmlFor="parent2-email">Email Address</Label>
+                          <Input id="parent2-email" type="email" placeholder="Enter email address" />
+                        </div>
+                        <div>
+                          <Label htmlFor="parent2-phone">Phone Number</Label>
+                          <Input id="parent2-phone" type="tel" placeholder="Enter phone number" />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="parent2-relationship">Relationship to Student</Label>
+                          <Select>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select relationship" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="mother">Mother</SelectItem>
+                              <SelectItem value="father">Father</SelectItem>
+                              <SelectItem value="guardian">Guardian</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div>
+                          <Label htmlFor="parent2-occupation">Occupation</Label>
+                          <Input id="parent2-occupation" placeholder="Enter occupation" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Address Information */}
+                  <div className="space-y-6">
+                    <h3 className="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-2 flex items-center gap-2">
+                      <Home className="h-5 w-5 text-purple-600" />
+                      Address Information
+                    </h3>
+
+                    <div>
+                      <Label htmlFor="address">Street Address *</Label>
+                      <Input id="address" placeholder="Enter street address" required />
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <div>
+                        <Label htmlFor="city">City *</Label>
+                        <Input id="city" placeholder="Enter city" required />
+                      </div>
+                      <div>
+                        <Label htmlFor="province">Province/State *</Label>
+                        <Input id="province" placeholder="Enter province/state" required />
+                      </div>
+                      <div>
+                        <Label htmlFor="postal-code">Postal Code</Label>
+                        <Input id="postal-code" placeholder="Enter postal code" />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="country">Country *</Label>
+                      <Input id="country" placeholder="Enter country" required />
+                    </div>
+                  </div>
+
+                  {/* Emergency Contact */}
+                  <div className="space-y-6">
+                    <h3 className="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-2 flex items-center gap-2">
+                      <Phone className="h-5 w-5 text-red-600" />
+                      Emergency Contact
+                    </h3>
+
+                    <div className="bg-red-50 p-6 rounded-lg border border-red-200">
+                      <p className="text-sm text-red-700 mb-4">
+                        Please provide an emergency contact who is not a parent/guardian listed above.
+                      </p>
+
+                      <div className="grid md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                          <Label htmlFor="emergency-name">Full Name *</Label>
+                          <Input id="emergency-name" placeholder="Enter full name" required />
+                        </div>
+                        <div>
+                          <Label htmlFor="emergency-relationship">Relationship to Student *</Label>
+                          <Input id="emergency-relationship" placeholder="Enter relationship" required />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="emergency-phone">Phone Number *</Label>
+                          <Input id="emergency-phone" type="tel" placeholder="Enter phone number" required />
+                        </div>
+                        <div>
+                          <Label htmlFor="emergency-email">Email Address</Label>
+                          <Input id="emergency-email" type="email" placeholder="Enter email address" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Additional Information */}
+                  <div className="space-y-6">
+                    <h3 className="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-2 flex items-center gap-2">
+                      <FileText className="h-5 w-5 text-orange-600" />
+                      Additional Information
+                    </h3>
+
+                    <div>
+                      <Label htmlFor="why-waldorf">Why are you interested in Waldorf education? *</Label>
+                      <Textarea
+                        id="why-waldorf"
+                        placeholder="Please share what draws you to Waldorf education and our school..."
+                        className="min-h-[120px]"
+                        required
                       />
-                      <Label htmlFor="agreeToAccuracy" className="text-sm text-gray-700 leading-relaxed">
-                        All information provided on this form is true and accurate. My acceptance is valid as my
-                        signature. *
+                    </div>
+
+                    <div>
+                      <Label htmlFor="child-interests">Tell us about your child's interests and personality</Label>
+                      <Textarea
+                        id="child-interests"
+                        placeholder="Please describe your child's interests, hobbies, personality traits, and anything else you'd like us to know..."
+                        className="min-h-[120px]"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="family-languages">Languages spoken at home *</Label>
+                      <Input id="family-languages" placeholder="e.g., English, Spanish, French" required />
+                    </div>
+
+                    <div>
+                      <Label>How did you hear about our school? *</Label>
+                      <RadioGroup className="mt-2">
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="website" id="website" />
+                          <Label htmlFor="website">Website</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="social-media" id="social-media" />
+                          <Label htmlFor="social-media">Social Media</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="friend-referral" id="friend-referral" />
+                          <Label htmlFor="friend-referral">Friend/Family Referral</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="google-search" id="google-search" />
+                          <Label htmlFor="google-search">Google Search</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="other" id="other" />
+                          <Label htmlFor="other">Other</Label>
+                        </div>
+                      </RadioGroup>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="additional-comments">Additional Comments or Questions</Label>
+                      <Textarea
+                        id="additional-comments"
+                        placeholder="Please share any additional information, questions, or concerns..."
+                        className="min-h-[100px]"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Program Selection and Tuition */}
+                  <div className="space-y-6">
+                    <h3 className="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-2 flex items-center gap-2">
+                      <GraduationCap className="h-5 w-5 text-indigo-600" />
+                      Program Selection
+                    </h3>
+
+                    <div className="bg-indigo-50 p-6 rounded-lg border border-indigo-200">
+                      <Label>Preferred Schedule (for Kindergarten students) *</Label>
+                      <RadioGroup className="mt-2">
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="3-day-full" id="3-day-full" />
+                          <Label htmlFor="3-day-full">3 days/week - Full Day (8:00 AM - 2:15 PM) - $5,200/year</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="5-day-full" id="5-day-full" />
+                          <Label htmlFor="5-day-full">5 days/week - Full Day (8:00 AM - 2:15 PM) - $6,950/year</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="3-day-half" id="3-day-half" />
+                          <Label htmlFor="3-day-half">3 days/week - Half Day (8:00 AM - 1:00 PM) - $4,050/year</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="5-day-half" id="5-day-half" />
+                          <Label htmlFor="5-day-half">5 days/week - Half Day (8:00 AM - 1:00 PM) - $5,800/year</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="grades" id="grades" />
+                          <Label htmlFor="grades">Grades 1-8 - Full Day (8:00 AM - 2:15 PM) - $6,950/year</Label>
+                        </div>
+                      </RadioGroup>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="extended-care" />
+                      <Label htmlFor="extended-care">
+                        Interested in Extended Care for Kindergarten (until 2:15 PM)
                       </Label>
                     </div>
                   </div>
-                </div>
 
-                {/* Submit Button */}
-                <div className="text-center pt-6">
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white shadow-lg px-8"
-                    disabled={!formData.agreeToAccuracy}
-                  >
-                    <Send className="mr-2 h-5 w-5" />
-                    Submit Application
-                  </Button>
-                  <p className="text-sm text-gray-600 mt-3">
-                    We will contact you within 24 hours to discuss next steps.
-                  </p>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
+                  {/* Agreements and Consent */}
+                  <div className="space-y-6">
+                    <h3 className="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-2">
+                      Agreements and Consent
+                    </h3>
+
+                    <div className="space-y-4">
+                      <div className="flex items-start space-x-2">
+                        <Checkbox id="accuracy" required />
+                        <Label htmlFor="accuracy" className="text-sm">
+                          I certify that all information provided in this application is true and accurate to the best
+                          of my knowledge. *
+                        </Label>
+                      </div>
+
+                      <div className="flex items-start space-x-2">
+                        <Checkbox id="tour-agreement" required />
+                        <Label htmlFor="tour-agreement" className="text-sm">
+                          I understand that a campus tour and family interview are required as part of the admissions
+                          process. *
+                        </Label>
+                      </div>
+
+                      <div className="flex items-start space-x-2">
+                        <Checkbox id="financial-commitment" required />
+                        <Label htmlFor="financial-commitment" className="text-sm">
+                          I understand the financial commitment and fee structure outlined on the school website. *
+                        </Label>
+                      </div>
+
+                      <div className="flex items-start space-x-2">
+                        <Checkbox id="communication-consent" />
+                        <Label htmlFor="communication-consent" className="text-sm">
+                          I consent to receive communications from Pacífico Internacional regarding my child's
+                          application and school updates.
+                        </Label>
+                      </div>
+
+                      <div className="flex items-start space-x-2">
+                        <Checkbox id="photo-consent" />
+                        <Label htmlFor="photo-consent" className="text-sm">
+                          I give permission for my child to be photographed for school promotional materials and social
+                          media (optional).
+                        </Label>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Submit Button */}
+                  <div className="pt-6 border-t border-gray-200">
+                    <div className="text-center space-y-4">
+                      <Button
+                        type="submit"
+                        size="lg"
+                        className="bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white px-8 py-3"
+                      >
+                        <FileText className="mr-2 h-5 w-5" />
+                        Submit Application
+                      </Button>
+                      <p className="text-sm text-gray-600">
+                        After submitting, you will receive a confirmation email with next steps.
+                      </p>
+                    </div>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-16 bg-gradient-to-r from-teal-100 to-blue-100">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="flex justify-center items-center space-x-2 mb-4">
+              <Mail className="h-8 w-8 text-teal-600" />
+              <h2 className="text-4xl font-bold text-gray-800">Questions?</h2>
+            </div>
+            <p className="text-xl text-gray-600">We're here to help with your application process</p>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            <Card className="bg-white/80 backdrop-blur-sm border-2 border-teal-200">
+              <CardHeader>
+                <CardTitle className="text-2xl text-teal-700">Contact Admissions</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <Phone className="h-6 w-6 text-teal-600 mt-1" />
+                  <div>
+                    <p className="font-semibold text-gray-800">Phone</p>
+                    <p className="text-gray-600">+506 8762 6927</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <Mail className="h-6 w-6 text-teal-600 mt-1" />
+                  <div>
+                    <p className="font-semibold text-gray-800">Email</p>
+                    <p className="text-gray-600">info@waldorf.cr</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <Clock className="h-6 w-6 text-teal-600 mt-1" />
+                  <div>
+                    <p className="font-semibold text-gray-800">Office Hours</p>
+                    <p className="text-gray-600">Monday - Friday: 7:30 AM - 2:30 PM</p>
+                  </div>
+                </div>
+                <div className="pt-4">
+                  <Button
+                    asChild
+                    className="w-full bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white"
+                  >
+                    <a href="https://wa.me/50687626927" target="_blank" rel="noopener noreferrer">
+                      <Phone className="mr-2 h-5 w-5" />
+                      Contact via WhatsApp
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gradient-to-r from-gray-800 to-gray-900 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div>
+              <div className="flex items-center space-x-3 mb-4">
+                <Image
+                  src="/images/pacifico-logo.png"
+                  alt="Pacífico Internacional"
+                  width={50}
+                  height={50}
+                  className="rounded-full"
+                />
+                <div>
+                  <h3 className="text-xl font-bold">Pacífico Internacional</h3>
+                  <p className="text-sm text-gray-300">Educación Inspirada en Waldorf</p>
+                </div>
+              </div>
+              <p className="text-gray-300">
+                Nurturing young minds through nature-based, holistic education that honors each child's unique journey.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-gray-300">
+                <li>
+                  <Link href="/#about" className="hover:text-teal-300 transition-colors">
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/#admissions" className="hover:text-teal-300 transition-colors">
+                    Admissions
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/#calendar" className="hover:text-teal-300 transition-colors">
+                    School Calendar
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/#contact" className="hover:text-teal-300 transition-colors">
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Connect With Us</h4>
+              <div className="space-y-3 text-gray-300">
+                <p className="flex items-center">
+                  <Mail className="mr-2 h-4 w-4" /> info@waldorf.cr
+                </p>
+                <p className="flex items-center">
+                  <Phone className="mr-2 h-4 w-4" /> +506 8762 6927
+                </p>
+                <p className="flex items-center">
+                  <MapPin className="mr-2 h-4 w-4" /> Costa Rica, Guanacaste
+                </p>
+
+                {/* Social Media Icons */}
+                <div className="flex space-x-4 pt-2">
+                  <a href="#" className="hover:opacity-80 transition-opacity" aria-label="WhatsApp">
+                    <Image src="/icons/whatsapp.png" alt="WhatsApp" width={32} height={32} className="w-8 h-8" />
+                  </a>
+                  <a href="#" className="hover:opacity-80 transition-opacity" aria-label="Instagram">
+                    <Image src="/icons/instagram.png" alt="Instagram" width={32} height={32} className="w-8 h-8" />
+                  </a>
+                  <a href="#" className="hover:opacity-80 transition-opacity" aria-label="Facebook">
+                    <Image src="/icons/facebook.png" alt="Facebook" width={32} height={32} className="w-8 h-8" />
+                  </a>
+                  <a href="#" className="hover:opacity-80 transition-opacity" aria-label="Google Maps Location">
+                    <Image src="/icons/google-maps.png" alt="Google Maps" width={32} height={32} className="w-8 h-8" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+            <p>
+              &copy; {new Date().getFullYear()} Pacífico Internacional. All rights reserved. | Nurturing minds, hearts,
+              and hands.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }

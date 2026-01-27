@@ -1,38 +1,84 @@
-// Fetch and analyze the tuition data from the CSV
+// Script to fetch and process tuition data from Google Sheets
+// This script demonstrates how to connect to external data sources
+
 async function fetchTuitionData() {
   try {
-    const response = await fetch(
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Tuition%20and%20fees%20-%20Sheet1-7FJATrNCCfexrDwGO8RAIhHHh3dbv3.csv",
-    )
-    const csvText = await response.text()
+    // Example Google Sheets API endpoint (replace with actual sheet ID and API key)
+    const SHEET_ID = "your-google-sheet-id"
+    const API_KEY = "your-google-api-key"
+    const RANGE = "Tuition!A1:D20"
 
-    console.log("Raw CSV Data:")
-    console.log(csvText)
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`
 
-    // Parse CSV manually
-    const lines = csvText.trim().split("\n")
-    const headers = lines[0].split(",").map((h) => h.trim().replace(/"/g, ""))
+    console.log("Fetching tuition data from Google Sheets...")
 
-    console.log("Headers:", headers)
+    const response = await fetch(url)
 
-    const data = []
-    for (let i = 1; i < lines.length; i++) {
-      const values = lines[i].split(",").map((v) => v.trim().replace(/"/g, ""))
-      const row = {}
-      headers.forEach((header, index) => {
-        row[header] = values[index] || ""
-      })
-      data.push(row)
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
     }
 
-    console.log("Parsed Data:")
-    console.log(JSON.stringify(data, null, 2))
+    const data = await response.json()
 
-    return data
+    console.log("Raw data from Google Sheets:", data)
+
+    // Process the data
+    const rows = data.values
+    if (!rows || rows.length === 0) {
+      console.log("No data found in the sheet")
+      return
+    }
+
+    // Assuming first row contains headers
+    const headers = rows[0]
+    console.log("Headers:", headers)
+
+    // Process each row of tuition data
+    const tuitionData = []
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i]
+      if (row.length >= 4) {
+        tuitionData.push({
+          program: row[0],
+          schedule: row[1],
+          annualTuition: row[2],
+          monthly: row[3],
+        })
+      }
+    }
+
+    console.log("Processed tuition data:", tuitionData)
+
+    // You could save this data to a JSON file or use it directly
+    return tuitionData
   } catch (error) {
     console.error("Error fetching tuition data:", error)
+
+    // Return fallback data if API fails
+    return [
+      {
+        program: "Kindergarten (3 days/week)",
+        schedule: "Any 3 of 5",
+        annualTuition: "$5,200",
+        monthly: "$520",
+      },
+      {
+        program: "Kindergarten (5 days/week)",
+        schedule: "Monday - Friday",
+        annualTuition: "$6,950",
+        monthly: "$695",
+      },
+      {
+        program: "Grades 1-8",
+        schedule: "Monday - Friday",
+        annualTuition: "$6,950",
+        monthly: "$695",
+      },
+    ]
   }
 }
 
 // Execute the function
-fetchTuitionData()
+fetchTuitionData().then((data) => {
+  console.log("Final tuition data:", data)
+})

@@ -1,38 +1,138 @@
-// Fetch and analyze the tuition data from Google Sheets
-async function fetchGoogleSheetsData() {
-  try {
-    const response = await fetch(
-      "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOqFu1M-iKC8K7g6eqyeb-qt4L-Qb_Ds8b_C931-D59-Wb1gF3gE6R6b--n4hIluWs2o_7zVPRHicC/pub?output=csv",
-    )
-    const csvText = await response.text()
+// Generic script to fetch data from Google Sheets
+// Can be used for various data sources like events, student info, etc.
 
-    console.log("Raw CSV Data from Google Sheets:")
-    console.log(csvText)
+class GoogleSheetsAPI {
+  constructor(apiKey, sheetId) {
+    this.apiKey = apiKey
+    this.sheetId = sheetId
+    this.baseUrl = "https://sheets.googleapis.com/v4/spreadsheets"
+  }
 
-    // Parse CSV manually
-    const lines = csvText.trim().split("\n")
-    const headers = lines[0].split(",").map((h) => h.trim().replace(/"/g, ""))
+  async fetchRange(range) {
+    try {
+      const url = `${this.baseUrl}/${this.sheetId}/values/${range}?key=${this.apiKey}`
 
-    console.log("Headers:", headers)
+      console.log(`Fetching data from range: ${range}`)
 
-    const data = []
-    for (let i = 1; i < lines.length; i++) {
-      const values = lines[i].split(",").map((v) => v.trim().replace(/"/g, ""))
-      const row = {}
-      headers.forEach((header, index) => {
-        row[header] = values[index] || ""
-      })
-      data.push(row)
+      const response = await fetch(url)
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const data = await response.json()
+      return data.values || []
+    } catch (error) {
+      console.error(`Error fetching range ${range}:`, error)
+      return []
+    }
+  }
+
+  async fetchMultipleRanges(ranges) {
+    try {
+      const rangeParams = ranges.map((range) => `ranges=${encodeURIComponent(range)}`).join("&")
+      const url = `${this.baseUrl}/${this.sheetId}/values:batchGet?${rangeParams}&key=${this.apiKey}`
+
+      console.log("Fetching multiple ranges:", ranges)
+
+      const response = await fetch(url)
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const data = await response.json()
+      return data.valueRanges || []
+    } catch (error) {
+      console.error("Error fetching multiple ranges:", error)
+      return []
+    }
+  }
+
+  processRowsToObjects(rows, headerRow = 0) {
+    if (!rows || rows.length <= headerRow) {
+      return []
     }
 
-    console.log("Parsed Data:")
-    console.log(JSON.stringify(data, null, 2))
+    const headers = rows[headerRow]
+    const dataRows = rows.slice(headerRow + 1)
 
-    return data
+    return dataRows.map((row) => {
+      const obj = {}
+      headers.forEach((header, index) => {
+        obj[header] = row[index] || ""
+      })
+      return obj
+    })
+  }
+}
+
+// Example usage for school data
+async function fetchSchoolData() {
+  // Replace with actual API key and sheet ID
+  const API_KEY = process.env.GOOGLE_SHEETS_API_KEY || "your-api-key"
+  const SHEET_ID = process.env.GOOGLE_SHEET_ID || "your-sheet-id"
+
+  const sheetsAPI = new GoogleSheetsAPI(API_KEY, SHEET_ID)
+
+  try {
+    // Fetch different types of school data
+    const ranges = [
+      "Students!A1:Z100", // Student information
+      "Events!A1:F50", // School events
+      "Tuition!A1:D20", // Tuition information
+      "Staff!A1:E30", // Staff directory
+    ]
+
+    const results = await sheetsAPI.fetchMultipleRanges(ranges)
+
+    const schoolData = {
+      students: [],
+      events: [],
+      tuition: [],
+      staff: [],
+    }
+
+    if (results.length >= 1 && results[0].values) {
+      schoolData.students = sheetsAPI.processRowsToObjects(results[0].values)
+      console.log(`Processed ${schoolData.students.length} student records`)
+    }
+
+    if (results.length >= 2 && results[1].values) {
+      schoolData.events = sheetsAPI.processRowsToObjects(results[1].values)
+      console.log(`Processed ${schoolData.events.length} events`)
+    }
+
+    if (results.length >= 3 && results[2].values) {
+      schoolData.tuition = sheetsAPI.processRowsToObjects(results[2].values)
+      console.log(`Processed ${schoolData.tuition.length} tuition entries`)
+    }
+
+    if (results.length >= 4 && results[3].values) {
+      schoolData.staff = sheetsAPI.processRowsToObjects(results[3].values)
+      console.log(`Processed ${schoolData.staff.length} staff members`)
+    }
+
+    return schoolData
   } catch (error) {
-    console.error("Error fetching Google Sheets data:", error)
+    console.error("Error fetching school data:", error)
+    return null
   }
 }
 
 // Execute the function
-fetchGoogleSheetsData()
+fetchSchoolData().then((data) => {
+  if (data) {
+    console.log("Successfully fetched school data:", Object.keys(data))
+
+    // Example: Log first few events
+    if (data.events.length > 0) {
+      console.log("Sample events:", data.events.slice(0, 3))
+    }
+  }
+})
+
+// Export for use in other modules
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { GoogleSheetsAPI, fetchSchoolData }
+}
