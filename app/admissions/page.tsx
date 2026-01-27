@@ -43,8 +43,8 @@ const translations = {
     heroSubtitle: "Join our nurturing community in the heart of Costa Rica where children learn through creativity, nature, and hands-on discovery.",
 
     // Form
-    formTitle: "Start Your Application",
-    formSubtitle: "Tell us about your family and we'll be in touch within 24 hours.",
+    formTitle: "Request Admissions Information",
+    formSubtitle: "Give us a few details and we'll be in touch right away!",
     parentGuardian: "Parent / Guardian",
     firstName: "First Name",
     lastName: "Last Name",
@@ -111,8 +111,8 @@ const translations = {
     heroSubtitle: "Únete a nuestra comunidad nutritiva en el corazón de Costa Rica donde los niños aprenden a través de la creatividad, la naturaleza y el descubrimiento práctico.",
 
     // Form
-    formTitle: "Inicia tu Solicitud",
-    formSubtitle: "Cuéntanos sobre tu familia y nos pondremos en contacto dentro de 24 horas.",
+    formTitle: "Solicita Información de Admisiones",
+    formSubtitle: "Danos algunos detalles y nos pondremos en contacto de inmediato!",
     parentGuardian: "Padre / Tutor",
     firstName: "Nombre",
     lastName: "Apellido",
