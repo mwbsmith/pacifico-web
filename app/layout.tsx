@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
+import Script from "next/script"
 import "./globals.css"
 
 const inter = Inter({
@@ -28,31 +29,40 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <head>
+      <body className="font-sans antialiased">
+        {children}
+        
         {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EHFWEQWDYL"></script>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-EHFWEQWDYL"
+          strategy="afterInteractive"
+        />
+        
         {/* Google Ads - loads if NEXT_PUBLIC_GOOGLE_ADS_ID is set */}
         {process.env.NEXT_PUBLIC_GOOGLE_ADS_ID && (
-          <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ADS_ID}`}></script>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ADS_ID}`}
+            strategy="afterInteractive"
+          />
         )}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-EHFWEQWDYL');
-              ${process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ? `gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ADS_ID}');` : ''}
-            `,
-          }}
-        />
-        <script
+        
+        {/* gtag configuration */}
+        <Script id="gtag-config" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-EHFWEQWDYL');
+            ${process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ? `gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ADS_ID}');` : ''}
+          `}
+        </Script>
+        
+        {/* reCAPTCHA Enterprise */}
+        <Script
           src={`https://www.google.com/recaptcha/enterprise.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"}`}
-          async
-          defer
-        ></script>
-      </head>
-      <body className="font-sans antialiased">{children}</body>
+          strategy="afterInteractive"
+        />
+      </body>
     </html>
   )
 }
