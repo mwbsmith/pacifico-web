@@ -1,9 +1,6 @@
 "use client"
 
-import type React from "react"
-
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Globe,
   ChevronDown,
@@ -11,14 +8,14 @@ import {
   Mail,
   Phone,
   MapPin,
-  Calendar,
+  CheckCircle,
   ArrowRight,
 } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 type Language = "en" | "es"
 
@@ -30,19 +27,24 @@ const translations = {
     calendar: "Calendar",
     contact: "Contact",
 
-    // Hero Section
-    heroTitle: "School ",
-    heroHighlight: "News",
-    heroDescription: "Stay updated with the latest news, events, and announcements from Pacífico Internacional.",
+    // Thank You Content
+    thankYouTitle: "Thank You!",
+    thankYouSubtitle: "Your Request Has Been Received",
+    thankYouMessage: "We're excited to connect with you! A member of our admissions team will be in touch within 24 hours to discuss next steps and answer any questions you may have.",
+    whatHappensNext: "What Happens Next?",
+    step1Title: "Email Confirmation",
+    step1Desc: "You'll receive a confirmation email shortly with details about your inquiry.",
+    step2Title: "Personal Outreach",
+    step2Desc: "Our admissions team will contact you within 24 hours to schedule a call or visit.",
+    step3Title: "Campus Visit",
+    step3Desc: "We'll invite you to tour our beautiful jungle campus and meet our teachers.",
+    exploreMore: "While You Wait",
+    learnMore: "Learn more about our school",
+    visitHomepage: "Visit Homepage",
+    scheduleCall: "Schedule a Call Now",
 
-    // News Section
-    newsTitle: "Latest Updates",
-    noNews: "No news articles available at this time. Check back soon!",
-    readMore: "Read More",
-    
     // Footer
-    footerDescription:
-      "Nurturing young minds through nature-based, holistic education that honors each child's unique journey.",
+    footerDescription: "Nurturing young minds through nature-based, holistic education that honors each child's unique journey.",
     quickLinks: "Quick Links",
     aboutUs: "About Us",
     schoolCalendar: "School Calendar",
@@ -56,19 +58,24 @@ const translations = {
     calendar: "Calendario",
     contact: "Contacto",
 
-    // Hero Section
-    heroTitle: "Noticias de la ",
-    heroHighlight: "Escuela",
-    heroDescription: "Mantente actualizado con las últimas noticias, eventos y anuncios de Pacífico Internacional.",
-
-    // News Section
-    newsTitle: "Últimas Actualizaciones",
-    noNews: "No hay artículos de noticias disponibles en este momento. ¡Vuelve pronto!",
-    readMore: "Leer Más",
+    // Thank You Content
+    thankYouTitle: "¡Gracias!",
+    thankYouSubtitle: "Tu Solicitud Ha Sido Recibida",
+    thankYouMessage: "¡Estamos emocionados de conectar contigo! Un miembro de nuestro equipo de admisiones se pondrá en contacto dentro de 24 horas para discutir los próximos pasos y responder cualquier pregunta que puedas tener.",
+    whatHappensNext: "¿Qué Sigue?",
+    step1Title: "Confirmación por Email",
+    step1Desc: "Recibirás un correo de confirmación en breve con detalles sobre tu consulta.",
+    step2Title: "Contacto Personal",
+    step2Desc: "Nuestro equipo de admisiones te contactará dentro de 24 horas para programar una llamada o visita.",
+    step3Title: "Visita al Campus",
+    step3Desc: "Te invitaremos a recorrer nuestro hermoso campus en la selva y conocer a nuestros maestros.",
+    exploreMore: "Mientras Esperas",
+    learnMore: "Conoce más sobre nuestra escuela",
+    visitHomepage: "Visitar Página Principal",
+    scheduleCall: "Programar una Llamada Ahora",
 
     // Footer
-    footerDescription:
-      "Nutriendo mentes jóvenes a través de educación holística basada en la naturaleza que honra el viaje único de cada niño.",
+    footerDescription: "Nutriendo mentes jóvenes a través de educación holística basada en la naturaleza que honra el viaje único de cada niño.",
     quickLinks: "Enlaces Rápidos",
     aboutUs: "Acerca de Nosotros",
     schoolCalendar: "Calendario Escolar",
@@ -77,93 +84,26 @@ const translations = {
   },
 }
 
-// Sample news articles - these can be replaced with API data later
-const newsArticles = [
-  {
-    id: 1,
-    titleEn: "Welcome to the 2025-2026 School Year",
-    titleEs: "Bienvenidos al Año Escolar 2025-2026",
-    descriptionEn: "We are excited to welcome all families to another wonderful year of Waldorf-inspired education at Pacífico Internacional.",
-    descriptionEs: "Estamos emocionados de dar la bienvenida a todas las familias a otro maravilloso año de educación inspirada en Waldorf en Pacífico Internacional.",
-    date: "2025-08-18",
-    image: "/images/waldorf-classroom.jpg",
-  },
-  {
-    id: 2,
-    titleEn: "Morning Garden Program Now Enrolling",
-    titleEs: "Programa Morning Garden Ahora Inscribiendo",
-    descriptionEn: "Our beloved Morning Garden program for young children is accepting new enrollments. Join us for a nurturing introduction to school life.",
-    descriptionEs: "Nuestro querido programa Morning Garden para niños pequeños está aceptando nuevas inscripciones. Únete a nosotros para una introducción nutritiva a la vida escolar.",
-    date: "2025-01-15",
-    image: "/images/morning-garden-en.jpg",
-  },
-  {
-    id: 3,
-    titleEn: "Meet Our Growing Faculty Team",
-    titleEs: "Conoce a Nuestro Equipo de Profesores en Crecimiento",
-    descriptionEn: "We are thrilled to introduce new members to our dedicated team of Waldorf-trained educators.",
-    descriptionEs: "Estamos encantados de presentar nuevos miembros a nuestro dedicado equipo de educadores entrenados en Waldorf.",
-    date: "2025-01-10",
-    image: "/images/faculty-group-photo.jpeg",
-  },
-]
-
-export default function NewsPage() {
-  const [scrollY, setScrollY] = useState(0)
+export default function AdmissionsThankYouPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [language, setLanguage] = useState<Language>("en")
 
   const t = (key: keyof typeof translations.en) => translations[language][key]
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  // Calculate logo animation based on scroll
-  const maxScroll = 400
-  const progress = Math.min(scrollY / maxScroll, 1)
-
-  // Logo starts in hero center and moves to header - responsive sizing
-  const logoScale = 1 - progress * 0.7
-  const logoY = -(progress * 60)
-  const logoOpacity = scrollY > maxScroll ? 0 : 1
-
-  // Header logo appears when main logo is hidden
-  const headerLogoOpacity = scrollY > maxScroll ? 1 : 0
-
   const handleNavClick = (href: string) => {
     setMobileMenuOpen(false)
-    if (href.startsWith("#")) {
-      window.location.href = "/" + href
-    } else {
-      window.location.href = href
-    }
-  }
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString + "T12:00:00-06:00")
-    return date.toLocaleDateString(language === "en" ? "en-US" : "es-ES", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      timeZone: "America/Costa_Rica",
-    })
+    window.location.href = "/" + href
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-100 via-emerald-50 to-amber-50">
-      {/* Hero Section */}
-      <section className="relative py-16 md:py-24 overflow-hidden min-h-[60vh] flex items-center">
+      {/* Hero Section with Background */}
+      <section className="relative min-h-[60vh] flex flex-col">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/faculty-group-photo.jpeg"
-            alt="Pacífico Internacional faculty and staff"
+            alt="Pacífico Internacional Faculty"
             fill
             className="object-cover"
             priority
@@ -178,34 +118,18 @@ export default function NewsPage() {
         <nav className="fixed top-0 left-0 right-0 z-30 bg-black/20 backdrop-blur-sm transition-all duration-300">
           <div className="container mx-auto px-4 py-6 md:py-8">
             <div className="flex items-center justify-between">
-              {/* Left - Work With Us Link */}
-              <div className="hidden md:flex items-center">
-                <Link href="/#careers" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md flex items-center gap-1">
-                  {language === "en" ? "Work With Us!" : "¡Trabaja con nosotros!"}
-                  <span className="bg-yellow-400 text-teal-800 text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase animate-pulse">
-                    {language === "en" ? "New" : "Nuevo"}
-                  </span>
-                </Link>
-              </div>
-              <div className="md:hidden w-8"></div>
+              {/* Logo */}
+              <Link href="/" className="flex items-center space-x-3">
+                <Image
+                  src="/images/pacifico-logo.png"
+                  alt="Pacífico Internacional"
+                  width={50}
+                  height={50}
+                  className="rounded-full"
+                />
+              </Link>
 
-              {/* Header Logo - appears when scrolled */}
-              <div
-                className="absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300"
-                style={{ opacity: headerLogoOpacity }}
-              >
-                <Link href="/">
-                  <Image
-                    src="/images/pacifico-logo.png"
-                    alt="Pacífico Internacional - Educación Inspirada en Waldorf"
-                    width={100}
-                    height={100}
-                    className="drop-shadow-lg w-[60px] h-[60px] md:w-[100px] md:h-[100px]"
-                  />
-                </Link>
-              </div>
-
-              {/* Desktop Navigation and Language Selector */}
+              {/* Desktop Navigation */}
               <div className="hidden md:flex items-center space-x-6">
                 <Link href="/#about" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md">
                   {t("about")}
@@ -223,7 +147,7 @@ export default function NewsPage() {
                 {/* Language Selector */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="sm" className="text-white hover:text-yellow-200 hover:bg-white/10">
+                    <Button variant="ghost" size="sm" className="text-white hover:text-yellow-200 hover:bg-white/10 bg-transparent">
                       <Globe className="h-4 w-4 mr-2" />
                       {language.toUpperCase()}
                       <ChevronDown className="h-4 w-4 ml-2" />
@@ -240,7 +164,7 @@ export default function NewsPage() {
               <div className="md:hidden">
                 <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                   <SheetTrigger asChild>
-                    <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                    <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 bg-transparent">
                       <Menu className="h-6 w-6" />
                     </Button>
                   </SheetTrigger>
@@ -248,25 +172,25 @@ export default function NewsPage() {
                     <div className="flex flex-col space-y-4 mt-8">
                       <div className="space-y-2">
                         <button
-                          onClick={() => handleNavClick("/#about")}
+                          onClick={() => handleNavClick("#about")}
                           className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2"
                         >
                           {t("about")}
                         </button>
                         <button
-                          onClick={() => handleNavClick("/#admissions")}
+                          onClick={() => handleNavClick("#admissions")}
                           className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2"
                         >
                           {t("admissions")}
                         </button>
                         <button
-                          onClick={() => handleNavClick("/#calendar")}
+                          onClick={() => handleNavClick("#calendar")}
                           className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2"
                         >
                           {t("calendar")}
                         </button>
                         <button
-                          onClick={() => handleNavClick("/#contact")}
+                          onClick={() => handleNavClick("#contact")}
                           className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2"
                         >
                           {t("contact")}
@@ -300,96 +224,87 @@ export default function NewsPage() {
           </div>
         </nav>
 
-        <div className="container mx-auto px-4 relative z-10 pt-[25px]">
-          <div className="flex items-center justify-center text-center">
-            <div className="space-y-8 max-w-4xl mx-auto">
-              <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight drop-shadow-2xl">
-                {t("heroTitle")}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-green-300 drop-shadow-lg">
-                  {t("heroHighlight")}
-                </span>
-              </h1>
-
-              {/* Animated Logo */}
-              <div className="flex justify-center mb-6 relative">
-                <div
-                  className="transition-all duration-300 ease-out"
-                  style={{
-                    transform: `translateY(${logoY}vh) scale(${logoScale})`,
-                    opacity: logoOpacity,
-                  }}
-                >
-                  <Link href="/">
-                    <Image
-                      src="/images/pacifico-logo.png"
-                      alt="Pacífico Internacional - Educación Inspirada en Waldorf"
-                      width={250}
-                      height={250}
-                      className="drop-shadow-2xl w-[150px] h-[150px] md:w-[250px] md:h-[250px]"
-                    />
-                  </Link>
-                </div>
-              </div>
-
-              <p className="text-xl md:text-2xl text-white leading-relaxed drop-shadow-lg">{t("heroDescription")}</p>
+        {/* Hero Content */}
+        <div className="container mx-auto px-4 relative z-10 pt-32 pb-16 flex-1 flex items-center justify-center">
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="mb-6">
+              <CheckCircle className="h-20 w-20 text-green-400 mx-auto drop-shadow-lg" />
             </div>
+            <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight drop-shadow-2xl mb-4 font-serif">
+              {t("thankYouTitle")}
+            </h1>
+            <p className="text-2xl md:text-3xl text-white/90 drop-shadow-lg mb-6">
+              {t("thankYouSubtitle")}
+            </p>
+            <p className="text-lg md:text-xl text-white/80 leading-relaxed drop-shadow-md max-w-2xl mx-auto">
+              {t("thankYouMessage")}
+            </p>
           </div>
-        </div>
-
-        {/* Decorative elements - Fixed positioning */}
-        <div className="fixed top-20 left-4 md:left-10 text-yellow-400/70 opacity-60 z-50">
-          <div className="text-3xl md:text-4xl animate-bounce">🐒</div>
-        </div>
-        <div className="fixed top-32 right-4 md:right-10 text-green-400/70 opacity-60 z-50">
-          <div className="text-2xl md:text-3xl animate-pulse">🌿</div>
         </div>
       </section>
 
-      {/* News Articles Section */}
-      <section className="py-16 bg-gradient-to-r from-emerald-100 to-teal-100">
+      {/* What Happens Next Section */}
+      <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">{t("newsTitle")}</h2>
-          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12 font-serif">
+            {t("whatHappensNext")}
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Step 1 */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-teal-100 text-center">
+              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Mail className="h-8 w-8 text-teal-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">{t("step1Title")}</h3>
+              <p className="text-gray-600">{t("step1Desc")}</p>
+            </div>
 
-          {newsArticles.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {newsArticles.map((article) => (
-                <Card key={article.id} className="bg-white border-2 border-teal-100 hover:shadow-lg transition-shadow overflow-hidden">
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={article.image || "/placeholder.svg"}
-                      alt={language === "en" ? article.titleEn : article.titleEs}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <CardHeader>
-                    <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                      <Calendar className="h-4 w-4" />
-                      <span>{formatDate(article.date)}</span>
-                    </div>
-                    <CardTitle className="text-xl text-teal-700">
-                      {language === "en" ? article.titleEn : article.titleEs}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-gray-600 mb-4">
-                      {language === "en" ? article.descriptionEn : article.descriptionEs}
-                    </CardDescription>
-                    <Button variant="outline" className="border-teal-600 text-teal-600 hover:bg-teal-50 bg-transparent">
-                      {t("readMore")}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
+            {/* Step 2 */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-teal-100 text-center">
+              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Phone className="h-8 w-8 text-amber-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">{t("step2Title")}</h3>
+              <p className="text-gray-600">{t("step2Desc")}</p>
             </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-xl text-gray-600">{t("noNews")}</p>
+
+            {/* Step 3 */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-teal-100 text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <MapPin className="h-8 w-8 text-green-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">{t("step3Title")}</h3>
+              <p className="text-gray-600">{t("step3Desc")}</p>
             </div>
-          )}
+          </div>
+        </div>
+      </section>
+
+      {/* Explore More Section */}
+      <section className="py-16 bg-gradient-to-r from-teal-50 to-emerald-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8 font-serif">
+            {t("exploreMore")}
+          </h2>
+          <p className="text-center text-gray-600 mb-8 text-lg">
+            {t("learnMore")}
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/">
+              <Button className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-6 text-lg rounded-xl">
+                {t("visitHomepage")}
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+            <a href="tel:+50687626927">
+              <Button variant="outline" className="border-2 border-teal-600 text-teal-600 hover:bg-teal-50 px-8 py-6 text-lg rounded-xl bg-transparent">
+                {t("scheduleCall")}
+                <Phone className="ml-2 h-5 w-5" />
+              </Button>
+            </a>
+          </div>
         </div>
       </section>
 
