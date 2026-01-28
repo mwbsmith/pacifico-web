@@ -237,7 +237,7 @@ export default function AdmissionsLandingPage() {
         }
       }
 
-      const response = await fetch("/api/v1/admissions-inquiries", {
+      const response = await fetch("https://waldorf.cr/api/v1/admissions-inquiries", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
