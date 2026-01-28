@@ -176,16 +176,16 @@ export default function AdmissionsLandingPage() {
   const [isRecaptchaReady, setIsRecaptchaReady] = useState(false)
 
   const [formData, setFormData] = useState({
-    parentFirstName: "",
-    parentLastName: "",
-    email: "",
-    phone: "",
-    studentFirstName: "",
-    studentAge: "",
-    gradeApplying: "",
-    enrollmentTiming: "",
-    howDidYouHear: "",
-    message: "",
+    parent_first_name: "",
+    parent_last_name: "",
+    parent_email: "",
+    parent_phone: "",
+    student_first_name: "",
+    student_age_or_dob: "",
+    grade_applying_for: "",
+    enroll_timing: "",
+    heard_about: "",
+    notes: "",
   })
 
   useEffect(() => {
@@ -237,6 +237,9 @@ export default function AdmissionsLandingPage() {
         }
       }
 
+      // Get UTM parameters from URL
+      const urlParams = new URLSearchParams(window.location.search)
+      
       const response = await fetch("https://waldorf.cr/api/v1/admissions-inquiries", {
         method: "POST",
         headers: {
@@ -245,6 +248,13 @@ export default function AdmissionsLandingPage() {
         },
         body: JSON.stringify({
           ...formData,
+          source: "google_ads",
+          landing_path: window.location.pathname,
+          utm_source: urlParams.get("utm_source") || "",
+          utm_medium: urlParams.get("utm_medium") || "",
+          utm_campaign: urlParams.get("utm_campaign") || "",
+          utm_term: urlParams.get("utm_term") || "",
+          utm_content: urlParams.get("utm_content") || "",
           recaptcha_token: recaptchaToken,
         }),
       })
@@ -447,21 +457,21 @@ export default function AdmissionsLandingPage() {
                     </div>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="parentFirstName">{t("firstName")} *</Label>
+                        <Label htmlFor="parent_first_name">{t("firstName")} *</Label>
                         <Input
-                          id="parentFirstName"
-                          value={formData.parentFirstName}
-                          onChange={(e) => handleInputChange("parentFirstName", e.target.value)}
+                          id="parent_first_name"
+                          value={formData.parent_first_name}
+                          onChange={(e) => handleInputChange("parent_first_name", e.target.value)}
                           required
                           className="mt-1"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="parentLastName">{t("lastName")} *</Label>
+                        <Label htmlFor="parent_last_name">{t("lastName")} *</Label>
                         <Input
-                          id="parentLastName"
-                          value={formData.parentLastName}
-                          onChange={(e) => handleInputChange("parentLastName", e.target.value)}
+                          id="parent_last_name"
+                          value={formData.parent_last_name}
+                          onChange={(e) => handleInputChange("parent_last_name", e.target.value)}
                           required
                           className="mt-1"
                         />
@@ -469,23 +479,23 @@ export default function AdmissionsLandingPage() {
                     </div>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="email">{t("email")} *</Label>
+                        <Label htmlFor="parent_email">{t("email")} *</Label>
                         <Input
-                          id="email"
+                          id="parent_email"
                           type="email"
-                          value={formData.email}
-                          onChange={(e) => handleInputChange("email", e.target.value)}
+                          value={formData.parent_email}
+                          onChange={(e) => handleInputChange("parent_email", e.target.value)}
                           required
                           className="mt-1"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="phone">{t("phone")} *</Label>
+                        <Label htmlFor="parent_phone">{t("phone")} *</Label>
                         <Input
-                          id="phone"
+                          id="parent_phone"
                           type="tel"
-                          value={formData.phone}
-                          onChange={(e) => handleInputChange("phone", e.target.value)}
+                          value={formData.parent_phone}
+                          onChange={(e) => handleInputChange("parent_phone", e.target.value)}
                           required
                           className="mt-1"
                         />
@@ -501,21 +511,21 @@ export default function AdmissionsLandingPage() {
                     </div>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="studentFirstName">{t("studentFirstName")} *</Label>
+                        <Label htmlFor="student_first_name">{t("studentFirstName")} *</Label>
                         <Input
-                          id="studentFirstName"
-                          value={formData.studentFirstName}
-                          onChange={(e) => handleInputChange("studentFirstName", e.target.value)}
+                          id="student_first_name"
+                          value={formData.student_first_name}
+                          onChange={(e) => handleInputChange("student_first_name", e.target.value)}
                           required
                           className="mt-1"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="studentAge">{t("studentAge")} *</Label>
+                        <Label htmlFor="student_age_or_dob">{t("studentAge")} *</Label>
                         <Input
-                          id="studentAge"
-                          value={formData.studentAge}
-                          onChange={(e) => handleInputChange("studentAge", e.target.value)}
+                          id="student_age_or_dob"
+                          value={formData.student_age_or_dob}
+                          onChange={(e) => handleInputChange("student_age_or_dob", e.target.value)}
                           required
                           placeholder="e.g., 6 years old or 01/15/2018"
                           className="mt-1"
@@ -523,11 +533,11 @@ export default function AdmissionsLandingPage() {
                       </div>
                     </div>
                     <div>
-                      <Label htmlFor="gradeApplying">{t("gradeApplying")}</Label>
+                      <Label htmlFor="grade_applying_for">{t("gradeApplying")}</Label>
                       <Input
-                        id="gradeApplying"
-                        value={formData.gradeApplying}
-                        onChange={(e) => handleInputChange("gradeApplying", e.target.value)}
+                        id="grade_applying_for"
+                        value={formData.grade_applying_for}
+                        onChange={(e) => handleInputChange("grade_applying_for", e.target.value)}
                         placeholder="e.g., Kindergarten, Grade 1, etc."
                         className="mt-1"
                       />
@@ -541,8 +551,8 @@ export default function AdmissionsLandingPage() {
                       <h3 className="text-lg font-semibold text-gray-800">{t("enrollmentTiming")} *</h3>
                     </div>
                     <RadioGroup
-                      value={formData.enrollmentTiming}
-                      onValueChange={(value) => handleInputChange("enrollmentTiming", value)}
+                      value={formData.enroll_timing}
+                      onValueChange={(value) => handleInputChange("enroll_timing", value)}
                       required
                       className="space-y-3"
                     >
@@ -563,11 +573,11 @@ export default function AdmissionsLandingPage() {
 
                   {/* How Did You Hear About Us */}
                   <div className="space-y-4">
-                    <Label htmlFor="howDidYouHear">{t("howDidYouHear")}</Label>
+                    <Label htmlFor="heard_about">{t("howDidYouHear")}</Label>
                     <select
-                      id="howDidYouHear"
-                      value={formData.howDidYouHear}
-                      onChange={(e) => handleInputChange("howDidYouHear", e.target.value)}
+                      id="heard_about"
+                      value={formData.heard_about}
+                      onChange={(e) => handleInputChange("heard_about", e.target.value)}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                     >
                       <option value="">-- Select --</option>
@@ -578,13 +588,13 @@ export default function AdmissionsLandingPage() {
                     </select>
                   </div>
 
-                  {/* Message */}
+                  {/* Notes */}
                   <div className="space-y-4">
-                    <Label htmlFor="message">{t("message")}</Label>
+                    <Label htmlFor="notes">{t("message")}</Label>
                     <Textarea
-                      id="message"
-                      value={formData.message}
-                      onChange={(e) => handleInputChange("message", e.target.value)}
+                      id="notes"
+                      value={formData.notes}
+                      onChange={(e) => handleInputChange("notes", e.target.value)}
                       placeholder={t("messagePlaceholder")}
                       rows={4}
                       className="mt-1"
