@@ -242,7 +242,7 @@ export default function AdmissionsLandingPage() {
       // Get UTM parameters from URL
       const urlParams = new URLSearchParams(window.location.search)
       
-      const response = await fetch("https://waldorf.cr/api/v1/admissions-inquiries", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/admissions-inquiries`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
