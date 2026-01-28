@@ -25,6 +25,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 type Language = "en" | "es"
@@ -169,10 +170,11 @@ const translations = {
 }
 
 export default function AdmissionsLandingPage() {
+  const router = useRouter()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [language, setLanguage] = useState<Language>("en")
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "error">("idle")
   const [isRecaptchaReady, setIsRecaptchaReady] = useState(false)
 
   const [formData, setFormData] = useState({
@@ -261,11 +263,11 @@ export default function AdmissionsLandingPage() {
 
       const result = await response.json()
 
-      if (result === true) {
+      if (result?.ok === true) {
         // Redirect to thank-you page on success
-        window.location.href = "/admissions/thank-you"
+        router.push("/admissions/thank-you")
       } else {
-        throw new Error("Failed to submit")
+        throw new Error(result?.message || "Failed to submit")
       }
     } catch (error) {
       setSubmitStatus("error")
@@ -561,8 +563,8 @@ export default function AdmissionsLandingPage() {
                         <Label htmlFor="asap" className="cursor-pointer">{t("asap")}</Label>
                       </div>
                       <div className="flex items-center space-x-3">
-                        <RadioGroupItem value="next_year" id="next_year" />
-                        <Label htmlFor="next_year" className="cursor-pointer">{t("nextYear")}</Label>
+                        <RadioGroupItem value="next_school_year" id="next_school_year" />
+                        <Label htmlFor="next_school_year" className="cursor-pointer">{t("nextYear")}</Label>
                       </div>
                       <div className="flex items-center space-x-3">
                         <RadioGroupItem value="exploring" id="exploring" />
@@ -604,7 +606,7 @@ export default function AdmissionsLandingPage() {
                   {/* Submit Button */}
                   <Button
                     type="submit"
-                    disabled={isSubmitting || !formData.enrollmentTiming}
+                    disabled={isSubmitting || !formData.enroll_timing}
                     className="w-full bg-teal-600 hover:bg-teal-700 disabled:bg-teal-400 text-white py-6 text-lg"
                   >
                     {isSubmitting ? t("submitting") : t("submit")}
