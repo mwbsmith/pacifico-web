@@ -29,7 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <head>
+        {/* Google Analytics */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-EHFWEQWDYL"></script>
+        {/* Google Ads - loads if NEXT_PUBLIC_GOOGLE_ADS_ID is set */}
+        {process.env.NEXT_PUBLIC_GOOGLE_ADS_ID && (
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ADS_ID}`}></script>
+        )}
         <script
           dangerouslySetInnerHTML={{
             __html: `

@@ -15,7 +15,14 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+
+// Declare gtag for TypeScript
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void
+  }
+}
 
 type Language = "en" | "es"
 
@@ -94,6 +101,15 @@ export default function AdmissionsThankYouPage() {
     setMobileMenuOpen(false)
     window.location.href = "/" + href
   }
+
+  // Fire Google Ads conversion event on page load
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.gtag && process.env.NEXT_PUBLIC_GOOGLE_ADS_ID && process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL) {
+      window.gtag("event", "conversion", {
+        send_to: `${process.env.NEXT_PUBLIC_GOOGLE_ADS_ID}/${process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL}`,
+      })
+    }
+  }, [])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-100 via-emerald-50 to-amber-50">
