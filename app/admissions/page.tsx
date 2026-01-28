@@ -237,56 +237,23 @@ export default function AdmissionsLandingPage() {
         }
       }
 
-      const messageContent = `
-ADMISSIONS INQUIRY - Google Ads Landing Page
-
-PARENT/GUARDIAN:
-Name: ${formData.parentFirstName} ${formData.parentLastName}
-Email: ${formData.email}
-Phone: ${formData.phone}
-
-STUDENT:
-Name: ${formData.studentFirstName}
-Age/DOB: ${formData.studentAge}
-Grade Applying For: ${formData.gradeApplying || "Not specified"}
-
-ENROLLMENT:
-Timing: ${formData.enrollmentTiming}
-How they heard about us: ${formData.howDidYouHear || "Not specified"}
-
-MESSAGE:
-${formData.message || "No additional message"}
-      `.trim()
-
-      const response = await fetch("/proxy/contact", {
+      const response = await fetch("/api/v1/admissions-inquiries", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
         body: JSON.stringify({
-          name: `${formData.parentFirstName} ${formData.parentLastName}`.trim(),
-          email: formData.email,
-          phone: formData.phone,
-          message: messageContent,
+          ...formData,
           recaptcha_token: recaptchaToken,
         }),
       })
 
-      if (response.ok) {
-        setSubmitStatus("success")
-        setFormData({
-          parentFirstName: "",
-          parentLastName: "",
-          email: "",
-          phone: "",
-          studentFirstName: "",
-          studentAge: "",
-          gradeApplying: "",
-          enrollmentTiming: "",
-          howDidYouHear: "",
-          message: "",
-        })
+      const result = await response.json()
+
+      if (result === true) {
+        // Redirect to thank-you page on success
+        window.location.href = "/admissions/thank-you"
       } else {
         throw new Error("Failed to submit")
       }
@@ -296,29 +263,6 @@ ${formData.message || "No additional message"}
     } finally {
       setIsSubmitting(false)
     }
-  }
-
-  if (submitStatus === "success") {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-sky-100 via-emerald-50 to-amber-50 flex items-center justify-center p-4">
-        <Card className="max-w-lg w-full text-center">
-          <CardHeader>
-            <div className="mx-auto bg-green-500 text-white p-4 rounded-full w-fit mb-4">
-              <Heart className="h-8 w-8" />
-            </div>
-            <CardTitle className="text-2xl text-green-700">{t("successTitle")}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <CardDescription className="text-lg text-gray-600">
-              {t("successMessage")}
-            </CardDescription>
-            <Button asChild className="bg-teal-600 hover:bg-teal-700 text-white">
-              <Link href="/">{t("backToHome")}</Link>
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    )
   }
 
   return (
