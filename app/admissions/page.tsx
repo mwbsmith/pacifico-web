@@ -232,8 +232,10 @@ export default function AdmissionsLandingPage() {
       let recaptchaToken = ""
       if (isRecaptchaReady && typeof window !== "undefined" && (window as any).grecaptcha?.enterprise) {
         try {
-          const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-          recaptchaToken = await (window as any).grecaptcha.enterprise.execute(siteKey, { action: "admissions_form" })
+          const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+          if (siteKey) {
+            recaptchaToken = await (window as any).grecaptcha.enterprise.execute(siteKey, { action: "admissions_form" })
+          }
         } catch (error) {
           console.error("reCAPTCHA error:", error)
         }
