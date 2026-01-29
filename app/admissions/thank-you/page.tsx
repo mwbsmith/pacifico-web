@@ -133,15 +133,21 @@ export default function AdmissionsThankYouPage() {
         {/* Navigation Overlay */}
         <nav className="fixed top-0 left-0 right-0 z-30 bg-black/20 backdrop-blur-sm transition-all duration-300">
           <div className="container mx-auto px-4 py-6 md:py-8">
-            <div className="flex items-center justify-between">
-              {/* Logo */}
-              <Link href="/" className="flex items-center space-x-3">
+            <div className="flex items-center justify-between relative">
+              {/* Spacer for mobile */}
+              <div className="md:hidden w-8"></div>
+
+              {/* Centered Logo */}
+              <Link 
+                href="/" 
+                className="absolute left-1/2 transform -translate-x-1/2"
+              >
                 <Image
                   src="/images/pacifico-logo.png"
                   alt="Pacífico Internacional"
-                  width={50}
-                  height={50}
-                  className="rounded-full"
+                  width={100}
+                  height={100}
+                  className="drop-shadow-lg w-[60px] h-[60px] md:w-[100px] md:h-[100px]"
                 />
               </Link>
 
