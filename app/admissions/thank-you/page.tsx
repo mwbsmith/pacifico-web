@@ -133,8 +133,9 @@ export default function AdmissionsThankYouPage() {
         {/* Navigation Overlay */}
         <nav className="fixed top-0 left-0 right-0 z-30 bg-black/20 backdrop-blur-sm transition-all duration-300">
           <div className="container mx-auto px-4 py-6 md:py-8">
-            <div className="flex items-center justify-between relative">
-              {/* Spacer for mobile */}
+            <div className="flex items-center justify-between">
+              {/* Left spacer - hidden on mobile, visible on desktop for balance */}
+              <div className="hidden md:block w-[200px]"></div>
               <div className="md:hidden w-8"></div>
 
               {/* Centered Logo */}
