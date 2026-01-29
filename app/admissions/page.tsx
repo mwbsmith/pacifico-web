@@ -614,6 +614,15 @@ export default function AdmissionsLandingPage() {
                     {isSubmitting ? t("submitting") : t("submit")}
                   </Button>
 
+                  <p className="text-sm text-gray-500 text-center">
+                    {language === "en"
+                      ? "If you have trouble submitting this form, email us directly at "
+                      : "Si tienes problemas para enviar este formulario, escríbenos directamente a "}
+                    <a href="mailto:info@waldorf.cr" className="text-teal-600 hover:text-teal-700 underline">
+                      info@waldorf.cr
+                    </a>
+                  </p>
+
                   {submitStatus === "error" && (
                     <p className="text-red-600 text-center">
                       {language === "en"
