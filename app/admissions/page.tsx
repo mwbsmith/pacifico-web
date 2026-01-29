@@ -283,11 +283,11 @@ export default function AdmissionsLandingPage() {
     <div className="min-h-screen bg-gradient-to-br from-sky-100 via-emerald-50 to-amber-50">
       {/* Hero Section */}
       <section className="relative py-16 md:py-24 overflow-hidden min-h-[70vh] flex items-center">
-        {/* Background Image - Staff Group Photo */}
+        {/* Background Image - Waldorf Classroom */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/faculty-group-photo.jpeg"
-            alt="Pacífico Internacional faculty and staff"
+            src="/images/waldorf-classroom.jpg"
+            alt="Waldorf classroom with students learning"
             fill
             className="object-cover"
             priority
