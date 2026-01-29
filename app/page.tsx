@@ -864,7 +864,7 @@ export default function PacificoHomepage() {
             <div className="flex items-center justify-between">
               {/* Left - Work With Us Link */}
               <div className="hidden md:flex items-center">
-                <Link href="#careers" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md flex items-center gap-1">
+                <Link href="/careers" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md flex items-center gap-1">
                   {language === "en" ? "Work With Us!" : "¡Trabaja con nosotros!"}
                   <span className="bg-yellow-400 text-teal-800 text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase animate-pulse">
                     {language === "en" ? "New" : "Nuevo"}
@@ -953,15 +953,16 @@ export default function PacificoHomepage() {
                         >
                           {t("contact")}
                         </button>
-                        <button
-                          onClick={() => handleNavClick("#careers")}
+                        <Link
+                          href="/careers"
+                          onClick={() => setMobileMenuOpen(false)}
                           className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2 flex items-center gap-2"
                         >
                           {language === "en" ? "Work With Us!" : "¡Trabaja con nosotros!"}
                           <span className="bg-yellow-400 text-teal-800 text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase">
                             {language === "en" ? "New" : "Nuevo"}
                           </span>
-                        </button>
+                        </Link>
                       </div>
 
                       <div className="border-t border-gray-200 pt-4">
