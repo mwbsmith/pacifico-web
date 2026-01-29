@@ -118,8 +118,8 @@ export default function AdmissionsThankYouPage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/faculty-group-photo.jpeg"
-            alt="Pacífico Internacional Faculty"
+            src="/images/mayo.jpeg"
+            alt="Students celebrating with colorful ribbons during a school event"
             fill
             className="object-cover"
             priority
