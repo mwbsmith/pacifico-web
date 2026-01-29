@@ -953,6 +953,15 @@ export default function PacificoHomepage() {
                         >
                           {t("contact")}
                         </button>
+                        <button
+                          onClick={() => handleNavClick("#careers")}
+                          className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2 flex items-center gap-2"
+                        >
+                          {language === "en" ? "Work With Us!" : "¡Trabaja con nosotros!"}
+                          <span className="bg-yellow-400 text-teal-800 text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase">
+                            {language === "en" ? "New" : "Nuevo"}
+                          </span>
+                        </button>
                       </div>
 
                       <div className="border-t border-gray-200 pt-4">
