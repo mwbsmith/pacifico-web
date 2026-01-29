@@ -262,7 +262,16 @@ export default function CareersPage() {
           <div className="max-w-4xl mx-auto">
             {/* Intro and Apply Now */}
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-800 mb-6">{t("title")}</h2>
+              <h2 className="text-3xl font-bold text-gray-800 mb-4">{t("title")}</h2>
+              
+              <p className="text-gray-600 mb-6">
+                {language === "en" 
+                  ? "If for any reason you cannot apply through the form, please send us your CV directly to "
+                  : "Si por alguna razón no puedes aplicar a través del formulario, envíanos tu CV directamente a "}
+                <a href="mailto:info@waldorf.cr" className="text-teal-600 hover:text-teal-700 underline">
+                  info@waldorf.cr
+                </a>
+              </p>
               
               {/* Apply Now Button - Top */}
               <a
