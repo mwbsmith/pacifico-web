@@ -307,19 +307,13 @@ export default function AdmissionsThankYouPage() {
             {t("learnMore")}
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex justify-center">
             <Link href="/">
               <Button className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-6 text-lg rounded-xl">
                 {t("visitHomepage")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
-            <a href="tel:+50687626927">
-              <Button variant="outline" className="border-2 border-teal-600 text-teal-600 hover:bg-teal-50 px-8 py-6 text-lg rounded-xl bg-transparent">
-                {t("scheduleCall")}
-                <Phone className="ml-2 h-5 w-5" />
-              </Button>
-            </a>
           </div>
         </div>
       </section>
