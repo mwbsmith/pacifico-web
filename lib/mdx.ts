@@ -90,26 +90,30 @@ Visit our Team page to learn more about each of our wonderful educators.`,
   },
 ]
 
-// Check if we're in a Node.js environment with filesystem access
-const isNodeEnvironment = typeof process !== "undefined" && process.versions?.node
-
 const CONTENT_DIR = path.join(process.cwd(), "content", "news")
 
+// Always return fallback sample data - filesystem access handled separately for production
 export function getAllNewsPosts(): NewsPostMeta[] {
-  if (!isNodeEnvironment) {
-    return SAMPLE_POSTS.map(({ content, ...meta }) => meta)
-  }
-
+  console.log("[v0] getAllNewsPosts called")
+  
   try {
+    // Try to use filesystem in Node.js environment
+    console.log("[v0] CONTENT_DIR:", CONTENT_DIR)
+    
     // Check if directory exists
     if (!fs.existsSync(CONTENT_DIR)) {
+      console.log("[v0] Content directory does not exist, using fallback")
       return SAMPLE_POSTS.map(({ content, ...meta }) => meta)
     }
 
     const files = fs.readdirSync(CONTENT_DIR)
+    console.log("[v0] Files found:", files)
+    
     const mdxFiles = files.filter((file: string) => file.endsWith(".mdx") || file.endsWith(".md"))
+    console.log("[v0] MDX files:", mdxFiles)
 
     if (mdxFiles.length === 0) {
+      console.log("[v0] No MDX files found, using fallback")
       return SAMPLE_POSTS.map(({ content, ...meta }) => meta)
     }
 
@@ -118,6 +122,8 @@ export function getAllNewsPosts(): NewsPostMeta[] {
       const filePath = path.join(CONTENT_DIR, filename)
       const fileContents = fs.readFileSync(filePath, "utf8")
       const { data } = matter(fileContents)
+
+      console.log("[v0] Parsed post:", slug, data.title)
 
       return {
         slug,
@@ -130,9 +136,12 @@ export function getAllNewsPosts(): NewsPostMeta[] {
       }
     })
 
+    console.log("[v0] Total posts loaded:", posts.length)
+
     // Sort by date, newest first
     return posts.sort((a: NewsPostMeta, b: NewsPostMeta) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  } catch {
+  } catch (error) {
+    console.log("[v0] Error loading posts, using fallback:", error)
     return SAMPLE_POSTS.map(({ content, ...meta }) => meta)
   }
 }
