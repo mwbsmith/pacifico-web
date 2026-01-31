@@ -178,19 +178,21 @@ export default function NewsPageClient({ posts }: NewsPageClientProps) {
 
               {/* Header Logo - appears when scrolled */}
               <div
-                className="absolute left-1/2 transform -translate-x-1/2 pointer-events-none"
+                className="absolute left-1/2 transform -translate-x-1/2"
                 style={{
                   opacity: headerLogoOpacity,
                   transition: "opacity 0.3s ease-out",
                 }}
               >
-                <Image
-                  src="/images/pacifico-logo.png"
-                  alt="Pacífico Internacional"
-                  width={50}
-                  height={50}
-                  className="drop-shadow-lg"
-                />
+                <Link href="/">
+                  <Image
+                    src="/images/pacifico-logo.png"
+                    alt="Pacífico Internacional"
+                    width={100}
+                    height={100}
+                    className="drop-shadow-lg w-[60px] h-[60px] md:w-[100px] md:h-[100px]"
+                  />
+                </Link>
               </div>
 
               {/* Desktop Navigation */}
