@@ -1,7 +1,3 @@
-import path from "path"
-import fs from "fs"
-import matter from "gray-matter"
-
 export interface NewsPostMeta {
   slug: string
   title: string
@@ -90,31 +86,43 @@ Visit our Team page to learn more about each of our wonderful educators.`,
   },
 ]
 
-const CONTENT_DIR = path.join(process.cwd(), "content", "news")
+// Helper to get sample posts metadata
+function getSamplePostsMeta(): NewsPostMeta[] {
+  return SAMPLE_POSTS.map(({ content, ...meta }) => meta)
+}
 
-// Always return fallback sample data - filesystem access handled separately for production
+// Helper to get sample post by slug
+function getSamplePostBySlug(slug: string): NewsPost | null {
+  return SAMPLE_POSTS.find(post => post.slug === slug) || null
+}
+
+// Helper to get sample slugs
+function getSampleSlugs(): string[] {
+  return SAMPLE_POSTS.map(post => post.slug)
+}
+
 export function getAllNewsPosts(): NewsPostMeta[] {
-  console.log("[v0] getAllNewsPosts called")
-  
+  // In v0 preview, always use fallback data
+  // Dynamic require will fail in browser/edge environments
   try {
-    // Try to use filesystem in Node.js environment
-    console.log("[v0] CONTENT_DIR:", CONTENT_DIR)
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const fs = require("fs")
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const path = require("path")
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const matter = require("gray-matter")
     
-    // Check if directory exists
+    const CONTENT_DIR = path.join(process.cwd(), "content", "news")
+    
     if (!fs.existsSync(CONTENT_DIR)) {
-      console.log("[v0] Content directory does not exist, using fallback")
-      return SAMPLE_POSTS.map(({ content, ...meta }) => meta)
+      return getSamplePostsMeta()
     }
 
     const files = fs.readdirSync(CONTENT_DIR)
-    console.log("[v0] Files found:", files)
-    
     const mdxFiles = files.filter((file: string) => file.endsWith(".mdx") || file.endsWith(".md"))
-    console.log("[v0] MDX files:", mdxFiles)
 
     if (mdxFiles.length === 0) {
-      console.log("[v0] No MDX files found, using fallback")
-      return SAMPLE_POSTS.map(({ content, ...meta }) => meta)
+      return getSamplePostsMeta()
     }
 
     const posts = mdxFiles.map((filename: string) => {
@@ -122,8 +130,6 @@ export function getAllNewsPosts(): NewsPostMeta[] {
       const filePath = path.join(CONTENT_DIR, filename)
       const fileContents = fs.readFileSync(filePath, "utf8")
       const { data } = matter(fileContents)
-
-      console.log("[v0] Parsed post:", slug, data.title)
 
       return {
         slug,
@@ -136,54 +142,75 @@ export function getAllNewsPosts(): NewsPostMeta[] {
       }
     })
 
-    console.log("[v0] Total posts loaded:", posts.length)
-
-    // Sort by date, newest first
     return posts.sort((a: NewsPostMeta, b: NewsPostMeta) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  } catch (error) {
-    console.log("[v0] Error loading posts, using fallback:", error)
-    return SAMPLE_POSTS.map(({ content, ...meta }) => meta)
+  } catch {
+    return getSamplePostsMeta()
   }
 }
 
 export function getNewsPostBySlug(slug: string): NewsPost | null {
-  const mdxPath = path.join(CONTENT_DIR, `${slug}.mdx`)
-  const mdPath = path.join(CONTENT_DIR, `${slug}.md`)
-  
-  let filePath: string | null = null
-  
-  if (fs.existsSync(mdxPath)) {
-    filePath = mdxPath
-  } else if (fs.existsSync(mdPath)) {
-    filePath = mdPath
-  }
-  
-  if (!filePath) {
-    return null
-  }
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const fs = require("fs")
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const path = require("path")
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const matter = require("gray-matter")
+    
+    const CONTENT_DIR = path.join(process.cwd(), "content", "news")
+    const mdxPath = path.join(CONTENT_DIR, `${slug}.mdx`)
+    const mdPath = path.join(CONTENT_DIR, `${slug}.md`)
+    
+    let filePath: string | null = null
+    
+    if (fs.existsSync(mdxPath)) {
+      filePath = mdxPath
+    } else if (fs.existsSync(mdPath)) {
+      filePath = mdPath
+    }
+    
+    if (!filePath) {
+      return getSamplePostBySlug(slug)
+    }
 
-  const fileContents = fs.readFileSync(filePath, "utf8")
-  const { data, content } = matter(fileContents)
+    const fileContents = fs.readFileSync(filePath, "utf8")
+    const { data, content } = matter(fileContents)
 
-  return {
-    slug,
-    title: data.title || "Untitled",
-    date: data.date || new Date().toISOString().split("T")[0],
-    description: data.description || "",
-    tags: data.tags || [],
-    image: data.image || "/images/waldorf-classroom.jpg",
-    canonical: data.canonical,
-    content,
+    return {
+      slug,
+      title: data.title || "Untitled",
+      date: data.date || new Date().toISOString().split("T")[0],
+      description: data.description || "",
+      tags: data.tags || [],
+      image: data.image || "/images/waldorf-classroom.jpg",
+      canonical: data.canonical,
+      content,
+    }
+  } catch {
+    return getSamplePostBySlug(slug)
   }
 }
 
 export function getAllNewsSlugs(): string[] {
-  if (!fs.existsSync(CONTENT_DIR)) {
-    return []
-  }
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const fs = require("fs")
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const path = require("path")
+    
+    const CONTENT_DIR = path.join(process.cwd(), "content", "news")
+    
+    if (!fs.existsSync(CONTENT_DIR)) {
+      return getSampleSlugs()
+    }
 
-  const files = fs.readdirSync(CONTENT_DIR)
-  return files
-    .filter((file) => file.endsWith(".mdx") || file.endsWith(".md"))
-    .map((file) => file.replace(/\.mdx?$/, ""))
+    const files = fs.readdirSync(CONTENT_DIR)
+    const slugs = files
+      .filter((file: string) => file.endsWith(".mdx") || file.endsWith(".md"))
+      .map((file: string) => file.replace(/\.mdx?$/, ""))
+    
+    return slugs.length > 0 ? slugs : getSampleSlugs()
+  } catch {
+    return getSampleSlugs()
+  }
 }
