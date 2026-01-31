@@ -170,6 +170,7 @@ const translations = {
       "Nurturing young minds through nature-based, holistic education that honors each child's unique journey.",
     quickLinks: "Quick Links",
     aboutUs: "About Us",
+    schoolNews: "School News",
     schoolCalendar: "School Calendar",
     familyHandbook: "Family Handbook 2025-2026",
     connectWithUs: "Connect With Us",
@@ -303,6 +304,7 @@ const translations = {
       "Nutriendo mentes jóvenes a través de educación holística basada en la naturaleza que honra el viaje único de cada niño.",
     quickLinks: "Enlaces Rápidos",
     aboutUs: "Acerca de Nosotros",
+    schoolNews: "Noticias de la Escuela",
     schoolCalendar: "Calendario Escolar",
     familyHandbook: "Manual Familiar 2025-2026",
     connectWithUs: "Conéctate con Nosotros",
@@ -2140,6 +2142,11 @@ export default function PacificoHomepage() {
                 <li>
                   <Link href="#about" className="text-gray-300 hover:text-teal-300 transition-colors">
                     {t("aboutUs")}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/news" className="text-gray-300 hover:text-teal-300 transition-colors">
+                    {t("schoolNews")}
                   </Link>
                 </li>
                 <li>

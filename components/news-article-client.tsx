@@ -17,8 +17,9 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import type { NewsPost } from "@/lib/mdx"
+import type { NewsPost, NewsPostMeta } from "@/lib/mdx"
 import ReactMarkdown from "react-markdown"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 type Language = "en" | "es"
 
@@ -32,6 +33,11 @@ const translations = {
 
     // Article
     backToNews: "Back to News",
+    publishedOn: "Published on",
+    updatedOn: "Updated on",
+    previousArticle: "Previous Article",
+    nextArticle: "Next Article",
+    readMore: "Read more",
     
     // Footer
     footerDescription:
@@ -51,6 +57,11 @@ const translations = {
 
     // Article
     backToNews: "Volver a Noticias",
+    publishedOn: "Publicado el",
+    updatedOn: "Actualizado el",
+    previousArticle: "Artículo Anterior",
+    nextArticle: "Artículo Siguiente",
+    readMore: "Leer más",
 
     // Footer
     footerDescription:
@@ -65,9 +76,11 @@ const translations = {
 
 interface NewsArticleClientProps {
   post: NewsPost
+  prevPost?: NewsPostMeta | null
+  nextPost?: NewsPostMeta | null
 }
 
-export default function NewsArticleClient({ post }: NewsArticleClientProps) {
+export default function NewsArticleClient({ post, prevPost, nextPost }: NewsArticleClientProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [language, setLanguage] = useState<Language>("en")
 
@@ -279,11 +292,25 @@ export default function NewsArticleClient({ post }: NewsArticleClientProps) {
               </Button>
             </Link>
 
+            {/* Visible publish date for SEO */}
+            <div className="mb-8 pb-6 border-b border-gray-200">
+              <p className="text-gray-600">
+                <time dateTime={post.date}>
+                  {t("publishedOn")} {formatDate(post.date)}
+                </time>
+                {post.updated && post.updated !== post.date && (
+                  <span className="ml-4 text-gray-500">
+                    ({t("updatedOn")} <time dateTime={post.updated}>{formatDate(post.updated)}</time>)
+                  </span>
+                )}
+              </p>
+            </div>
+
             <article className="prose prose-lg prose-teal max-w-none">
               <ReactMarkdown
                 components={{
                   h1: ({ children }) => (
-                    <h1 className="text-3xl font-bold text-gray-800 mb-6 font-serif">{children}</h1>
+                    <h2 className="text-3xl font-bold text-gray-800 mb-6 font-serif">{children}</h2>
                   ),
                   h2: ({ children }) => (
                     <h2 className="text-2xl font-bold text-gray-800 mt-8 mb-4 font-serif">{children}</h2>
@@ -316,11 +343,60 @@ export default function NewsArticleClient({ post }: NewsArticleClientProps) {
                       {children}
                     </blockquote>
                   ),
+                  img: ({ src, alt }) => (
+                    <Image
+                      src={src || ""}
+                      alt={alt || "Article image"}
+                      width={800}
+                      height={450}
+                      className="rounded-lg my-6"
+                    />
+                  ),
                 }}
               >
                 {post.content}
               </ReactMarkdown>
             </article>
+
+            {/* Previous / Next Navigation */}
+            {(prevPost || nextPost) && (
+              <nav className="mt-12 pt-8 border-t border-gray-200">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {prevPost ? (
+                    <Link
+                      href={`/news/${prevPost.slug}`}
+                      className="group flex flex-col p-4 rounded-lg border border-gray-200 hover:border-teal-300 hover:bg-teal-50 transition-colors"
+                    >
+                      <span className="text-sm text-gray-500 flex items-center gap-1 mb-1">
+                        <ChevronLeft className="h-4 w-4" />
+                        {t("previousArticle")}
+                      </span>
+                      <span className="font-medium text-gray-800 group-hover:text-teal-600 line-clamp-2">
+                        {prevPost.title}
+                      </span>
+                    </Link>
+                  ) : (
+                    <div />
+                  )}
+                  {nextPost ? (
+                    <Link
+                      href={`/news/${nextPost.slug}`}
+                      className="group flex flex-col p-4 rounded-lg border border-gray-200 hover:border-teal-300 hover:bg-teal-50 transition-colors text-right md:items-end"
+                    >
+                      <span className="text-sm text-gray-500 flex items-center gap-1 mb-1 justify-end">
+                        {t("nextArticle")}
+                        <ChevronRight className="h-4 w-4" />
+                      </span>
+                      <span className="font-medium text-gray-800 group-hover:text-teal-600 line-clamp-2">
+                        {nextPost.title}
+                      </span>
+                    </Link>
+                  ) : (
+                    <div />
+                  )}
+                </div>
+              </nav>
+            )}
           </div>
         </div>
       </section>

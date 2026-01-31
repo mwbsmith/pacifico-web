@@ -20,6 +20,11 @@ export const metadata: Metadata = {
   title: "Pacífico Internacional - Waldorf School in Costa Rica",
   description: "A Waldorf school in Costa Rica offering holistic education for children",
   generator: "v0.app",
+  alternates: {
+    types: {
+      "application/rss+xml": "https://waldorf.cr/news/feed.xml",
+    },
+  },
 };
 
 export default function RootLayout({
