@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import SharedFooter from "@/components/shared-footer" // Import SharedFooter
 
 export default function VisitPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -252,98 +253,7 @@ export default function VisitPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-gray-800 to-gray-900 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <Image
-                  src="/images/pacifico-logo.png"
-                  alt="Pacífico Internacional"
-                  width={50}
-                  height={50}
-                  className="rounded-full"
-                />
-                <div>
-                  <h3 className="text-xl font-bold">Pacífico Internacional</h3>
-                  <p className="text-sm text-gray-300">Educación Inspirada en Waldorf</p>
-                </div>
-              </div>
-              <p className="text-gray-300">{t.footer.description}</p>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">{t.footer.quickLinks}</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li>
-                  <Link href="/#about" className="hover:text-teal-300 transition-colors">
-                    {t.footer.aboutUs}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#admissions" className="hover:text-teal-300 transition-colors">
-                    {t.nav.admissions}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#calendar" className="hover:text-teal-300 transition-colors">
-                    {t.footer.schoolCalendar}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#contact" className="hover:text-teal-300 transition-colors">
-                    {t.nav.contact}
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    href="/documents/family-handbook-2025-2026.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-teal-300 transition-colors"
-                  >
-                    {t.footer.familyHandbook}
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">{t.footer.connectWithUs}</h4>
-              <div className="space-y-3 text-gray-300">
-                <p className="flex items-center">
-                  <Mail className="mr-2 h-4 w-4" /> info@waldorf.cr
-                </p>
-                <p className="flex items-center">
-                  <Phone className="mr-2 h-4 w-4" /> +506 8762 6927
-                </p>
-                <p className="flex items-center">
-                  <MapPin className="mr-2 h-4 w-4" /> Costa Rica, Guanacaste
-                </p>
-
-                {/* Social Media Icons */}
-                <div className="flex space-x-4 pt-2">
-                  <a href="#" className="hover:opacity-80 transition-opacity" aria-label="WhatsApp">
-                    <Image src="/icons/whatsapp.png" alt="WhatsApp" width={32} height={32} className="w-8 h-8" />
-                  </a>
-                  <a href="#" className="hover:opacity-80 transition-opacity" aria-label="Instagram">
-                    <Image src="/icons/instagram.png" alt="Instagram" width={32} height={32} className="w-8 h-8" />
-                  </a>
-                  <a href="#" className="hover:opacity-80 transition-opacity" aria-label="Facebook">
-                    <Image src="/icons/facebook.png" alt="Facebook" width={32} height={32} className="w-8 h-8" />
-                  </a>
-                  <a href="#" className="hover:opacity-80 transition-opacity" aria-label="Google Maps Location">
-                    <Image src="/icons/google-maps.png" alt="Google Maps" width={32} height={32} className="w-8 h-8" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>
-              &copy; {new Date().getFullYear()} Pacífico Internacional. {t.footer.copyright}
-            </p>
-          </div>
-        </div>
-      </footer>
+      <SharedFooter language={language} />
     </div>
   )
 }

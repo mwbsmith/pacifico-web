@@ -20,6 +20,7 @@ import { useEffect, useState } from "react"
 import type { NewsPost, NewsPostMeta } from "@/lib/mdx"
 import ReactMarkdown from "react-markdown"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import SharedFooter from "@/components/shared-footer" // Import SharedFooter
 
 type Language = "en" | "es"
 
@@ -402,105 +403,7 @@ export default function NewsArticleClient({ post, prevPost, nextPost }: NewsArti
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-teal-800 via-teal-700 to-cyan-700 text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-12">
-            <div>
-              <Image
-                src="/images/pacifico-logo.png"
-                alt="Pacífico Internacional"
-                width={80}
-                height={80}
-                className="mb-4"
-              />
-              <p className="text-teal-100 leading-relaxed">{t("footerDescription")}</p>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">{t("quickLinks")}</h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="/#about" className="text-teal-100 hover:text-yellow-200 transition-colors">
-                    {t("aboutUs")}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/calendar" className="text-teal-100 hover:text-yellow-200 transition-colors">
-                    {t("schoolCalendar")}
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    href="/documents/family-handbook-2025-2026.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-teal-100 hover:text-yellow-200 transition-colors"
-                  >
-                    {t("familyHandbook")}
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">{t("connectWithUs")}</h4>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 text-teal-100">
-                  <Mail className="h-5 w-5" />
-                  <a href="mailto:info@waldorf.cr" className="hover:text-yellow-200 transition-colors">
-                    info@waldorf.cr
-                  </a>
-                </div>
-                <div className="flex items-center gap-3 text-teal-100">
-                  <Phone className="h-5 w-5" />
-                  <a href="tel:+50687626927" className="hover:text-yellow-200 transition-colors">
-                    +506 8762-6927
-                  </a>
-                </div>
-                <div className="flex items-center gap-3 text-teal-100">
-                  <MapPin className="h-5 w-5" />
-                  <span>Tamarindo, Guanacaste, Costa Rica</span>
-                </div>
-              </div>
-              <div className="flex gap-4 mt-6">
-                <a
-                  href="https://wa.me/50687626927"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  <Image src="/icons/whatsapp.png" alt="WhatsApp" width={32} height={32} />
-                </a>
-                <a
-                  href="https://www.instagram.com/pacifico.internacional/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  <Image src="/icons/instagram.png" alt="Instagram" width={32} height={32} />
-                </a>
-                <a
-                  href="https://www.facebook.com/waldorf.tamarindo"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  <Image src="/icons/facebook.png" alt="Facebook" width={32} height={32} />
-                </a>
-                <a
-                  href="https://maps.app.goo.gl/dCLfCKwtjKFLrrSz8"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  <Image src="/icons/google-maps.png" alt="Google Maps" width={32} height={32} />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-teal-600 mt-12 pt-8 text-center text-teal-200">
-            <p>&copy; {new Date().getFullYear()} Pacífico Internacional. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <SharedFooter language={language} />
     </div>
   )
 }

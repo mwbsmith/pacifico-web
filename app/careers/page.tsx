@@ -7,6 +7,7 @@ import { Menu, Globe, ChevronDown, Mail, Phone, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import SharedFooter from "@/components/shared-footer" // Import SharedFooter
 
 export default function CareersPage() {
   const [language, setLanguage] = useState("en")
@@ -146,11 +147,11 @@ export default function CareersPage() {
               <Link href="/#calendar" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md">
                 {t("calendar")}
               </Link>
-<Link href="/#contact" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md">
-              {t("contact")}
-            </Link>
+              <Link href="/#contact" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md">
+                {t("contact")}
+              </Link>
 
-            {/* Language Selector */}
+              {/* Language Selector */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="text-white hover:text-yellow-200 hover:bg-white/10">
@@ -430,69 +431,7 @@ export default function CareersPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <Image
-                  src="/images/pacifico-logo.png"
-                  alt="Pacífico Internacional"
-                  width={40}
-                  height={40}
-                  className="rounded-full"
-                />
-                <span className="text-xl font-bold">Pacífico Internacional</span>
-              </div>
-              <p className="text-gray-400">{t("footerDescription")}</p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">{t("quickLinks")}</h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="/#about" className="text-gray-400 hover:text-white transition-colors">
-                    {t("aboutUs")}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/calendar" className="text-gray-400 hover:text-white transition-colors">
-                    {t("schoolCalendar")}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/documents/family-handbook-2025-2026.pdf"
-                    target="_blank"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {t("familyHandbook")}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">{t("connectWithUs")}</h4>
-              <div className="space-y-2">
-                <a href="tel:+50687626927" className="flex items-center gap-2 text-gray-400 hover:text-white">
-                  <Phone className="h-4 w-4" />
-                  +506 8762 6927
-                </a>
-                <a href="mailto:info@waldorf.cr" className="flex items-center gap-2 text-gray-400 hover:text-white">
-                  <Mail className="h-4 w-4" />
-                  info@waldorf.cr
-                </a>
-                <div className="flex items-start gap-2 text-gray-400">
-                  <MapPin className="h-4 w-4 mt-1 flex-shrink-0" />
-                  <span>Cañafistula, Guanacaste, Costa Rica</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} {t("footerCopyright")}</p>
-          </div>
-        </div>
-      </footer>
+      <SharedFooter language={language} />
     </div>
   )
 }

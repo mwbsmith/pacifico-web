@@ -29,12 +29,14 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState, useRef } from "react"
+import SharedFooter from "@/components/shared-footer" // Import SharedFooter component
 
 export default function ApplicationPage() {
   const [scrollY, setScrollY] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [tuitionOpen, setTuitionOpen] = useState(false)
   const tuitionRef = useRef<HTMLDivElement>(null)
+  const language = "EN" // Declare language variable
 
   useEffect(() => {
     const handleScroll = () => {
@@ -143,7 +145,7 @@ export default function ApplicationPage() {
                       className="text-white hover:text-yellow-200 hover:bg-white/10 flex items-center gap-2 drop-shadow-md"
                     >
                       <Globe className="h-4 w-4" />
-                      <span>EN</span>
+                      <span>{language}</span>
                       <ChevronDown className="h-3 w-3" />
                     </Button>
                   </DropdownMenuTrigger>
@@ -807,91 +809,7 @@ export default function ApplicationPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-gray-800 to-gray-900 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <Image
-                  src="/images/pacifico-logo.png"
-                  alt="Pacífico Internacional"
-                  width={50}
-                  height={50}
-                  className="rounded-full"
-                />
-                <div>
-                  <h3 className="text-xl font-bold">Pacífico Internacional</h3>
-                  <p className="text-sm text-gray-300">Educación Inspirada en Waldorf</p>
-                </div>
-              </div>
-              <p className="text-gray-300">
-                Nurturing young minds through nature-based, holistic education that honors each child's unique journey.
-              </p>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li>
-                  <Link href="/#about" className="hover:text-teal-300 transition-colors">
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#admissions" className="hover:text-teal-300 transition-colors">
-                    Admissions
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#calendar" className="hover:text-teal-300 transition-colors">
-                    School Calendar
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#contact" className="hover:text-teal-300 transition-colors">
-                    Contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Connect With Us</h4>
-              <div className="space-y-3 text-gray-300">
-                <p className="flex items-center">
-                  <Mail className="mr-2 h-4 w-4" /> info@waldorf.cr
-                </p>
-                <p className="flex items-center">
-                  <Phone className="mr-2 h-4 w-4" /> +506 8762 6927
-                </p>
-                <p className="flex items-center">
-                  <MapPin className="mr-2 h-4 w-4" /> Costa Rica, Guanacaste
-                </p>
-
-                {/* Social Media Icons */}
-                <div className="flex space-x-4 pt-2">
-                  <a href="#" className="hover:opacity-80 transition-opacity" aria-label="WhatsApp">
-                    <Image src="/icons/whatsapp.png" alt="WhatsApp" width={32} height={32} className="w-8 h-8" />
-                  </a>
-                  <a href="#" className="hover:opacity-80 transition-opacity" aria-label="Instagram">
-                    <Image src="/icons/instagram.png" alt="Instagram" width={32} height={32} className="w-8 h-8" />
-                  </a>
-                  <a href="#" className="hover:opacity-80 transition-opacity" aria-label="Facebook">
-                    <Image src="/icons/facebook.png" alt="Facebook" width={32} height={32} className="w-8 h-8" />
-                  </a>
-                  <a href="#" className="hover:opacity-80 transition-opacity" aria-label="Google Maps Location">
-                    <Image src="/icons/google-maps.png" alt="Google Maps" width={32} height={32} className="w-8 h-8" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>
-              &copy; {new Date().getFullYear()} Pacífico Internacional. All rights reserved. | Nurturing minds, hearts,
-              and hands.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <SharedFooter language={language} />
     </div>
   )
 }
