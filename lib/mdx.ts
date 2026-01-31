@@ -1,8 +1,9 @@
 export interface NewsPostMeta {
   slug: string
   title: string
-  date: string
   description: string
+  date: string
+  updated?: string
   tags?: string[]
   image?: string
   canonical?: string
@@ -17,10 +18,10 @@ const SAMPLE_POSTS: NewsPost[] = [
   {
     slug: "welcome-2025-2026",
     title: "Welcome to the 2025-2026 School Year",
+    description: "We are excited to welcome all families to another wonderful year of Waldorf-inspired education.",
     date: "2025-08-18",
-    description: "We are excited to welcome all families to another wonderful year of Waldorf-inspired education at Pacífico Internacional.",
     tags: ["announcement", "school-year"],
-    image: "/images/waldorf-classroom.jpg",
+    image: "/images/news/welcome-2025-2026.jpg",
     canonical: "https://waldorf.cr/news/welcome-2025-2026",
     content: `We are thrilled to welcome all our families—both returning and new—to the 2025-2026 school year at Pacífico Internacional!
 
@@ -39,10 +40,10 @@ We look forward to walking this journey together with your family.`,
   {
     slug: "morning-garden-enrolling",
     title: "Morning Garden Program Now Enrolling",
+    description: "Our Morning Garden program for young children is now accepting enrollments for 2025-2026.",
     date: "2025-01-15",
-    description: "Our beloved Morning Garden program for young children is accepting new enrollments. Join us for a nurturing introduction to school life.",
     tags: ["enrollment", "early-childhood"],
-    image: "/images/morning-garden-en.jpg",
+    image: "/images/news/morning-garden-enrolling.jpg",
     canonical: "https://waldorf.cr/news/morning-garden-enrolling",
     content: `Our Morning Garden program is now accepting enrollments for children ages 3-5!
 
@@ -62,10 +63,10 @@ Contact us today to schedule a visit and learn more about this special program.`
   {
     slug: "meet-our-faculty",
     title: "Meet Our Growing Faculty Team",
+    description: "Introducing new members to our dedicated team of Waldorf-trained educators.",
     date: "2025-01-10",
-    description: "We are thrilled to introduce new members to our dedicated team of Waldorf-trained educators.",
     tags: ["faculty", "team"],
-    image: "/images/faculty-group-photo.jpeg",
+    image: "/images/news/meet-our-faculty.jpg",
     canonical: "https://waldorf.cr/news/meet-our-faculty",
     content: `We are delighted to introduce the newest members of our faculty team!
 
@@ -132,10 +133,11 @@ export function getAllNewsPosts(): NewsPostMeta[] {
       const { data } = matter(fileContents)
 
       return {
-        slug,
+        slug: data.slug || slug,
         title: data.title || "Untitled",
-        date: data.date || new Date().toISOString().split("T")[0],
         description: data.description || "",
+        date: data.date || new Date().toISOString().split("T")[0],
+        updated: data.updated,
         tags: data.tags || [],
         image: data.image || "/images/waldorf-classroom.jpg",
         canonical: data.canonical,
@@ -177,10 +179,11 @@ export function getNewsPostBySlug(slug: string): NewsPost | null {
     const { data, content } = matter(fileContents)
 
     return {
-      slug,
+      slug: data.slug || slug,
       title: data.title || "Untitled",
-      date: data.date || new Date().toISOString().split("T")[0],
       description: data.description || "",
+      date: data.date || new Date().toISOString().split("T")[0],
+      updated: data.updated,
       tags: data.tags || [],
       image: data.image || "/images/waldorf-classroom.jpg",
       canonical: data.canonical,
