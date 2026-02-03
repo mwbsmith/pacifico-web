@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import SharedFooter from "@/components/shared-footer" // Import SharedFooter component
+import SharedHeader from "@/components/shared-header" // Import SharedHeader component
 
 export default function TeamPage() {
   const [language, setLanguage] = useState("en")
@@ -265,138 +266,7 @@ export default function TeamPage() {
       <nav className="fixed top-0 left-0 right-0 z-30 bg-black/20 backdrop-blur-sm transition-all duration-300">
         <div className="container mx-auto px-4 py-6 md:py-8">
           <div className="flex items-center justify-between">
-            <div className="w-8"></div>
-
-            <div
-              className="absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300"
-              style={{ opacity: headerLogoOpacity }}
-            >
-              <Image
-                src="/images/pacifico-logo.png"
-                alt="Pacífico Internacional - Educación Inspirada en Waldorf"
-                width={100}
-                height={100}
-                className="drop-shadow-lg w-[60px] h-[60px] md:w-[100px] md:h-[100px]"
-              />
-            </div>
-
-            <div className="hidden md:flex items-center space-x-6">
-              <Link href="/#about" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md">
-                {t("about")}
-              </Link>
-              <Link href="/#admissions" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md">
-                {t("admissions")}
-              </Link>
-              <Link href="/calendar" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md">
-                {t("calendar")}
-              </Link>
-              <Link href="/#contact" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md">
-                {t("contact")}
-              </Link>
-
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-white hover:text-yellow-200 hover:bg-white/10 flex items-center gap-2 drop-shadow-md"
-                  >
-                    <Globe className="h-4 w-4" />
-                    <span>{language.toUpperCase()}</span>
-                    <ChevronDown className="h-3 w-3" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="bg-white border border-gray-200">
-                  <DropdownMenuItem
-                    className="flex items-center gap-2 cursor-pointer hover:bg-gray-50"
-                    onClick={() => setLanguage("en")}
-                  >
-                    <span>EN</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    className="flex items-center gap-2 cursor-pointer hover:bg-gray-50"
-                    onClick={() => setLanguage("es")}
-                  >
-                    <span>ES</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-
-            <div className="md:hidden">
-              <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-                <SheetTrigger asChild>
-                  <Button variant="ghost" size="sm" className="text-white hover:text-yellow-200 hover:bg-white/10">
-                    <Menu className="h-6 w-6" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="right" className="w-[300px] bg-white/95 backdrop-blur-sm">
-                  <div className="flex flex-col space-y-6 mt-8">
-                    <div className="flex items-center space-x-3 mb-6">
-                      <Image
-                        src="/images/pacifico-logo.png"
-                        alt="Pacífico Internacional"
-                        width={40}
-                        height={40}
-                        className="rounded-full"
-                      />
-                      <div>
-                        <h3 className="font-bold text-gray-800">Pacífico Internacional</h3>
-                        <p className="text-sm text-gray-600">Educación Inspirada en Waldorf</p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <button
-                        onClick={() => handleNavClick("/#about")}
-                        className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2"
-                      >
-                        {t("about")}
-                      </button>
-                      <button
-                        onClick={() => handleNavClick("/#admissions")}
-                        className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2"
-                      >
-                        {t("admissions")}
-                      </button>
-                      <Link
-                        href="/calendar"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2"
-                      >
-                        {t("calendar")}
-                      </Link>
-                      <button
-                        onClick={() => handleNavClick("/#contact")}
-                        className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2"
-                      >
-                        {t("contact")}
-                      </button>
-                    </div>
-
-                    <div className="border-t border-gray-200 pt-4">
-                      <p className="text-sm font-semibold text-gray-700 mb-3">
-                        {language === "en" ? "Language / Idioma" : "Idioma / Language"}
-                      </p>
-                      <div className="space-y-2">
-                        <button
-                          onClick={() => setLanguage("en")}
-                          className={`flex items-center gap-3 w-full text-left p-2 rounded-lg hover:bg-gray-100 transition-colors ${language === "en" ? "bg-gray-100" : ""}`}
-                        >
-                          <span className="text-gray-800 font-medium">EN</span>
-                        </button>
-                        <button
-                          onClick={() => setLanguage("es")}
-                          className={`flex items-center gap-3 w-full text-left p-2 rounded-lg hover:bg-gray-100 transition-colors ${language === "es" ? "bg-gray-100" : ""}`}
-                        >
-                          <span className="text-gray-800 font-medium">ES</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </SheetContent>
-              </Sheet>
-            </div>
+            <SharedHeader language={language} setLanguage={setLanguage} headerLogoOpacity={headerLogoOpacity} />
           </div>
         </div>
       </nav>
