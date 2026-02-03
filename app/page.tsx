@@ -55,6 +55,8 @@ const translations = {
     admissions: "Admissions",
     calendar: "Calendar",
     contact: "Contact",
+    explore: "Explore",
+    insights: "Insights",
 
     // Hero Section
     heroTitle: "Discover Waldorf in",
@@ -188,6 +190,8 @@ const translations = {
     admissions: "Admisiones",
     calendar: "Calendario",
     contact: "Contacto",
+    explore: "Explorar",
+    insights: "Perspectivas",
 
     // Hero Section
     heroTitle: "Descubre Waldorf en",
@@ -904,6 +908,21 @@ export default function PacificoHomepage() {
                   {t("contact")}
                 </Link>
 
+                {/* Explore Dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button className="text-white hover:text-yellow-200 transition-colors drop-shadow-md flex items-center gap-1">
+                      {t("explore")}
+                      <ChevronDown className="h-4 w-4" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem asChild>
+                      <Link href="/news">{t("insights")}</Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
                 {/* Language Selector */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -955,6 +974,19 @@ export default function PacificoHomepage() {
                         >
                           {t("contact")}
                         </button>
+                        
+                        {/* Explore Section */}
+                        <div className="border-t border-gray-100 pt-2 mt-2">
+                          <p className="text-lg text-gray-800 py-2 font-medium">{t("explore")}</p>
+                          <Link
+                            href="/news"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors py-2"
+                          >
+                            {t("insights")}
+                          </Link>
+                        </div>
+
                         <Link
                           href="/careers"
                           onClick={() => setMobileMenuOpen(false)}
