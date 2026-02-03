@@ -1673,6 +1673,8 @@ export default function PacificoHomepage() {
             ) : (
               calendarEvents.map((event, index) => {
                 const { day, month } = formatEventDate(event.startDate)
+                const endDateInfo = event.endDate ? formatEventDate(event.endDate) : null
+                const isMultiDay = endDateInfo && (endDateInfo.day !== day || endDateInfo.month !== month)
                 const colorClass = getEventColor(index)
 
                 return (
@@ -1685,8 +1687,24 @@ export default function PacificoHomepage() {
                         <div
                           className={`flex flex-row sm:flex-col items-center sm:items-center text-${colorClass}-600 min-w-[80px]`}
                         >
-                          <div className="text-3xl sm:text-4xl font-bold mr-2 sm:mr-0">{day}</div>
-                          <div className="text-sm font-semibold">{month}</div>
+                          <div className="text-3xl sm:text-4xl font-bold mr-2 sm:mr-0">
+                            {isMultiDay ? (
+                              endDateInfo.month === month ? (
+                                <>{day}-{endDateInfo.day}</>
+                              ) : (
+                                <>{day}</>
+                              )
+                            ) : (
+                              day
+                            )}
+                          </div>
+                          <div className="text-sm font-semibold">
+                            {isMultiDay && endDateInfo.month !== month ? (
+                              <>{month} - {endDateInfo.day} {endDateInfo.month}</>
+                            ) : (
+                              month
+                            )}
+                          </div>
                         </div>
                         <div className="flex-1 min-w-0">
                           <h3 className={`text-lg sm:text-xl font-bold text-${colorClass}-700 mb-3 break-words`}>
