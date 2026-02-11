@@ -89,7 +89,7 @@ const translations = {
     visitDescription:
       "Come see our beautiful campus nestled in the Costa Rican jungle and meet our dedicated teachers. We offer personalized tours for prospective families.",
     callPhone: "Call +506 8762 6927",
-    tuitionFees: "2025 Tuition & Fees",
+    tuitionFees: "2026/27 Tuition & Fees",
     whatToExpect: "What to Expect During Your Visit:",
     meetTeachers: "Meet Our Teachers",
     meetTeachersDesc: "Connect with our experienced Waldorf-trained educators",
@@ -228,7 +228,7 @@ const translations = {
     visitDescription:
       "Ven a ver nuestro hermoso campus ubicado en la selva costarricense y conoce a nuestros maestros dedicados. Ofrecemos tours personalizados para familias prospectivas.",
     callPhone: "Llamar +506 8762 6927",
-    tuitionFees: "Matrícula y Cuotas 2025",
+    tuitionFees: "Matrícula y Cuotas 2026/27",
     whatToExpect: "Qué Esperar Durante tu Visita:",
     meetTeachers: "Conoce a Nuestros Maestros",
     meetTeachersDesc: "Conéctate con nuestros educadores experimentados entrenados en Waldorf",
