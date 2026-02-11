@@ -104,25 +104,28 @@ const translations = {
     applicationStep4: "4. Enrollment confirmation and payment of fees",
 
     // Tuition Table
-    tuitionTitle: "2025 Tuition & Fees",
-    tuitionDescription: "Complete pricing information for the 2025 academic year",
+    tuitionTitle: "2026/27 Tuition & Fees",
+    tuitionDescription: "Complete pricing information for the 2026/27 school year",
     program: "Program",
     schedule: "Schedule",
     annualTuition: "Annual Tuition",
     monthly: "Monthly",
-    fullDay: "Full Day (8:00 AM - 2:15 PM)",
-    halfDay: "Half Day (8:00 AM - 1:00 PM)",
-    kindergarten3Days: "Kindergarten (3 days/week)",
-    kindergarten5Days: "Kindergarten (5 days/week)",
-    grades18: "Grades 1-8",
-    any3of5: "Any 3 of 5",
-    mondayFriday: "Monday - Friday",
+    nursery3Days: "Nursery 3 days",
+    nursery5Days: "Nursery 5 days",
+    kindergarten5Days: "Kindergarten 5 days",
+    grades15: "Grades 1-5",
+    grades68: "Grades 6-8",
+    nursery3Schedule: "3 days (8:00 AM - 12:00 PM)",
+    nursery5Schedule: "5 days (8:00 AM - 12:00 PM)",
+    kindergartenSchedule: "5 days (8:00 AM - 2:15 PM)",
+    gradesSchedule: "8:00 AM - 2:15 PM",
     oneTimeAnnualFees: "One-time and Annual Fees",
-    newStudentRegistration: "New Student Registration (one-time)",
-    enrollmentFee: "Enrollment Fee (annual)",
-    materialsFeeKindergarten: "Materials Fee - Kindergarten (annual)",
-    materialsFeegrades: "Materials Fee - Grades (annual)",
-    insurance: "Insurance (annual)",
+    newStudentRegistration: "New Student Registration Fee",
+    yearlyEnrollmentFee: "Yearly Enrollment Fee (once yearly)",
+    earlyBirdReenrollment: "Early Bird Re-enrollment Fee (paid before 20 March 2026)",
+    materialsFeeKindergarten: "Materials Fee - Kindergarten",
+    materialsFeegrades: "Materials Fee - Grades",
+    insurance: "Student Insurance Fee",
     paymentOptions: "Payment Options",
     fullTuitionDiscount: "100% Tuition by August 1st",
     discountLabel: "5% Discount",
@@ -240,25 +243,28 @@ const translations = {
     applicationStep4: "4. Confirmación de inscripción y pago de cuotas",
 
     // Tuition Table
-    tuitionTitle: "Matrícula y Cuotas 2025",
-    tuitionDescription: "Información completa de precios para el año académico 2025",
+    tuitionTitle: "Matrícula y Cuotas 2026/27",
+    tuitionDescription: "Información completa de precios para el año escolar 2026/27",
     program: "Programa",
     schedule: "Horario",
     annualTuition: "Matrícula Anual",
     monthly: "Mensual",
-    fullDay: "Día Completo (8:00 AM - 2:15 PM)",
-    halfDay: "Medio Día (8:00 AM - 1:00 PM)",
-    kindergarten3Days: "Kindergarten (3 días/semana)",
-    kindergarten5Days: "Kindergarten (5 días/semana)",
-    grades18: "Grados 1-8",
-    any3of5: "Cualquier 3 de 5",
-    mondayFriday: "Lunes - Viernes",
+    nursery3Days: "Nursery 3 días",
+    nursery5Days: "Nursery 5 días",
+    kindergarten5Days: "Kindergarten 5 días",
+    grades15: "Grados 1-5",
+    grades68: "Grados 6-8",
+    nursery3Schedule: "3 días (8:00 AM - 12:00 PM)",
+    nursery5Schedule: "5 días (8:00 AM - 12:00 PM)",
+    kindergartenSchedule: "5 días (8:00 AM - 2:15 PM)",
+    gradesSchedule: "8:00 AM - 2:15 PM",
     oneTimeAnnualFees: "Cuotas Únicas y Anuales",
-    newStudentRegistration: "Registro de Estudiante Nuevo (única vez)",
-    enrollmentFee: "Cuota de Inscripción (anual)",
-    materialsFeeKindergarten: "Cuota de Materiales - Kindergarten (anual)",
-    materialsFeegrades: "Cuota de Materiales - Grados (anual)",
-    insurance: "Seguro (anual)",
+    newStudentRegistration: "Cuota de Registro de Estudiante Nuevo",
+    yearlyEnrollmentFee: "Cuota de Inscripción Anual (una vez al año)",
+    earlyBirdReenrollment: "Cuota de Reinscripción Anticipada (antes del 20 de marzo 2026)",
+    materialsFeeKindergarten: "Cuota de Materiales - Kindergarten",
+    materialsFeegrades: "Cuota de Materiales - Grados",
+    insurance: "Cuota de Seguro Estudiantil",
     paymentOptions: "Opciones de Pago",
     fullTuitionDiscount: "100% Matrícula antes del 1 de Agosto",
     discountLabel: "5% Descuento",
@@ -1430,53 +1436,41 @@ export default function PacificoHomepage() {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr className="bg-blue-50">
-                            <td colSpan={4} className="border border-gray-200 p-3 font-bold text-blue-700 text-center">
-                              {t("fullDay")}
+                          <tr className="hover:bg-orange-50 transition-colors">
+                            <td className="border border-gray-200 p-3 font-medium text-orange-700">
+                              {t("nursery3Days")}
                             </td>
+                            <td className="border border-gray-200 p-3 text-gray-600">{t("nursery3Schedule")}</td>
+                            <td className="border border-gray-200 p-3 text-right font-bold text-orange-700">$4,050</td>
+                            <td className="border border-gray-200 p-3 text-right text-gray-600">$405</td>
                           </tr>
-                          <tr className="hover:bg-blue-50 transition-colors">
-                            <td className="border border-gray-200 p-3 font-medium text-blue-700">
-                              {t("kindergarten3Days")}
+                          <tr className="hover:bg-amber-50 transition-colors">
+                            <td className="border border-gray-200 p-3 font-medium text-amber-700">
+                              {t("nursery5Days")}
                             </td>
-                            <td className="border border-gray-200 p-3 text-gray-600">{t("any3of5")}</td>
-                            <td className="border border-gray-200 p-3 text-right font-bold text-blue-700">$5,200</td>
-                            <td className="border border-gray-200 p-3 text-right text-gray-600">$520</td>
+                            <td className="border border-gray-200 p-3 text-gray-600">{t("nursery5Schedule")}</td>
+                            <td className="border border-gray-200 p-3 text-right font-bold text-amber-700">$5,800</td>
+                            <td className="border border-gray-200 p-3 text-right text-gray-600">$580</td>
                           </tr>
                           <tr className="hover:bg-green-50 transition-colors">
                             <td className="border border-gray-200 p-3 font-medium text-green-700">
                               {t("kindergarten5Days")}
                             </td>
-                            <td className="border border-gray-200 p-3 text-gray-600">{t("mondayFriday")}</td>
+                            <td className="border border-gray-200 p-3 text-gray-600">{t("kindergartenSchedule")}</td>
                             <td className="border border-gray-200 p-3 text-right font-bold text-green-700">$6,950</td>
                             <td className="border border-gray-200 p-3 text-right text-gray-600">$695</td>
                           </tr>
+                          <tr className="hover:bg-blue-50 transition-colors">
+                            <td className="border border-gray-200 p-3 font-medium text-blue-700">{t("grades15")}</td>
+                            <td className="border border-gray-200 p-3 text-gray-600">{t("gradesSchedule")}</td>
+                            <td className="border border-gray-200 p-3 text-right font-bold text-blue-700">$7,250</td>
+                            <td className="border border-gray-200 p-3 text-right text-gray-600">$725</td>
+                          </tr>
                           <tr className="hover:bg-purple-50 transition-colors">
-                            <td className="border border-gray-200 p-3 font-medium text-purple-700">{t("grades18")}</td>
-                            <td className="border border-gray-200 p-3 text-gray-600">{t("mondayFriday")}</td>
-                            <td className="border border-gray-200 p-3 text-right font-bold text-purple-700">$6,950</td>
-                            <td className="border border-gray-200 p-3 text-right text-gray-600">$695</td>
-                          </tr>
-                          <tr className="bg-amber-50">
-                            <td colSpan={4} className="border border-gray-200 p-3 font-bold text-amber-700 text-center">
-                              {t("halfDay")}
-                            </td>
-                          </tr>
-                          <tr className="hover:bg-orange-50 transition-colors">
-                            <td className="border border-gray-200 p-3 font-medium text-orange-700">
-                              {t("kindergarten3Days")}
-                            </td>
-                            <td className="border border-gray-200 p-3 text-gray-600">{t("any3of5")}</td>
-                            <td className="border border-gray-200 p-3 text-right font-bold text-orange-700">$4,050</td>
-                            <td className="border border-gray-200 p-3 text-right text-gray-600">$405</td>
-                          </tr>
-                          <tr className="hover:bg-yellow-50 transition-colors">
-                            <td className="border border-gray-200 p-3 font-medium text-yellow-700">
-                              {t("kindergarten5Days")}
-                            </td>
-                            <td className="border border-gray-200 p-3 text-gray-600">{t("mondayFriday")}</td>
-                            <td className="border border-gray-200 p-3 text-right font-bold text-yellow-700">$5,800</td>
-                            <td className="border border-gray-200 p-3 text-right text-gray-600">$580</td>
+                            <td className="border border-gray-200 p-3 font-medium text-purple-700">{t("grades68")}</td>
+                            <td className="border border-gray-200 p-3 text-gray-600">{t("gradesSchedule")}</td>
+                            <td className="border border-gray-200 p-3 text-right font-bold text-purple-700">$7,800</td>
+                            <td className="border border-gray-200 p-3 text-right text-gray-600">$780</td>
                           </tr>
                         </tbody>
                       </table>
@@ -1488,19 +1482,23 @@ export default function PacificoHomepage() {
                         <div className="space-y-2">
                           <div className="flex justify-between items-center p-3 bg-orange-50 rounded-lg border border-orange-200">
                             <span className="text-gray-700">{t("newStudentRegistration")}</span>
-                            <span className="font-bold text-orange-700">$500</span>
+                            <span className="font-bold text-orange-700">$800</span>
                           </div>
                           <div className="flex justify-between items-center p-3 bg-red-50 rounded-lg border border-red-200">
-                            <span className="text-gray-700">{t("enrollmentFee")}</span>
-                            <span className="font-bold text-red-700">$550</span>
+                            <span className="text-gray-700">{t("yearlyEnrollmentFee")}</span>
+                            <span className="font-bold text-red-700">$800</span>
+                          </div>
+                          <div className="flex justify-between items-center p-3 bg-amber-50 rounded-lg border border-amber-200">
+                            <span className="text-gray-700">{t("earlyBirdReenrollment")}</span>
+                            <span className="font-bold text-amber-700">$550</span>
                           </div>
                           <div className="flex justify-between items-center p-3 bg-teal-50 rounded-lg border border-teal-200">
                             <span className="text-gray-700">{t("materialsFeeKindergarten")}</span>
-                            <span className="font-bold text-teal-700">$300</span>
+                            <span className="font-bold text-teal-700">$350</span>
                           </div>
                           <div className="flex justify-between items-center p-3 bg-indigo-50 rounded-lg border border-indigo-200">
                             <span className="text-gray-700">{t("materialsFeegrades")}</span>
-                            <span className="font-bold text-indigo-700">$350</span>
+                            <span className="font-bold text-indigo-700">$450</span>
                           </div>
                           <div className="flex justify-between items-center p-3 bg-pink-50 rounded-lg border border-pink-200">
                             <span className="text-gray-700">{t("insurance")}</span>
