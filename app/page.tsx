@@ -551,6 +551,8 @@ export default function PacificoHomepage() {
           message: "",
         })
       } else {
+        const errorData = await response.json().catch(() => null)
+        console.log("[v0] API error response:", { status: response.status, body: errorData })
         throw new Error("Failed to send message")
       }
     } catch (error) {
