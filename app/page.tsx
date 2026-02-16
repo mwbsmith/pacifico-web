@@ -169,6 +169,7 @@ const translations = {
     messagePlaceholder: "Tell us about your interest in our school...",
     sending: "Sending...",
     sendMessageButton: "Send Message",
+    contactDifficultyNote: "If you have any difficulty reaching us please send an email to",
 
     // Footer
     footerDescription:
@@ -308,6 +309,7 @@ const translations = {
     messagePlaceholder: "Cuéntanos sobre tu interés en nuestra escuela...",
     sending: "Enviando...",
     sendMessageButton: "Enviar Mensaje",
+    contactDifficultyNote: "Si tiene alguna dificultad para comunicarse con nosotros, envíe un correo electrónico a",
 
     // Footer
     footerDescription:
@@ -1958,6 +1960,13 @@ export default function PacificoHomepage() {
                       <p className="text-red-700 text-sm">{submitMessage}</p>
                     </div>
                   )}
+
+                  <p className="text-sm text-gray-500 text-center">
+                    {t("contactDifficultyNote")}{" "}
+                    <a href="mailto:info@waldorf.cr" className="text-teal-600 hover:text-teal-700 underline">
+                      info@waldorf.cr
+                    </a>
+                  </p>
 
                   <Button
                     type="submit"
