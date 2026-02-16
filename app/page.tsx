@@ -391,18 +391,33 @@ export default function PacificoHomepage() {
         (window as any).grecaptcha.enterprise.ready
       ) {
         ;(window as any).grecaptcha.enterprise.ready(() => {
+          console.log("[v0] reCAPTCHA Enterprise is ready")
           setIsRecaptchaReady(true)
         })
+        return true
       }
+      return false
     }
 
     // Check immediately
-    checkRecaptchaReady()
+    if (!checkRecaptchaReady()) {
+      // Poll every 500ms until ready, up to 10 seconds
+      const interval = setInterval(() => {
+        if (checkRecaptchaReady()) {
+          clearInterval(interval)
+        }
+      }, 500)
 
-    // Also check after a delay in case script loads later
-    const timeout = setTimeout(checkRecaptchaReady, 1000)
+      const timeout = setTimeout(() => {
+        clearInterval(interval)
+        console.log("[v0] reCAPTCHA Enterprise failed to load within 10s")
+      }, 10000)
 
-    return () => clearTimeout(timeout)
+      return () => {
+        clearInterval(interval)
+        clearTimeout(timeout)
+      }
+    }
   }, [])
 
   const handleWhatsAppClick = () => {
@@ -483,16 +498,26 @@ export default function PacificoHomepage() {
     try {
       // Get reCAPTCHA token
       let recaptchaToken = ""
+      console.log("[v0] reCAPTCHA state:", {
+        isRecaptchaReady,
+        hasGrecaptcha: typeof window !== "undefined" && !!(window as any).grecaptcha?.enterprise,
+        siteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? "set" : "missing",
+      })
       if (isRecaptchaReady && typeof window !== "undefined" && (window as any).grecaptcha?.enterprise) {
         try {
           const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
           if (siteKey) {
             recaptchaToken = await (window as any).grecaptcha.enterprise.execute(siteKey, { action: "contact_form" })
+            console.log("[v0] reCAPTCHA token obtained:", recaptchaToken ? `${recaptchaToken.substring(0, 20)}...` : "empty")
+          } else {
+            console.log("[v0] reCAPTCHA site key is missing from env")
           }
         } catch (error) {
-          console.error("[v0] reCAPTCHA error:", error)
+          console.error("[v0] reCAPTCHA execute error:", error)
           // Continue without token if reCAPTCHA fails
         }
+      } else {
+        console.log("[v0] reCAPTCHA skipped - not ready or not loaded")
       }
 
       const response = await fetch("/proxy/contact", {
