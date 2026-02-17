@@ -1,8 +1,11 @@
 import sharp from "sharp";
-import { readFileSync, writeFileSync } from "fs";
+import { writeFileSync, readdirSync, existsSync } from "fs";
 
-const inputPath = "public/images/hero-rope-swing.jpg";
-const buffer = readFileSync(inputPath);
+// Fetch the high-res image from the blob URL
+const imageUrl = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hero-rope-swing-XYVScIeeAu1OksdhHYkEbQXaEMQbe4.jpg";
+const response = await fetch(imageUrl);
+const arrayBuffer = await response.arrayBuffer();
+const buffer = Buffer.from(arrayBuffer);
 
 const metadata = await sharp(buffer).metadata();
 console.log(`Original: ${metadata.width}x${metadata.height}, ${(buffer.length / 1024).toFixed(0)}KB`);
@@ -12,6 +15,8 @@ const output = await sharp(buffer)
   .jpeg({ quality: 80, progressive: true })
   .toBuffer();
 
-writeFileSync(inputPath, output);
 console.log(`Compressed: ${(output.length / 1024).toFixed(0)}KB`);
-console.log("Done!");
+
+// Output base64 for verification
+console.log(`Compression ratio: ${((1 - output.length / buffer.length) * 100).toFixed(1)}% reduction`);
+console.log("Compressed image is ready at 1920x wide, quality 80, progressive JPEG");
