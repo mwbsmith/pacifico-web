@@ -164,9 +164,9 @@ export default function NewsPageClient({ posts }: NewsPageClientProps) {
         {/* Hero Content */}
         <div className="container mx-auto px-4 relative z-10 pt-16">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight drop-shadow-2xl mb-6 font-serif">
+            <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight drop-shadow-2xl mb-6">
               {t("heroTitle")}
-              <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-green-300 drop-shadow-lg">
                 {t("heroHighlight")}
               </span>
             </h1>
