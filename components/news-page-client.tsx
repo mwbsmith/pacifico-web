@@ -34,9 +34,9 @@ const translations = {
     contact: "Contact",
 
     // Hero Section
-    heroTitle: "School ",
-    heroHighlight: "News",
-    heroDescription: "Stay updated with the latest news, events, and announcements from Pacífico Internacional.",
+    heroTitle: "Education, News and ",
+    heroHighlight: "Insights",
+    heroDescription: "A resource for our community and prospective families.",
 
     // News Section
     newsTitle: "Latest Updates",
@@ -60,9 +60,9 @@ const translations = {
     contact: "Contacto",
 
     // Hero Section
-    heroTitle: "Noticias de la ",
-    heroHighlight: "Escuela",
-    heroDescription: "Mantente actualizado con las últimas noticias, eventos y anuncios de Pacífico Internacional.",
+    heroTitle: "Educación, Noticias y ",
+    heroHighlight: "Perspectivas",
+    heroDescription: "Un recurso para nuestra comunidad y familias interesadas.",
 
     // News Section
     newsTitle: "Últimas Actualizaciones",
@@ -137,8 +137,8 @@ export default function NewsPageClient({ posts }: NewsPageClientProps) {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/faculty-group-photo.jpeg"
-            alt="Pacífico Internacional Faculty"
+            src="/images/hero-rope-swing.jpg"
+            alt="Pacífico Internacional students on a nature excursion"
             fill
             className="object-cover"
             priority
