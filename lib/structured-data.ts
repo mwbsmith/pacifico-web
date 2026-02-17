@@ -1,7 +1,8 @@
 import type { NewsPostMeta, NewsPost } from "./mdx"
+import { baseMetadata } from "./base-metadata"
 
-const BASE_URL = "https://waldorf.cr"
-const ORG_NAME = "Pacífico Internacional"
+const BASE_URL = baseMetadata.contact.website
+const ORG_NAME = baseMetadata.school.name
 const ORG_LOGO = `${BASE_URL}/images/pacifico-logo.png`
 
 export function generateArticleStructuredData(post: NewsPost | NewsPostMeta) {
@@ -52,21 +53,40 @@ export function generateBreadcrumbStructuredData(items: { name: string; url: str
 export function generateOrganizationStructuredData() {
   return {
     "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
+    "@type": baseMetadata.entityType,
     name: ORG_NAME,
     url: BASE_URL,
     logo: ORG_LOGO,
+    telephone: baseMetadata.contact.phone,
+    email: baseMetadata.contact.email,
     description: "Authentic Waldorf education in the heart of Costa Rica, nurturing children through nature-based, holistic learning.",
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Guanacaste",
-      addressCountry: "CR",
+      addressLocality: baseMetadata.location.addressLocality,
+      addressRegion: baseMetadata.location.addressRegion,
+      addressCountry: baseMetadata.location.addressCountry,
     },
+    areaServed: baseMetadata.location.areaServed.map((area) => ({
+      "@type": "City",
+      name: area,
+    })),
+    availableLanguage: baseMetadata.languages.map((lang) => ({
+      "@type": "Language",
+      name: lang,
+    })),
+    knowsAbout: [
+      "Waldorf Education",
+      "Bilingual Education",
+      "Early Childhood Development",
+      "Middle School Education",
+      "Play Based Learning",
+      "Alternative Education Costa Rica",
+    ],
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+506-8762-6927",
+      telephone: baseMetadata.contact.phone,
       contactType: "admissions",
-      email: "info@waldorf.cr",
+      email: baseMetadata.contact.email,
     },
     sameAs: [
       "https://www.facebook.com/pacificointernacional",

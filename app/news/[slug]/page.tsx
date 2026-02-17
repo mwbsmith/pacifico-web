@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { getNewsPostBySlug, getAllNewsSlugs, getAllNewsPosts } from "@/lib/mdx"
-import { generateArticleStructuredData, generateBreadcrumbStructuredData } from "@/lib/structured-data"
+import { generateArticleStructuredData, generateBreadcrumbStructuredData, generateOrganizationStructuredData } from "@/lib/structured-data"
+import { baseMetadata } from "@/lib/base-metadata"
 import NewsArticleClient from "@/components/news-article-client"
 import { notFound } from "next/navigation"
 
@@ -8,7 +9,8 @@ interface PageProps {
   params: Promise<{ slug: string }>
 }
 
-const BASE_URL = "https://waldorf.cr"
+const BASE_URL = baseMetadata.contact.website
+const ORG_NAME = baseMetadata.school.name
 
 export async function generateStaticParams() {
   const slugs = getAllNewsSlugs()
@@ -21,22 +23,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   
   if (!post) {
     return {
-      title: "Article Not Found - Pacífico Internacional",
+      title: `Article Not Found - ${ORG_NAME}`,
     }
   }
 
   const ogImage = post.image || "/images/waldorf-classroom.jpg"
   
   return {
-    title: `${post.title} - Pacífico Internacional News`,
+    title: `${post.title} - ${ORG_NAME} News`,
     description: post.description,
     keywords: post.tags?.join(", "),
-    authors: [{ name: "Pacífico Internacional" }],
+    authors: [{ name: ORG_NAME }],
     openGraph: {
       title: post.title,
       description: post.description,
       url: `${BASE_URL}/news/${post.slug}`,
-      siteName: "Pacífico Internacional",
+      siteName: ORG_NAME,
       images: [
         {
           url: `${BASE_URL}${ogImage}`,
@@ -45,7 +47,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           alt: post.title,
         },
       ],
-      locale: "en_US",
+      locale: baseMetadata.locale,
       type: "article",
       publishedTime: new Date(post.date + "T12:00:00-06:00").toISOString(),
       modifiedTime: post.updated 
@@ -86,9 +88,14 @@ export default async function NewsArticlePage({ params }: PageProps) {
     { name: "News", url: `${BASE_URL}/news` },
     { name: post.title, url: `${BASE_URL}/news/${post.slug}` },
   ])
+  const orgSchema = generateOrganizationStructuredData()
   
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
