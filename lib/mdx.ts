@@ -7,6 +7,20 @@ export interface NewsPostMeta {
   tags?: string[]
   image?: string
   canonical?: string
+  primaryKeyword?: string
+  secondaryKeywords?: string[]
+  featuredImage?: string
+  featuredImageAlt?: string
+  readingTime?: string
+  lastModified?: string
+  faq?: Array<{ question: string; answer: string }>
+}
+
+// Normalize date values — gray-matter may parse date strings into Date objects
+function normalizeDate(value: unknown): string {
+  if (!value) return new Date().toISOString().split("T")[0]
+  if (value instanceof Date) return value.toISOString().split("T")[0]
+  return String(value)
 }
 
 export interface NewsPost extends NewsPostMeta {
@@ -136,11 +150,18 @@ export function getAllNewsPosts(): NewsPostMeta[] {
         slug: data.slug || slug,
         title: data.title || "Untitled",
         description: data.description || "",
-        date: data.date || new Date().toISOString().split("T")[0],
-        updated: data.updated,
-        tags: data.tags || [],
-        image: data.image || "/images/waldorf-classroom.jpg",
+        date: normalizeDate(data.date),
+        updated: data.updated ? normalizeDate(data.updated) : undefined,
+        tags: data.tags || data.secondaryKeywords || [],
+        image: data.image || data.featuredImage || "/images/waldorf-classroom.jpg",
         canonical: data.canonical,
+        primaryKeyword: data.primaryKeyword,
+        secondaryKeywords: data.secondaryKeywords,
+        featuredImage: data.featuredImage,
+        featuredImageAlt: data.featuredImageAlt,
+        readingTime: data.readingTime,
+        lastModified: data.lastModified ? normalizeDate(data.lastModified) : undefined,
+        faq: data.faq,
       }
     })
 
@@ -182,11 +203,18 @@ export function getNewsPostBySlug(slug: string): NewsPost | null {
       slug: data.slug || slug,
       title: data.title || "Untitled",
       description: data.description || "",
-      date: data.date || new Date().toISOString().split("T")[0],
-      updated: data.updated,
-      tags: data.tags || [],
-      image: data.image || "/images/waldorf-classroom.jpg",
+      date: normalizeDate(data.date),
+      updated: data.updated ? normalizeDate(data.updated) : undefined,
+      tags: data.tags || data.secondaryKeywords || [],
+      image: data.image || data.featuredImage || "/images/waldorf-classroom.jpg",
       canonical: data.canonical,
+      primaryKeyword: data.primaryKeyword,
+      secondaryKeywords: data.secondaryKeywords,
+      featuredImage: data.featuredImage,
+      featuredImageAlt: data.featuredImageAlt,
+      readingTime: data.readingTime,
+      lastModified: data.lastModified ? normalizeDate(data.lastModified) : undefined,
+      faq: data.faq,
       content,
     }
   } catch {
