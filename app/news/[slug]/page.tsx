@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { getNewsPostBySlug, getAllNewsSlugs, getAllNewsPosts } from "@/lib/mdx"
-import { generateArticleStructuredData, generateBreadcrumbStructuredData, generateOrganizationStructuredData } from "@/lib/structured-data"
+import { generateArticleStructuredData, generateBreadcrumbStructuredData, generateOrganizationStructuredData, toISODateString } from "@/lib/structured-data"
 import { baseMetadata } from "@/lib/base-metadata"
 import NewsArticleClient from "@/components/news-article-client"
 import { notFound } from "next/navigation"
@@ -49,10 +49,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ],
       locale: baseMetadata.locale,
       type: "article",
-      publishedTime: new Date(post.date + "T12:00:00-06:00").toISOString(),
-      modifiedTime: post.updated 
-        ? new Date(post.updated + "T12:00:00-06:00").toISOString() 
-        : undefined,
+      publishedTime: toISODateString(post.date),
+      modifiedTime: post.updated ? toISODateString(post.updated) : undefined,
       tags: post.tags,
     },
     twitter: {

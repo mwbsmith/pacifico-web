@@ -6,7 +6,7 @@ const ORG_NAME = baseMetadata.school.name
 const ORG_LOGO = `${BASE_URL}/images/pacifico-logo.png`
 
 // Safely convert a date value to an ISO string for structured data
-function toISODateString(value: unknown): string {
+export function toISODateString(value: unknown): string {
   if (!value) return new Date().toISOString()
   // If it's already a Date object (gray-matter can do this)
   if (value instanceof Date) {
