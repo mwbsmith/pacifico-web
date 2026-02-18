@@ -36,7 +36,7 @@ const SAMPLE_POSTS: NewsPost[] = [
     date: "2026-02-17",
     updated: "2026-02-17",
     tags: ["waldorf-education", "child-development", "holistic-education", "play-based-learning"],
-    image: "/images/blog/math.jpg",
+    image: "/images/news/math.jpg",
     canonical: "https://waldorf.cr/news/core-principles-waldorf-education",
     content: `# The Core Principles of Waldorf Education
 
@@ -48,7 +48,7 @@ Instead of asking *"What should children know by a certain age?"* Waldorf educat
 
 When teaching matches developmental readiness, children engage more deeply, retain knowledge longer, and develop confidence in their own ability to learn.
 
-![Students collaborating on math problems at a chalkboard in a Waldorf classroom](/images/blog/math.jpg)
+![Students collaborating on math problems at a chalkboard in a Waldorf classroom](/images/news/math.jpg)
 
 ---
 
