@@ -30,74 +30,151 @@ export interface NewsPost extends NewsPostMeta {
 // Fallback sample data for preview environments without filesystem access
 const SAMPLE_POSTS: NewsPost[] = [
   {
-    slug: "welcome-2025-2026",
-    title: "Welcome to the 2025-2026 School Year",
-    description: "We are excited to welcome all families to another wonderful year of Waldorf-inspired education.",
-    date: "2025-08-18",
-    tags: ["announcement", "school-year"],
-    image: "/images/news/welcome-2025-2026.jpg",
-    canonical: "https://waldorf.cr/news/welcome-2025-2026",
-    content: `We are thrilled to welcome all our families—both returning and new—to the 2025-2026 school year at Pacífico Internacional!
+    slug: "core-principles-waldorf-education",
+    title: "The Core Principles of Waldorf Education: How Children Learn Best",
+    description: "Explore the fundamental aspects of Waldorf education and why its developmental approach helps children grow intellectually, socially, and creatively.",
+    date: "2026-02-17",
+    updated: "2026-02-17",
+    tags: ["waldorf-education", "child-development", "holistic-education", "play-based-learning"],
+    image: "/images/blog/math.jpg",
+    canonical: "https://waldorf.cr/news/core-principles-waldorf-education",
+    content: `# The Core Principles of Waldorf Education
 
-## A Year of Growth and Discovery
+Most education systems are organized around subjects and testing schedules. Waldorf education is organized around **human development**.
 
-This year promises to be filled with creativity, learning, and community connection as we continue our mission of providing authentic Waldorf education in the heart of Costa Rica.
+Instead of asking *"What should children know by a certain age?"* Waldorf education asks:
 
-### What to Expect
+**"What is the child ready to understand — and how can learning feel meaningful?"**
 
-- **New Programs**: Expanded offerings in arts and movement
-- **Community Events**: Monthly festivals celebrating seasons and cultures
-- **Enhanced Curriculum**: Deeper integration of nature-based learning
+When teaching matches developmental readiness, children engage more deeply, retain knowledge longer, and develop confidence in their own ability to learn.
 
-We look forward to walking this journey together with your family.`,
-  },
-  {
-    slug: "morning-garden-enrolling",
-    title: "Morning Garden Program Now Enrolling",
-    description: "Our Morning Garden program for young children is now accepting enrollments for 2025-2026.",
-    date: "2025-01-15",
-    tags: ["enrollment", "early-childhood"],
-    image: "/images/news/morning-garden-enrolling.jpg",
-    canonical: "https://waldorf.cr/news/morning-garden-enrolling",
-    content: `Our Morning Garden program is now accepting enrollments for children ages 3-5!
+![Students collaborating on math problems at a chalkboard in a Waldorf classroom](/images/blog/math.jpg)
 
-## A Gentle Introduction to Learning
+---
 
-The Morning Garden provides a warm, nurturing environment where young children can explore, play, and grow at their own pace.
+## 1) Learning Follows Developmental Stages
 
-### Program Highlights
+Waldorf education recognizes that children learn differently as they grow. Each stage calls for a different teaching approach.
 
-- **Nature-Based Play**: Daily outdoor exploration in our beautiful gardens
-- **Creative Arts**: Watercolor painting, beeswax modeling, and handwork
-- **Rhythm and Song**: Circle time with movement, songs, and storytelling
-- **Practical Life**: Baking, gardening, and caring for our classroom
+### Early Childhood (Birth–7)
+Young children learn primarily through **imitation** and **sensory experience**.
 
-Contact us today to schedule a visit and learn more about this special program.`,
-  },
-  {
-    slug: "meet-our-faculty",
-    title: "Meet Our Growing Faculty Team",
-    description: "Introducing new members to our dedicated team of Waldorf-trained educators.",
-    date: "2025-01-10",
-    tags: ["faculty", "team"],
-    image: "/images/news/meet-our-faculty.jpg",
-    canonical: "https://waldorf.cr/news/meet-our-faculty",
-    content: `We are delighted to introduce the newest members of our faculty team!
+Common priorities include:
+- free, imaginative play
+- movement and coordination
+- practical life activities (helping, tidying, baking, gardening)
+- rich spoken language through songs, stories, and conversation
+- warm, predictable rhythms that help children feel secure
 
-## Dedicated Waldorf Educators
+Formal academics are not rushed, because strong foundations in movement, language, and social development support later success in reading and math.
 
-Our teachers bring years of experience and deep commitment to Waldorf education. Each brings unique gifts to our community.
+### Grades / Elementary (7–14)
+In these years, **imagination becomes a bridge** to intellectual understanding.
 
-### Our Teaching Philosophy
+Children learn through:
+- story-based teaching
+- artistic work that supports academic content (drawing, painting, modeling)
+- hands-on projects
+- nature observation and experiential science
+- skill-building through practice, rhythm, and review
 
-At Pacífico Internacional, we believe in:
+Rather than separating "arts" from "academics," Waldorf integrates them so learning is memorable and emotionally connected.
 
-- **Whole Child Education**: Nurturing head, heart, and hands
-- **Developmentally Appropriate Learning**: Meeting each child where they are
-- **Arts Integration**: Weaving creativity through all subjects
-- **Connection to Nature**: Learning in and from the natural world
+### Adolescence (14–18)
+As analytical thinking matures, students take on more:
+- independent research
+- debate and discussion
+- formal scientific reasoning
+- complex writing and abstract mathematics
 
-Visit our Team page to learn more about each of our wonderful educators.`,
+Because earlier years nurtured curiosity and resilience, academic challenge tends to feel purposeful instead of stressful.
+
+---
+
+## 2) Head, Heart, and Hands
+
+A short way to describe Waldorf education is **head, heart, and hands**:
+
+- **Head:** clear thinking and deep understanding
+- **Heart:** emotional intelligence, empathy, and connection
+- **Hands:** practical competence, creativity, and real-world skill
+
+Children aren't educated only for test performance. They're educated to become capable, grounded people.
+
+---
+
+## 3) The Arts Are a Learning Method, Not an Extra
+
+In Waldorf education, the arts are not "decorations." They're a core way children learn.
+
+For example:
+- drawing supports fine motor skills needed for writing
+- music strengthens listening, memory, and pattern recognition
+- drama builds language confidence and social awareness
+- handwork (knitting, sewing, woodworking) builds focus and perseverance
+
+These capacities support academic performance later because they train attention, sequencing, and executive function.
+
+---
+
+## 4) Rhythm, Repetition, and Meaning
+
+Waldorf classrooms often use **rhythm** in daily and weekly routines.
+
+Why? Because rhythm helps children:
+- feel safe and oriented
+- regulate energy and attention
+- learn through repetition without boredom
+- build habits of responsibility and care
+
+This stability supports both emotional wellbeing and learning.
+
+---
+
+## 5) The Teacher–Student Relationship Matters
+
+Waldorf education places strong value on the **relationship between teacher and student**.
+
+When children feel known, supported, and respected:
+- they take healthy risks in learning
+- they recover from mistakes more easily
+- they develop stronger motivation from within
+
+This is one reason Waldorf education often emphasizes community, class culture, and social development alongside academics.
+
+---
+
+## 6) Why Waldorf Doesn't Rush Early Academics
+
+One of the most misunderstood aspects of Waldorf education is the pace of early academics.
+
+Early memorization can create short-term results.
+Developmentally timed learning often creates **long-term mastery**.
+
+When reading and math begin when the brain is ready for symbolic thought, children tend to learn quickly and with greater comprehension — because the foundations are already strong.
+
+---
+
+## What Waldorf Education Aims to Develop
+
+Waldorf education aims to develop graduates who are:
+- curious and capable learners
+- creative problem-solvers
+- socially responsible and empathetic
+- resilient and adaptable
+- able to think independently
+
+Knowledge changes quickly. The ability to learn and grow lasts a lifetime.
+
+---
+
+## Final Thought
+
+Education isn't a race to earlier achievement.
+
+It's a process of becoming fully capable — intellectually, socially, and creatively.
+
+When childhood is respected and curiosity is nurtured, strong learning follows naturally.`,
   },
 ]
 
