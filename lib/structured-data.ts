@@ -5,17 +5,36 @@ const BASE_URL = baseMetadata.contact.website
 const ORG_NAME = baseMetadata.school.name
 const ORG_LOGO = `${BASE_URL}/images/pacifico-logo.png`
 
+// Safely convert a date value to an ISO string for structured data
+function toISODateString(value: unknown): string {
+  if (!value) return new Date().toISOString()
+  // If it's already a Date object (gray-matter can do this)
+  if (value instanceof Date) {
+    return isNaN(value.getTime()) ? new Date().toISOString() : value.toISOString()
+  }
+  const str = String(value).trim()
+  // If it already contains time info (T or timezone offset), parse directly
+  if (str.includes("T") || str.match(/[+-]\d{2}:\d{2}$/)) {
+    const d = new Date(str)
+    return isNaN(d.getTime()) ? new Date().toISOString() : d.toISOString()
+  }
+  // Plain date string like "2026-02-17" — append time and timezone
+  const d = new Date(str + "T12:00:00-06:00")
+  return isNaN(d.getTime()) ? new Date().toISOString() : d.toISOString()
+}
+
 export function generateArticleStructuredData(post: NewsPost | NewsPostMeta) {
+  const datePublished = toISODateString(post.date)
+  const dateModified = post.updated ? toISODateString(post.updated) : datePublished
+
   return {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
     headline: post.title,
     description: post.description,
     image: post.image ? `${BASE_URL}${post.image}` : `${BASE_URL}/images/waldorf-classroom.jpg`,
-    datePublished: new Date(post.date + "T12:00:00-06:00").toISOString(),
-    dateModified: post.updated 
-      ? new Date(post.updated + "T12:00:00-06:00").toISOString() 
-      : new Date(post.date + "T12:00:00-06:00").toISOString(),
+    datePublished,
+    dateModified,
     author: {
       "@type": "Organization",
       name: ORG_NAME,
