@@ -2133,10 +2133,7 @@ export default function PacificoHomepage() {
                 <span className="text-amber-600">•</span>
                 {language === "en" ? "Lower Grades" : "Grados Inferiores"}
               </li>
-              <li className="flex items-center justify-center gap-2">
-                <span className="text-amber-600">•</span>
-                {language === "en" ? "Middle School" : "Escuela Secundaria"}
-              </li>
+
             </ul>
             <p className="mt-6 text-gray-600">
               {language === "en" ? "Interested? " : "¿Interesado? "}

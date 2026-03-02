@@ -47,7 +47,6 @@ export default function CareersPage() {
         subtitle: "We are growing and searching for Lead Teachers in",
         earlyChildhood: "Early Childhood",
         lowerGrades: "Lower Grades",
-        middleSchool: "Middle School",
         whyJoin: "Why Join Pacífico Internacional?",
         reason1Title: "Waldorf-Inspired Education",
         reason1Desc: "Be part of a school that honors the whole child through head, heart, and hands learning.",
@@ -80,7 +79,6 @@ export default function CareersPage() {
         subtitle: "Estamos creciendo y buscando Maestros Líderes en",
         earlyChildhood: "Educación Temprana",
         lowerGrades: "Grados Inferiores",
-        middleSchool: "Escuela Secundaria",
         whyJoin: "¿Por qué unirse a Pacífico Internacional?",
         reason1Title: "Educación Inspirada en Waldorf",
         reason1Desc: "Sé parte de una escuela que honra al niño integral a través del aprendizaje de cabeza, corazón y manos.",
@@ -221,54 +219,10 @@ export default function CareersPage() {
                 </a>
               </div>
 
-              {/* Job 2: Lead Teacher - Middle School */}
+              {/* Job 2: Lead Teacher - Early Childhood */}
               <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
                 <h3 className="text-2xl font-bold text-teal-700 mb-4">
-                  {language === "en" ? "2) Lead Teacher - Middle School" : "2) Maestro Líder - Escuela Secundaria"}
-                </h3>
-                <p className="text-gray-700 mb-6">
-                  {language === "en"
-                    ? "We are looking for a trained and experienced Waldorf Teacher to join our talented faculty as a Lead Teacher in our growing Middle School."
-                    : "Buscamos un maestro Waldorf capacitado y experimentado para unirse a nuestro talentoso equipo docente como Maestro Líder en nuestra creciente Escuela Secundaria."}
-                </p>
-                
-                <h4 className="font-semibold text-gray-800 mb-3">
-                  {language === "en" ? "Main responsibilities include (but are not limited to):" : "Las responsabilidades principales incluyen (pero no se limitan a):"}
-                </h4>
-                <ul className="list-disc list-inside text-gray-600 space-y-2 mb-6 ml-4">
-                  <li>{language === "en" ? "Plan and teach Main Lesson blocks for the relevant grade(s)." : "Planificar y enseñar bloques de Lección Principal para los grados correspondientes."}</li>
-                  <li>{language === "en" ? "Teach every subject in accordance with the Waldorf Pedagogy and with an artistic approach." : "Enseñar todas las materias de acuerdo con la Pedagogía Waldorf y con un enfoque artístico."}</li>
-                  <li>{language === "en" ? "Support the academic and artistic development of the students." : "Apoyar el desarrollo académico y artístico de los estudiantes."}</li>
-                  <li>{language === "en" ? "Create and care for the classroom." : "Crear y cuidar el aula."}</li>
-                  <li>{language === "en" ? "Administrative aspects of being the lead teacher including organizing pedagogical meetings with parents, writing of end of year reports, organizing field trips, supporting the admission of students." : "Aspectos administrativos de ser el maestro líder, incluyendo organizar reuniones pedagógicas con padres, redactar informes de fin de año, organizar excursiones y apoyar la admisión de estudiantes."}</li>
-                  <li>{language === "en" ? "Help in planning festivals and events at the school." : "Ayudar en la planificación de festivales y eventos en la escuela."}</li>
-                </ul>
-
-                <h4 className="font-semibold text-gray-800 mb-3">
-                  {language === "en" ? "Minimum Qualifications" : "Requisitos Mínimos"}
-                </h4>
-                <ul className="list-disc list-inside text-gray-600 space-y-2 mb-6 ml-4">
-                  <li>{language === "en" ? "Completion of, or current enrollment in, a Waldorf Teacher Training program" : "Finalización o inscripción actual en un programa de Formación de Maestros Waldorf"}</li>
-                  <li>{language === "en" ? "Bachelor's degree from an accredited university" : "Título de licenciatura de una universidad acreditada"}</li>
-                  <li>{language === "en" ? "Previous Waldorf experience" : "Experiencia previa en Waldorf"}</li>
-                  <li>{language === "en" ? "Fluency in either English or Spanish and competency in the other" : "Fluidez en inglés o español y competencia en el otro idioma"}</li>
-                  <li>{language === "en" ? "A special interest and talent in musical would be an added benefit" : "Un interés especial y talento en música sería un beneficio adicional"}</li>
-                </ul>
-
-                <a
-                  href="https://forms.gle/YPSwqP1vm66PmfhH9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block bg-amber-500 text-white px-6 py-3 rounded-lg hover:bg-amber-600 transition-colors font-semibold"
-                >
-                  {language === "en" ? "Apply Now" : "Aplicar Ahora"}
-                </a>
-              </div>
-
-              {/* Job 3: Lead Teacher - Early Childhood */}
-              <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                <h3 className="text-2xl font-bold text-teal-700 mb-4">
-                  {language === "en" ? "3) Lead Teacher - Early Childhood" : "3) Maestro Líder - Educación Temprana"}
+                  {language === "en" ? "2) Lead Teacher - Early Childhood" : "2) Maestro Líder - Educación Temprana"}
                 </h3>
                 <p className="text-gray-700 mb-6">
                   {language === "en"
