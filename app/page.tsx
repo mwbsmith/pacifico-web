@@ -110,13 +110,11 @@ const translations = {
     schedule: "Schedule",
     annualTuition: "Annual Tuition",
     monthly: "Monthly",
-    nursery3Days: "Nursery 3 days",
-    nursery5Days: "Nursery 5 days",
+    nursery4Days: "Nursery 4 days",
     kindergarten5Days: "Kindergarten 5 days",
     grades15: "Grades 1-5",
     grades68: "Grades 6-8",
-    nursery3Schedule: "3 days (8:00 AM - 12:00 PM)",
-    nursery5Schedule: "5 days (8:00 AM - 12:00 PM)",
+    nursery4Schedule: "4 days (8:00 AM - 12:00 PM)",
     kindergartenSchedule: "5 days (8:00 AM - 2:15 PM)",
     gradesSchedule: "8:00 AM - 2:15 PM",
     oneTimeAnnualFees: "One-time and Annual Fees",
@@ -250,13 +248,11 @@ const translations = {
     schedule: "Horario",
     annualTuition: "Matrícula Anual",
     monthly: "Mensual",
-    nursery3Days: "Nursery 3 días",
-    nursery5Days: "Nursery 5 días",
+    nursery4Days: "Nursery 4 días",
     kindergarten5Days: "Kindergarten 5 días",
     grades15: "Grados 1-5",
     grades68: "Grados 6-8",
-    nursery3Schedule: "3 días (8:00 AM - 12:00 PM)",
-    nursery5Schedule: "5 días (8:00 AM - 12:00 PM)",
+    nursery4Schedule: "4 días (8:00 AM - 12:00 PM)",
     kindergartenSchedule: "5 días (8:00 AM - 2:15 PM)",
     gradesSchedule: "8:00 AM - 2:15 PM",
     oneTimeAnnualFees: "Cuotas Únicas y Anuales",
@@ -1467,19 +1463,11 @@ export default function PacificoHomepage() {
                         <tbody>
                           <tr className="hover:bg-orange-50 transition-colors">
                             <td className="border border-gray-200 p-3 font-medium text-orange-700">
-                              {t("nursery3Days")}
+                              {t("nursery4Days")}
                             </td>
-                            <td className="border border-gray-200 p-3 text-gray-600">{t("nursery3Schedule")}</td>
-                            <td className="border border-gray-200 p-3 text-right font-bold text-orange-700">$4,050</td>
-                            <td className="border border-gray-200 p-3 text-right text-gray-600">$405</td>
-                          </tr>
-                          <tr className="hover:bg-amber-50 transition-colors">
-                            <td className="border border-gray-200 p-3 font-medium text-amber-700">
-                              {t("nursery5Days")}
-                            </td>
-                            <td className="border border-gray-200 p-3 text-gray-600">{t("nursery5Schedule")}</td>
-                            <td className="border border-gray-200 p-3 text-right font-bold text-amber-700">$5,800</td>
-                            <td className="border border-gray-200 p-3 text-right text-gray-600">$580</td>
+                            <td className="border border-gray-200 p-3 text-gray-600">{t("nursery4Schedule")}</td>
+                            <td className="border border-gray-200 p-3 text-right font-bold text-orange-700">$4,950</td>
+                            <td className="border border-gray-200 p-3 text-right text-gray-600">$495</td>
                           </tr>
                           <tr className="hover:bg-green-50 transition-colors">
                             <td className="border border-gray-200 p-3 font-medium text-green-700">
