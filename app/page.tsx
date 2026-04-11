@@ -66,7 +66,7 @@ const translations = {
     scheduleVisit: "Schedule a Visit or Call",
 
     // Morning Garden Section
-    morningGardenAlert: "The next session of Morning Garden is about to start! Enroll before January 30, 2026.",
+    morningGardenAlert: "The next session of Morning Garden is about to start! Enroll before April 17, 2026.",
 
     // About Section
     aboutTitle: "About Our School",
@@ -204,7 +204,7 @@ const translations = {
 
     // Morning Garden Section
     morningGardenAlert:
-      "¡La próxima sesión de Morning Garden está por comenzar! Inscríbete antes del 30 de enero de 2026.",
+      "¡La próxima sesión de Morning Garden está por comenzar! Inscríbete antes del 17 de abril de 2026.",
 
     // About Section
     aboutTitle: "Acerca de Nuestra Escuela",
@@ -1114,14 +1114,18 @@ export default function PacificoHomepage() {
       </section>
 
       {/* Morning Garden Section */}
-      <section className="py-12 bg-gradient-to-r from-amber-50 to-yellow-50">
+      <section className="py-12 bg-gradient-to-r from-rose-50 via-amber-50 to-yellow-50 relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-6">
-            <p className="text-xl md:text-2xl font-semibold text-amber-800">{t("morningGardenAlert")}</p>
+          <div className="text-center mb-6 relative">
+            <div className="inline-block relative">
+              <span className="absolute -top-3 -left-3 text-2xl animate-bounce">✨</span>
+              <span className="absolute -top-2 -right-3 bg-rose-500 text-white text-xs font-bold px-2 py-1 rounded-full animate-pulse">NEW</span>
+              <p className="text-xl md:text-2xl font-bold bg-gradient-to-r from-rose-600 via-amber-600 to-orange-500 bg-clip-text text-transparent px-8">{t("morningGardenAlert")}</p>
+            </div>
           </div>
           <div className="flex justify-center">
             <Image
-              src={language === "en" ? "/images/morning-garden-en.jpg" : "/images/morning-garden-es.jpg"}
+              src={language === "en" ? "/images/morning-garden-session-2-en.jpg" : "/images/morning-garden-session-2-es.jpg"}
               alt="Morning Garden at Pacífico Internacional"
               width={600}
               height={776}
