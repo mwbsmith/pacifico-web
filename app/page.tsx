@@ -1196,11 +1196,9 @@ export default function PacificoHomepage() {
             </div>
 
             <div className="space-y-8">
-              {/* First Row: Diana, Arielle, Robyn, Larissa */}
+              {/* First Row: Robyn, Larissa */}
               <div className="flex justify-center gap-6 flex-wrap">
                 {[
-                  { name: "Diana", image: "/images/faculty/diana.jpg" },
-                  { name: "Arielle", image: "/images/faculty/arielle.jpg" },
                   { name: "Robyn", image: "/images/faculty/robyn.jpg" },
                   { name: "Larissa", image: "/images/faculty/larissa.jpg" },
                 ].map((faculty, index) => (
@@ -1221,15 +1219,13 @@ export default function PacificoHomepage() {
                 ))}
               </div>
 
-              {/* Second Row: Elvira, Karol, Ani, Dennis, Cesar, Todd */}
+              {/* Second Row: Elvira, Karol, Ani, Cesar */}
               <div className="flex justify-center gap-6 flex-wrap">
                 {[
                   { name: "Elvira", image: "/images/faculty/elvira.jpeg" },
                   { name: "Karol", image: "/images/faculty/karol.jpg" },
                   { name: "Ani", image: "/images/faculty/ani.jpg", anchor: "angelique" },
-                  { name: "Dennis", image: "/images/faculty/dennis.jpg" },
                   { name: "César", image: "/images/faculty/cesar.jpg" },
-                  { name: "Todd", image: "/images/faculty/todd.jpg" },
                 ].map((faculty, index) => (
                   <Link
                     key={index}
@@ -1248,12 +1244,10 @@ export default function PacificoHomepage() {
                 ))}
               </div>
 
-              {/* Third Row: Ashley, Carrie, Oscar */}
+              {/* Third Row: Carrie */}
               <div className="flex justify-center gap-6 flex-wrap">
                 {[
-                  { name: "Ashley", image: "/images/faculty/ashley.jpg" },
                   { name: "Carrie", image: "/images/faculty/carrie.jpeg" },
-                  { name: "Oscar", image: "/images/faculty/oscar.jpg" },
                 ].map((faculty, index) => (
                   <Link
                     key={index}
@@ -1264,7 +1258,7 @@ export default function PacificoHomepage() {
                       <img
                         src={faculty.image || "/placeholder.svg"}
                         alt={faculty.name}
-                        className={`w-full h-full ${faculty.name === "Carrie" || faculty.name === "Oscar" ? "object-cover object-top" : "object-cover"}`}
+                        className={`w-full h-full ${faculty.name === "Carrie" ? "object-cover object-top" : "object-cover"}`}
                       />
                     </div>
                     <p className="text-lg font-semibold text-gray-800">{faculty.name}</p>

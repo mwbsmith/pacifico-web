@@ -108,30 +108,12 @@ export default function TeamPage() {
     ],
     kindergarten: [
       {
-        name: "Diana Cubillos Salazar",
-        image: "/images/faculty/diana.jpg",
-        position: { en: "Kindergarten Teacher", es: "Maestra de Kindergarten" },
-        bio: {
-          en: "Diana grew up in San Jose, and has been working in early childhood education since 2012. She started her Waldorf Journey as a Kindergarten assistant at the Guanacaste Waldorf School, and became the main teacher for Pre-K at Pacific Waldorf School in 2021. In 2022, she completed both parts of the Foundations in Anthroposophy program from Rudolf Steiner College Canada, and is currently continuing her education through the LifeWays Ontario Professional Development Program. Diana is an active, outdoorsy person who loves water skiing, paddleboarding, and hiking. She is deeply passionate about education, individuality, temperaments, and karma.",
-          es: "Diana creció en San José y ha trabajado en educación inicial desde 2012. Comenzó su camino Waldorf como asistente de Kindergarten en la Guanacaste Waldorf School, y en 2021 se convirtió en maestra principal de Pre-K en Pacific Waldorf School. En 2022 completó ambas partes del programa Foundations in Anthroposophy del Rudolf Steiner College Canada, y actualmente continúa su formación a través del programa de Desarrollo Profesional de LifeWays Ontario. Diana es una persona activa y amante de la vida al aire libre; disfruta del esquí acuático, el paddleboard y las caminatas. Siente una profunda pasión por la educación, la individualidad, los temperamentos y el karma.",
-        },
-      },
-      {
         name: "Robyn Mundrick",
         image: "/images/faculty/robyn.jpg",
         position: { en: "Kindergarten Teacher", es: "Maestra de Kindergarten" },
         bio: {
           en: "Ms. Robyn grew up in the rolling hills of Pennsylvania on the East coast of the US. After high school she traveled all around the United States settling on the West coast in Eugene, Oregon. There she raised her son and was introduced to Waldorf Education. She attended the Waldorf Teacher Education Eugene, igniting a love of Anthroposophy and was introduced to surfing on the Oregon coast. After graduating in 2007 she began working in the Early Childhood Program at the Eugene Waldorf School. Over the years at EWS she was an assistant, co-teacher, lead kindergarten and preschool teacher. She helped redesign the aftercare program, reopen the preschool, lead a summer program, facilitate faculty meetings, and was a member of the College of teachers, among other activities. She began hearing a call to Costa Rica and in 2021 she followed her heart and began her adventure at PWS. This will be her 5th year teaching in the Guanacaste Kindergarten. In her free time she enjoys surfing, crafting, yoga, her kitties and relaxing in the hammock.",
           es: "Ms. Robyn creció en las colinas ondulantes de Pennsylvania, en la costa este de los Estados Unidos. Después de terminar la secundaria, viajó por todo el país y finalmente se estableció en la costa oeste, en Eugene, Oregón. Allí crió a su hijo y fue donde conoció la Educación Waldorf. Asistió a la formación para maestros Waldorf en Eugene, lo cual encendió en ella un amor por la Antroposofía y fue también donde se inició en el surf en la costa de Oregón. Después de graduarse en 2007, comenzó a trabajar en el programa de Educación Inicial en la Eugene Waldorf School. A lo largo de los años en EWS fue asistente, co-maestra, maestra principal de kindergarten y preescolar. Ayudó a rediseñar el programa de aftercare, reabrir el preescolar, lideró un programa de verano, facilitó reuniones de maestros y fue miembro del College of Teachers, entre otras actividades. En 2021, sintió un llamado hacia Costa Rica, siguió su corazón y comenzó su aventura en PWS. Este será su quinto año enseñando en el Kindergarten de Guanacaste. En su tiempo libre, disfruta surfear, hacer manualidades, practicar yoga, pasar tiempo con sus gatitos y relajarse en la hamaca.",
-        },
-      },
-      {
-        name: "Arielle Thomas",
-        image: "/images/faculty/arielle.jpg",
-        position: { en: "Kindergarten Assistant", es: "Asistente de Kindergarten" },
-        bio: {
-          en: "Ms. Arielle joined our community for the 2024/2025 school year when she was the Grade 1 and 2 assistant and English teacher. Arielle embarked on her Waldorf education journey from a young age attending a Waldorf inspired school. She is currently enrolled in Waldorf Teacher training in Colombia. She has served as an assistant across various grades in Waldorf Schools and taught Spanish and music. Arielle is passionate about music, storytelling, and the English language, and finds immense joy in connecting with students and fostering classroom community.",
-          es: "Arielle comenzó su viaje con la educación Waldorf en sus primeros años, atesorando recuerdos de explorar la naturaleza y participar en actividades prácticas. Ha sido ayudante en varios grados y ha enseñado español y música. Apasionada por la música, la narración y la lengua inglesa, Arielle encuentra una inmensa alegría en conectar con los estudiantes y construir una comunidad dentro del aula. Estamos entusiasmados de darle la bienvenida a nuestra comunidad y escuela. Sus conocimientos y habilidades nos ayudarán a enriquecer la experiencia educativa de nuestros alumnos.",
         },
       },
       {
@@ -155,18 +137,6 @@ export default function TeamPage() {
         },
       },
       {
-        name: "Dennis Drennan",
-        image: "/images/faculty/dennis.jpg",
-        position: {
-          en: "Main Teacher Grades 1/2 and English Teacher Grades 3/4",
-          es: "Maestro Principal de 1ero y 2do grado y Maestro de Inglés de 3ero y 4to grado",
-        },
-        bio: {
-          en: "Dennis recently joined the school from Seacoast Waldorf School in Maine, where he graduated his 8th grade class in June 2025. Dennis earned his Waldorf teaching degree from Antioch University in 2005. Along with being a Waldorf teacher for the past 18 years, he has also had experience teaching environmental education and special education in both public and private settings. He has a passion for teaching history and the arts and seeks to give kids hands-on experiences both in the classroom and out in the community. When Dennis is not teaching, he enjoys traveling, kayaking, skiing, and spending time with his wife Wendy and their two children, Alphea and Peder, who also attend the school. Along with teaching, he has spent much of his free time fixing up an old house where they live and building a cabin near Acadia National Park in Maine.",
-          es: "Dennis se unió recientemente a la escuela desde Seacoast Waldorf School en Maine, donde graduó a su clase de 8.º grado en junio de 2025. Obtuvo su título en enseñanza Waldorf en la Universidad de Antioch en 2005. Además de ser maestro Waldorf durante los últimos 18 años, también ha tenido experiencia enseñando educación ambiental y educación especial en entornos públicos y privados. Tiene una gran pasión por la enseñanza de la historia y las artes, y busca ofrecer a los estudiantes experiencias prácticas tanto en el aula como en la comunidad. Cuando no está enseñando, a Dennis le gusta viajar, hacer kayak, esquiar y pasar tiempo con su esposa Wendy y sus dos hijos, Alphea y Peder, quienes también asisten a la escuela. Además de enseñar, dedica gran parte de su tiempo libre a remodelar una casa antigua donde vive y a construir una cabaña cerca del Parque Nacional Acadia en Maine.",
-        },
-      },
-      {
         name: "César Bravo Frutos",
         image: "/images/faculty/cesar.jpg",
         position: {
@@ -176,18 +146,6 @@ export default function TeamPage() {
         bio: {
           en: "César is originally from Argentina and has lived in Costa Rica for the past 12 years. His Waldorf journey began thanks to his eldest daughter, Olivia, which led him to volunteer at Guanacaste Waldorf School, first supporting maintenance and later teaching Movement and Physical Education. After the school's closure in 2020, César and a group of colleagues founded Pacific Waldorf School in 2021. Since then, he has had the privilege of accompanying the same group of students, and this year he continues to guide them as their Fifth Grade teacher. He is currently completing his Waldorf teacher training in Mexico. His purpose as an educator is to support children in becoming creative, thoughtful, and responsible individuals who can make a positive contribution to society. César feels honored and grateful to continue walking alongside his students and to witness their growth as unique and valuable human beings.",
           es: "César es originario de Argentina y ha vivido en Costa Rica durante los últimos 12 años. Su camino en la educación Waldorf comenzó gracias a su hija mayor, Olivia, lo que lo llevó a ofrecerse como voluntario en la Guanacaste Waldorf School, primero en mantenimiento y luego como maestro de Movimiento y Educación Física. Tras el cierre de la escuela en 2020, César y un grupo de colegas fundaron la Pacific Waldorf School en 2021. Desde entonces, ha tenido el privilegio de acompañar al mismo grupo de estudiantes, y este año continúa guiándolos como su maestro de Quinto Grado. Actualmente está finalizando su formación como maestro Waldorf en México. Su propósito como educador es ayudar a los niños a crecer como seres creativos, reflexivos y responsables, capaces de aportar positivamente a la sociedad. César se siente honrado y agradecido de caminar junto a sus estudiantes y ser testigo de su desarrollo como seres humanos únicos y valiosos.",
-        },
-      },
-      {
-        name: "Todd Crowe",
-        image: "/images/faculty/todd.jpg",
-        position: {
-          en: "Main Teacher Grade 6/7, English Teacher Grades 5/6/7, Movement and Woodworking",
-          es: "Maestro Principal de 6to y 7mo grado, Maestro de Inglés de 5to, 6to y 7mo grado, Movimiento y Carpintería",
-        },
-        bio: {
-          en: "Todd recently joined the school from Asheville, North Carolina where he has been a founding faculty member of the Asheville Waldorf School the past 13 years. Todd recently took a year off from teaching and has been building and remodeling houses. Todd enjoys spending time with his wife Heidi and daughters, Aziza (9) and Nehara (5). In his spare time, Todd likes to play ukulele, sing, mountain bike, box, play board games and surf when he can. Todd looks forward to sharing his love and understanding of Waldorf education with his students and the surrounding community.",
-          es: "Todd se unió recientemente a la escuela desde Asheville, Carolina del Norte, donde fue miembro fundador de la Asheville Waldorf School durante los últimos 13 años. Recientemente tomó un año sabático de la enseñanza y se ha dedicado a construir y remodelar casas. Todd disfruta pasar tiempo con su esposa Heidi y sus hijas Aziza (9) y Nehara (5). En su tiempo libre, le gusta tocar el ukelele, cantar, practicar ciclismo de montaña, boxeo, jugar juegos de mesa y surfear cuando puede. Todd espera compartir su amor y comprensión de la educación Waldorf con sus estudiantes y la comunidad.",
         },
       },
       {
@@ -213,24 +171,6 @@ export default function TeamPage() {
       },
     ],
     specialty: [
-      {
-        name: "Ashley De Regil",
-        image: "/images/faculty/ashley.jpg",
-        position: { en: "Specialty Teacher", es: "Maestra Especializada" },
-        bio: {
-          en: "Ashley has a degree in Psychology and Social Work. She has done training in Waldorf Early Childhood Education and trained in Simplicity Parenting, helping families to bring Waldorf inspired rhythms and methods into the home and family life. Ashley is passionate about working with children, sustainability, and community, which is why Waldorf is close to her heart. She has run Waldorf inspired educational projects in different countries and holds regular Simplicity Parenting groups. Ashley has lived in Mexico, Canada, Costa Rica and Israel, but has chosen to raise her family here in Costa Rica, where she also grew up as a child. She is mother to 3 children who all attend our school.",
-          es: "Ashley es licenciada en Psicología y Trabajo Social. Ha recibido formación en Educación Infantil Waldorf y en Simplicity Parenting, ayudando a las familias a incorporar los ritmos y métodos inspirados en Waldorf en el hogar y la vida familiar. A Ashley le apasiona trabajar con niños, la sostenibilidad y la comunidad, por lo que Waldorf le toca el corazón. Ha dirigido proyectos educativos inspirados en Waldorf en diferentes países y organiza grupos de Simplicity Parenting. Ashley ha vivido en México, Canadá, Costa Rica e Israel, pero ha decidido criar a su familia aquí en Costa Rica, donde también creció de niña. Es madre de tres hijos que asisten a nuestra escuela.",
-        },
-      },
-      {
-        name: "Oscar Vega Castillo",
-        image: "/images/faculty/oscar.jpg",
-        position: { en: "Music teacher Grades 1-7", es: "Maestro de Música de 1ero a 7mo grado" },
-        bio: {
-          en: "Oscar Ricardo Vega Castillo graduated with a degree in Music Education from the National University of Costa Rica (UNA). Currently, his bachelor's degree project is active: a songbook of original music for elementary school anniversaries. He has 20 years of experience in music education from preschool to high school in public and private institutions. He specializes in singing and instrumental performance, as well as the formation and direction of musical ensembles. He has participated as a musician and director on folk music tours in Europe and Latin America. He has participated in the recording of several albums as an arranger, composer, singer, and saxophonist. He currently teaches specialized classes for instrumentalists and singing.",
-          es: "Oscar Ricardo Vega Castillo se graduó en Educación Musical en la Universidad Nacional de Costa Rica (UNA). Actualmente, su proyecto de licenciatura sigue activo: un cancionero de música original para aniversarios escolares de primaria. Cuenta con 20 años de experiencia en educación musical, desde preescolar hasta secundaria, en instituciones públicas y privadas. Se especializa en canto y ejecución instrumental, así como en la formación y dirección de ensambles musicales. Ha participado como músico y director en giras de música folclórica por Europa y América Latina. Además, ha colaborado en la grabación de varios álbumes como arreglista, compositor, cantante y saxofonista. Actualmente imparte clases especializadas para instrumentistas y canto.",
-        },
-      },
       {
         name: "Carrie Lawson",
         image: "/images/faculty/carrie.jpeg",
@@ -401,7 +341,7 @@ export default function TeamPage() {
                     alt={member.name}
                     width={400}
                     height={400}
-                    className={`w-full h-full object-cover hover:scale-105 transition-transform duration-300 ${["Carrie Lawson", "Oscar Vega Castillo"].includes(member.name) ? "object-top" : ""}`}
+                    className={`w-full h-full object-cover hover:scale-105 transition-transform duration-300 ${["Carrie Lawson"].includes(member.name) ? "object-top" : ""}`}
                   />
                 </div>
                 <div className="p-6">
