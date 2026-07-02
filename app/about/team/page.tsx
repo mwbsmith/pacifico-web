@@ -281,31 +281,6 @@ export default function TeamPage() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">{t("grades")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div
-              id="elvira"
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-            >
-              <div className="aspect-square overflow-hidden">
-                <Image
-                  src="/images/faculty/elvira.jpeg"
-                  alt="Elvira Espinosa Gil"
-                  width={400}
-                  height={400}
-                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-2">Elvira Espinosa Gil</h3>
-                <p className="text-blue-600 font-medium mb-4">
-                  {language === "en" ? "Main Teacher Grade 1" : "Maestra Principal de 1er Grado"}
-                </p>
-                <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">
-                  {language === "en"
-                    ? "Elvira is from Burgos in Spain. She holds a Bachelors degree in Early Childhood Education from Spain and worked at the MichäelSchool Steiner School Turnhout in Belgium for two years before moving to Costa Rica. Elvira joined the Pacifico Internacional faculty in August 2025, initially as a Grades Assistant before she took over as the Main Teacher for the combined Grade 1 and 2 class during the second semester. She has also completed a summer intensive Waldorf course through the Sunbridge Institute in New York.\n\nIn her free time Elvira enjoys exploring new places, food and people. She loves to read, surf and spend time with horses."
-                    : "Elvira es originaria de Burgos, España. Tiene una licenciatura en Educación Infantil de España y trabajó en la MichäelSchool Steiner School Turnhout en Bélgica durante dos años antes de mudarse a Costa Rica. Elvira se unió al equipo docente de Pacífico Internacional en agosto de 2025, inicialmente como Asistente de Grados antes de asumir como Maestra Principal de la clase combinada de 1er y 2do grado durante el segundo semestre. También completó un curso intensivo de verano de Waldorf a través del Sunbridge Institute en Nueva York.\n\nEn su tiempo libre, Elvira disfruta explorar nuevos lugares, comidas y conocer personas. Le encanta leer, surfear y pasar tiempo con caballos."}
-                </p>
-              </div>
-            </div>
             {facultyData.grades.map((member, index) => (
               <div
                 key={index}
