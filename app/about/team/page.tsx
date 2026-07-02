@@ -120,12 +120,30 @@ export default function TeamPage() {
         },
       },
       {
+        name: "Claudia Verónica Barrientos",
+        image: "/images/faculty/claudia.jpeg",
+        position: { en: "Kindergarten Main Teacher", es: "Maestra Principal de Kindergarten" },
+        bio: {
+          en: "Claudia grew up in El Salvador, where she worked for over two decades in film, photojournalism, and institutional communications. In 2014, following the birth of her son Inti, she discovered Waldorf education, a turning point that led her toward a new vocation. Driven by a desire to protect the purity of childhood in the face of a hyper-technological world, she decided to put down the camera lens and channel her storytelling skills into the art of supporting child development.\n\nIn 2018, she was a founding parent of the Casa Nuyulu Waldorf Initiative in El Salvador, the community where her children, Inti and Citlalli, grew up. Within this community, she took on multiple roles, including documenting school activities through photography and video, leading craft workshops, coordinating institutional communications, and facilitating a volunteer-based parenting group for mothers and babies. In the classroom, she served as a Nursery (Maternal) Teacher, holding the daily rhythm for the youngest children.\n\nCommitted to her own ongoing education, she completed her comprehensive Waldorf teacher training with the Centro Humanístico Micael (Colombia) and the Comunidad Turmalina (Peru), in addition to taking short courses on anthroposophical topics such as biodynamic agriculture and primary-level crafts.\n\nGuided by a commitment to her children's path and her own, she sought a school that would allow them to continue their Waldorf education—a sacred calling that brought her to Costa Rica to join Pacífico Internacional. In her free time, she enjoys volleyball, nature, the beach, hiking, and crafts; she is also dedicated to promoting a healthier, more harmonious lifestyle through organic food and reconnecting with her ancestral Indigenous roots.",
+          es: "Claudia creció en El Salvador, donde trabajó durante más de dos décadas en el cine, el fotoperiodismo y las comunicaciones institucionales. En 2014, tras el nacimiento de su hijo Inti, descubrió la educación Waldorf, un punto de inflexión que la llevó hacia una nueva vocación. Impulsada por el deseo de proteger la pureza de la infancia frente a un mundo hipertecnológico, decidió dejar la lente de la cámara y canalizar sus habilidades narrativas hacia el arte de acompañar el desarrollo infantil.\n\nEn 2018, fue madre fundadora de la Iniciativa Waldorf Casa Nuyulu en El Salvador, la comunidad donde crecieron sus hijos, Inti y Citlalli. Dentro de esta comunidad, asumió múltiples roles, incluyendo documentar las actividades escolares a través de la fotografía y el video, dirigir talleres de manualidades, coordinar las comunicaciones institucionales y facilitar un grupo de crianza voluntario para madres y bebés. En el aula, se desempeñó como Maestra de Maternal, sosteniendo el ritmo diario para los más pequeños.\n\nComprometida con su propia formación continua, completó su formación integral como maestra Waldorf con el Centro Humanístico Micael (Colombia) y la Comunidad Turmalina (Perú), además de tomar cursos cortos sobre temas antroposóficos como la agricultura biodinámica y las manualidades de nivel primario.\n\nGuiada por el compromiso con el camino de sus hijos y el suyo propio, buscó una escuela que les permitiera continuar su educación Waldorf, un llamado sagrado que la trajo a Costa Rica para unirse a Pacífico Internacional. En su tiempo libre disfruta del voleibol, la naturaleza, la playa, el senderismo y las manualidades; también se dedica a promover un estilo de vida más saludable y armonioso a través de la alimentación orgánica y la reconexión con sus raíces indígenas ancestrales.",
+        },
+      },
+      {
         name: "Larissa Paola Grande",
         image: "/images/faculty/larissa.jpg",
         position: { en: "Kindergarten Assistant Teacher", es: "Maestra Asistente de Kindergarten" },
         bio: {
           en: "Larissa is originally from San José, Costa Rica, and has been living in Guanacaste for the past ten years. She has a background in dramatic arts and has also developed as a musician. Since 2017, she has been cultivating experience in the field of education, always from an approach grounded in respect, trust, and the capacity for self-regulation in children.",
           es: "Larissa es originaria de San José, Costa Rica, y desde hace diez años reside en Guanacaste. Cuenta con formación en artes dramáticas y también se ha desarrollado como música. Desde 2017, ha venido cultivando experiencia en el ámbito educativo, siempre desde un enfoque basado en el respeto, la confianza y la capacidad de autorregulación en los niños.",
+        },
+      },
+      {
+        name: "Hila Fux",
+        image: "/images/faculty/hila.jpeg",
+        position: { en: "Kindergarten Assistant Teacher", es: "Maestra Asistente de Kindergarten" },
+        bio: {
+          en: "Ms. Hila's journey in education has taken her across countries and cultures, always guided by a love for young children and a desire to understand their unique path of development. With more than 20 years of experience working with children in Israel and Canada, she brings warmth, curiosity, and a deep respect for childhood to her work.\n\nWhile beginning her Bachelor of Education studies, Hila discovered Anthroposophy as she searched for a deeper understanding of child development and the human being. That discovery became a lifelong path, leading her to complete her Foundation Studies in Anthroposophy in Jerusalem more than 20 years ago. After making Canada her home, she also completed her Early Childhood Education diploma, weaving together her academic studies with years of hands-on experience in early childhood education.\n\nHila joined Toronto Waldorf School in 2018 and over the next eight wonderful years, she found not only a place to teach but also a community in which to grow. As both a teacher and a parent, she experienced the richness of Waldorf education as her two children journeyed through the school alongside her.\n\nNow, Hila is looking forward to a new adventure as she joins Pacifico Internacional. She is excited to become part of the school community and to continue supporting young children as they learn, play, imagine, and grow. Hila loves spending time in nature, whether hiking forest trails or camping under the stars. She also enjoys handwork, finding peace and inspiration in creating with her hands, baking and reading.",
+          es: "El camino de Ms. Hila en la educación la ha llevado a través de países y culturas, siempre guiada por el amor a los niños pequeños y el deseo de comprender su singular camino de desarrollo. Con más de 20 años de experiencia trabajando con niños en Israel y Canadá, aporta calidez, curiosidad y un profundo respeto por la infancia a su labor.\n\nMientras comenzaba sus estudios de Licenciatura en Educación, Hila descubrió la Antroposofía en su búsqueda de una comprensión más profunda del desarrollo infantil y del ser humano. Ese descubrimiento se convirtió en un camino de vida, llevándola a completar sus Estudios de Fundamento en Antroposofía en Jerusalén hace más de 20 años. Tras establecer su hogar en Canadá, también completó su diploma en Educación Inicial, entrelazando sus estudios académicos con años de experiencia práctica en la primera infancia.\n\nHila se unió a la Toronto Waldorf School en 2018 y, durante los ocho maravillosos años siguientes, encontró no solo un lugar para enseñar, sino también una comunidad en la cual crecer. Como maestra y madre, vivió la riqueza de la educación Waldorf mientras sus dos hijos recorrían la escuela junto a ella.\n\nAhora, Hila espera con ilusión una nueva aventura al unirse a Pacífico Internacional. Le entusiasma formar parte de la comunidad escolar y continuar acompañando a los niños pequeños mientras aprenden, juegan, imaginan y crecen. A Hila le encanta pasar tiempo en la naturaleza, ya sea caminando por senderos del bosque o acampando bajo las estrellas. También disfruta del trabajo manual, encontrando paz e inspiración al crear con sus manos, hornear y leer.",
         },
       },
     ],
@@ -175,6 +193,18 @@ export default function TeamPage() {
           es: "Elvira es originaria de Burgos, España. Tiene una licenciatura en Educación Infantil de España y trabajó en la MichäelSchool Steiner School Turnhout en Bélgica durante dos años antes de mudarse a Costa Rica. Elvira se unió al equipo docente de Pacífico Internacional en agosto de 2025, inicialmente como Asistente de Grados antes de asumir como Maestra Principal de la clase combinada de 1er y 2do grado durante el segundo semestre. También completó un curso intensivo de verano de Waldorf a través del Sunbridge Institute en Nueva York.\n\nEn su tiempo libre, Elvira disfruta explorar nuevos lugares, comidas y conocer personas. Le encanta leer, surfear y pasar tiempo con caballos.",
         },
       },
+      {
+        name: "Katy Thompson",
+        image: "/images/faculty/katy.jpeg",
+        position: {
+          en: "Main Teacher Grades 2/3 and English Teacher Grade 1",
+          es: "Maestra Principal de 2do/3er Grado y Maestra de Inglés de 1er Grado",
+        },
+        bio: {
+          en: "Katy approaches teaching as both an art and a relationship. Katy holds a MEd in Elementary Education from the University of Fairbanks and has completed a summer intensive Waldorf course through the Sunbridge Institute in New York. With over seven years of classroom experience, she is devoted to creating a warm, rhythmic classroom environment where children feel a sense of belonging, wonder, and joy in learning. She brings a deep respect for each child's developmental journey, weaving storytelling, creativity, movement, and connection to nature into her teaching.\n\nHer experience as a 4th grade teacher in a diverse classroom, along with her work in Montessori and community education, has shaped her holistic approach—one that honors imagination, nurtures social-emotional growth, and supports each learner with care and intention. Katy values the balance of structure and flexibility, meeting students where they are while gently guiding them forward.\n\nHaving been raised between the islands of Hawai'i and the landscapes of Alaska, Katy carries a strong connection to place, culture, and the natural world. She is inspired by the spirit of global education and is grateful for the opportunity to contribute to the learning community at Pacifico Internacional, where she hopes to cultivate curiosity, creativity, and a deep sense of connection in her students.",
+          es: "Katy concibe la enseñanza como un arte y una relación. Posee una Maestría en Educación Primaria de la Universidad de Fairbanks y ha completado un curso intensivo de verano de Waldorf a través del Sunbridge Institute en Nueva York. Con más de siete años de experiencia en el aula, se dedica a crear un ambiente cálido y rítmico donde los niños sienten pertenencia, asombro y alegría por aprender. Aporta un profundo respeto por el camino de desarrollo de cada niño, entretejiendo la narración, la creatividad, el movimiento y la conexión con la naturaleza en su enseñanza.\n\nSu experiencia como maestra de cuarto grado en un aula diversa, junto con su trabajo en educación Montessori y comunitaria, ha moldeado su enfoque holístico, uno que honra la imaginación, nutre el crecimiento socioemocional y apoya a cada estudiante con cuidado e intención. Katy valora el equilibrio entre estructura y flexibilidad, encontrando a los estudiantes donde están y guiándolos suavemente hacia adelante.\n\nHabiéndose criado entre las islas de Hawái y los paisajes de Alaska, Katy lleva consigo una fuerte conexión con el lugar, la cultura y el mundo natural. Se inspira en el espíritu de la educación global y está agradecida por la oportunidad de contribuir a la comunidad de aprendizaje de Pacífico Internacional, donde espera cultivar la curiosidad, la creatividad y un profundo sentido de conexión en sus estudiantes.",
+        },
+      },
     ],
     specialty: [
       {
@@ -186,7 +216,15 @@ export default function TeamPage() {
           es: "Carrie comenzó a enseñar manualidades Waldorf en 2018 en la Escuela Waldorf de Guanacaste y cuenta con una certificación de Waldorf Handwork Educators. A través del trabajo con niños, ha comprendido el papel fundamental que las manualidades juegan en el desarrollo cerebral de cada niño. Ha podido observar, tanto en sus estudiantes como en sus propios hijos, cuán beneficiosas son estas técnicas para el desarrollo de habilidades matemáticas, escritura y resolución de problemas. En su tiempo libre disfruta viajar, aprender sobre textiles de todo el mundo y crear regalos y prendas hechas a mano.",
         },
       },
-
+      {
+        name: "Jesua Moises Esquivel Rodriguez",
+        image: "/images/faculty/jesua.jpg",
+        position: { en: "Specialty Teacher - Music", es: "Maestro Especializado - Música" },
+        bio: {
+          en: "Professor Jesua Esquivel is from Turrialba, Costa Rica, a region known for its rich indigenous, cultural, artistic, and musical heritage.\n\nHe earned an honor degree in Music Education from the University of Costa Rica and has been teaching in different musical and artistic contexts since 2020. His experience in both formal and independent education has allowed him to improve teaching methods tailored to a variety of settings, developing a comprehensive approach to music education that inspires students at all levels.\n\nJesua specializes in guitar playing and has developed social action projects focused on teaching guitar to children and teenagers in different parts of the country. He has built a solid career based on a deep passion for teaching and artistic excellence.\n\nCurrently the guitarist for the political rock band SEKA, he has represented the country at various music festivals and cultural summits around the world as both a guitarist and an educator.\n\n“La música es libertad y la enseñanza de la música transmite las herramientas para ser libres” — J. Esquivel (2026)",
+          es: "El profesor Jesua Esquivel es de Turrialba, Costa Rica, una región conocida por su rica herencia indígena, cultural, artística y musical.\n\nObtuvo un título con honores en Educación Musical de la Universidad de Costa Rica y ha enseñado en diferentes contextos musicales y artísticos desde 2020. Su experiencia en la educación tanto formal como independiente le ha permitido perfeccionar métodos de enseñanza adaptados a una variedad de entornos, desarrollando un enfoque integral de la educación musical que inspira a estudiantes de todos los niveles.\n\nJesua se especializa en la ejecución de la guitarra y ha desarrollado proyectos de acción social enfocados en enseñar guitarra a niños y adolescentes en diferentes partes del país. Ha construido una carrera sólida basada en una profunda pasión por la enseñanza y la excelencia artística.\n\nActualmente guitarrista de la banda de rock político SEKA, ha representado al país en diversos festivales musicales y cumbres culturales alrededor del mundo, tanto como guitarrista como educador.\n\n“La música es libertad y la enseñanza de la música transmite las herramientas para ser libres” — J. Esquivel (2026)",
+        },
+      },
     ],
   }
 
@@ -241,7 +279,7 @@ export default function TeamPage() {
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-800 mb-2">{member.name}</h3>
                   <p className="text-blue-600 font-medium mb-4">{member.position[language]}</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">{member.bio[language]}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">{member.bio[language]}</p>
                 </div>
               </div>
             ))}
@@ -270,7 +308,7 @@ export default function TeamPage() {
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-800 mb-2">{member.name}</h3>
                   <p className="text-blue-600 font-medium mb-4">{member.position[language]}</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">{member.bio[language]}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">{member.bio[language]}</p>
                 </div>
               </div>
             ))}
@@ -299,7 +337,7 @@ export default function TeamPage() {
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-800 mb-2">{member.name}</h3>
                   <p className="text-blue-600 font-medium mb-4">{member.position[language]}</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">{member.bio[language]}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">{member.bio[language]}</p>
                 </div>
               </div>
             ))}
@@ -328,7 +366,7 @@ export default function TeamPage() {
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-800 mb-2">{member.name}</h3>
                   <p className="text-blue-600 font-medium mb-4">{member.position[language]}</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">{member.bio[language]}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">{member.bio[language]}</p>
                 </div>
               </div>
             ))}
