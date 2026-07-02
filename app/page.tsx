@@ -65,9 +65,6 @@ const translations = {
       "At our Waldorf inspired school in Costa Rica, we cultivate imagination, creativity, and love for learning in a natural and nurturing environment.",
     scheduleVisit: "Schedule a Visit or Call",
 
-    // Morning Garden Section
-    morningGardenAlert: "The next session of Morning Garden is about to start! Enroll before April 17, 2026.",
-
     // About Section
     aboutTitle: "About Our School",
     aboutDescription:
@@ -201,10 +198,6 @@ const translations = {
     heroDescription:
       "En nuestra escuela inspirada en Waldorf en Costa Rica, cultivamos la imaginación, creatividad y amor por el aprendizaje en un ambiente natural y nutritivo.",
     scheduleVisit: "Programar una Visita o Llamar",
-
-    // Morning Garden Section
-    morningGardenAlert:
-      "¡La próxima sesión de Morning Garden está por comenzar! Inscríbete antes del 17 de abril de 2026.",
 
     // About Section
     aboutTitle: "Acerca de Nuestra Escuela",
@@ -1110,28 +1103,6 @@ export default function PacificoHomepage() {
         </div>
         <div className="fixed top-32 right-4 md:right-10 text-green-400/70 opacity-60 z-50">
           <div className="text-2xl md:text-3xl animate-pulse">🌿</div>
-        </div>
-      </section>
-
-      {/* Morning Garden Section */}
-      <section className="py-12 bg-gradient-to-r from-rose-50 via-amber-50 to-yellow-50 relative overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-6 relative">
-            <div className="inline-block relative">
-              <span className="absolute -top-3 -left-3 text-2xl animate-bounce">✨</span>
-              <span className="absolute -top-2 -right-3 bg-rose-500 text-white text-xs font-bold px-2 py-1 rounded-full animate-pulse">NEW</span>
-              <p className="text-xl md:text-2xl font-bold bg-gradient-to-r from-rose-600 via-amber-600 to-orange-500 bg-clip-text text-transparent px-8">{t("morningGardenAlert")}</p>
-            </div>
-          </div>
-          <div className="flex justify-center">
-            <Image
-              src={language === "en" ? "/images/morning-garden-session-2-en.jpg" : "/images/morning-garden-session-2-es.jpg"}
-              alt="Morning Garden at Pacífico Internacional"
-              width={600}
-              height={776}
-              className="rounded-lg shadow-lg max-w-full h-auto"
-            />
-          </div>
         </div>
       </section>
 
