@@ -110,16 +110,19 @@ export default function TeamPage() {
       {
         name: "Robyn Mundrick",
         image: "/images/faculty/robyn.jpg",
-        position: { en: "Kindergarten Teacher", es: "Maestra de Kindergarten" },
+        position: {
+          en: "Kindergarten Main Teacher and Early Childhood Pedagogical Chair",
+          es: "Maestra Principal de Kindergarten y Coordinadora Pedagógica de Primera Infancia",
+        },
         bio: {
           en: "Ms. Robyn grew up in the rolling hills of Pennsylvania on the East coast of the US. After high school she traveled all around the United States settling on the West coast in Eugene, Oregon. There she raised her son and was introduced to Waldorf Education. She attended the Waldorf Teacher Education Eugene, igniting a love of Anthroposophy and was introduced to surfing on the Oregon coast. After graduating in 2007 she began working in the Early Childhood Program at the Eugene Waldorf School. Over the years at EWS she was an assistant, co-teacher, lead kindergarten and preschool teacher. She helped redesign the aftercare program, reopen the preschool, lead a summer program, facilitate faculty meetings, and was a member of the College of teachers, among other activities. She began hearing a call to Costa Rica and in 2021 she followed her heart and began her adventure at PWS. This will be her 5th year teaching in the Guanacaste Kindergarten. In her free time she enjoys surfing, crafting, yoga, her kitties and relaxing in the hammock.",
           es: "Ms. Robyn creció en las colinas ondulantes de Pennsylvania, en la costa este de los Estados Unidos. Después de terminar la secundaria, viajó por todo el país y finalmente se estableció en la costa oeste, en Eugene, Oregón. Allí crió a su hijo y fue donde conoció la Educación Waldorf. Asistió a la formación para maestros Waldorf en Eugene, lo cual encendió en ella un amor por la Antroposofía y fue también donde se inició en el surf en la costa de Oregón. Después de graduarse en 2007, comenzó a trabajar en el programa de Educación Inicial en la Eugene Waldorf School. A lo largo de los años en EWS fue asistente, co-maestra, maestra principal de kindergarten y preescolar. Ayudó a rediseñar el programa de aftercare, reabrir el preescolar, lideró un programa de verano, facilitó reuniones de maestros y fue miembro del College of Teachers, entre otras actividades. En 2021, sintió un llamado hacia Costa Rica, siguió su corazón y comenzó su aventura en PWS. Este será su quinto año enseñando en el Kindergarten de Guanacaste. En su tiempo libre, disfruta surfear, hacer manualidades, practicar yoga, pasar tiempo con sus gatitos y relajarse en la hamaca.",
         },
       },
       {
-        name: "Larissa",
+        name: "Larissa Paola Grande",
         image: "/images/faculty/larissa.jpg",
-        position: { en: "Kindergarten Assistant", es: "Asistente de Kindergarten" },
+        position: { en: "Kindergarten Assistant Teacher", es: "Maestra Asistente de Kindergarten" },
         bio: {
           en: "Larissa is originally from San José, Costa Rica, and has been living in Guanacaste for the past ten years. She has a background in dramatic arts and has also developed as a musician. Since 2017, she has been cultivating experience in the field of education, always from an approach grounded in respect, trust, and the capacity for self-regulation in children.",
           es: "Larissa es originaria de San José, Costa Rica, y desde hace diez años reside en Guanacaste. Cuenta con formación en artes dramáticas y también se ha desarrollado como música. Desde 2017, ha venido cultivando experiencia en el ámbito educativo, siempre desde un enfoque basado en el respeto, la confianza y la capacidad de autorregulación en los niños.",
@@ -130,7 +133,10 @@ export default function TeamPage() {
       {
         name: "Karol Abarca Martínez",
         image: "/images/faculty/karol.jpg",
-        position: { en: "Grade Teacher", es: "Maestra de Grado" },
+        position: {
+          en: "Main Teacher Grade 4/5 and Spanish Teacher Grade 2/3",
+          es: "Maestra Principal de 4to/5to Grado y Maestra de Español de 2do/3er Grado",
+        },
         bio: {
           en: "Ms. Karol is from the Caribbean coast of Costa Rica, but has lived in Guanacaste for close to 20 years. She obtained her Waldorf Teacher training from Centro de Desarrollo Antroposófico in Cuernavaca, Mexico. She worked as a lead teacher at the Guanecaste Waldorf School for 7 years, where she also was the Director for one year. She was the co-founder and co-Director of the Pacific Waldorf School in 2021, where she also has been a Lead teacher for 4 years. In 2025 she received her Diploma in Curative Pedagogy and Social Therapy from the GITA Anthroposophical Centre in Cuernavaca, Mexico. Karol is the mother of two amazing girls, Olivia and Afrika. In her spare time she enjoys reading, painting, listening to music and spending time in the forest or at the beach. Ms. Karol also loves rescuing and helping animals in need.",
           es: "Ms. Karol es originaria de la costa Caribe de Costa Rica, pero ha vivido en Guanacaste por casi 20 años. Obtuvo su formación como maestra Waldorf en el Centro de Desarrollo Antroposófico en Cuernavaca, México. Trabajó como maestra principal en la Escuela Waldorf de Guanacaste durante 7 años, donde también fue directora durante un año. Fue cofundadora y codirectora de Pacific Waldorf School en 2021, donde también ha sido maestra principal durante 4 años. En 2025 obtuvo su diploma en Pedagogía Curativa y Terapia Social del Centro Antroposófico GITA en Cuernavaca, México. Karol es madre de dos niñas maravillosas, Olivia y Afrika. En su tiempo libre disfruta leer, pintar, escuchar música y pasar tiempo en el bosque o en la playa. A Karol también le encanta rescatar y ayudar a animales necesitados.",
@@ -140,8 +146,8 @@ export default function TeamPage() {
         name: "César Bravo Frutos",
         image: "/images/faculty/cesar.jpg",
         position: {
-          en: "Main Teacher Grade 5, Spanish teacher Grades 5/6/7",
-          es: "Maestro Principal de 5to Grado, Maestro de Español de 5to/6to/7mo grado",
+          en: "Main Teacher Grade 6, Spanish Teacher Middle School",
+          es: "Maestro Principal de 6to Grado, Maestro de Español de Secundaria",
         },
         bio: {
           en: "César is originally from Argentina and has lived in Costa Rica for the past 12 years. His Waldorf journey began thanks to his eldest daughter, Olivia, which led him to volunteer at Guanacaste Waldorf School, first supporting maintenance and later teaching Movement and Physical Education. After the school's closure in 2020, César and a group of colleagues founded Pacific Waldorf School in 2021. Since then, he has had the privilege of accompanying the same group of students, and this year he continues to guide them as their Fifth Grade teacher. He is currently completing his Waldorf teacher training in Mexico. His purpose as an educator is to support children in becoming creative, thoughtful, and responsible individuals who can make a positive contribution to society. César feels honored and grateful to continue walking alongside his students and to witness their growth as unique and valuable human beings.",
@@ -152,8 +158,8 @@ export default function TeamPage() {
         name: "Angelique Metta (Ani)",
         image: "/images/faculty/ani.jpg",
         position: {
-          en: "Main lesson and Math Teacher for Grades 5,6 and 7",
-          es: "Maestra de Lección Principal y Maestra de Matemáticas de 5to, 6to y 7mo grado",
+          en: "Main Teacher Grade 7/8, Math Teacher Middle School, English Teacher Grade 4/5",
+          es: "Maestra Principal de 7mo/8vo Grado, Maestra de Matemáticas de Secundaria, Maestra de Inglés de 4to/5to Grado",
         },
         bio: {
           en: "Ani grew up in Ohio and began her professional journey studying marketing before serving as a Peace Corps volunteer in Paraguay. She went on to spend 7 years working in community economic development across Latin America. After returning to the United States, Ani earned her Waldorf Teaching Certificate and MEd in Waldorf Education from Antioch University. She then spent five years as a grades teacher at the Honolulu Waldorf School, guiding students through a rich and imaginative curriculum. Ani enjoys reading, writing, hiking, camping, crafting, and long days at the beach. She shares her life with her beloved dog Luka and two cats, and cherishes time spent in good company with friends. Ani brings a deep love for storytelling, culture, and the natural world into her classroom and is excited to be part of this learning community.",
