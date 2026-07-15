@@ -892,15 +892,8 @@ export default function PacificoHomepage() {
         <nav className="fixed top-0 left-0 right-0 z-30 bg-black/20 backdrop-blur-sm transition-all duration-300">
           <div className="container mx-auto px-4 py-6 md:py-8">
             <div className="flex items-center justify-between">
-              {/* Left - Work With Us Link */}
-              <div className="hidden md:flex items-center">
-                <Link href="/careers" className="text-white hover:text-yellow-200 transition-colors drop-shadow-md flex items-center gap-1">
-                  {language === "en" ? "Work With Us!" : "¡Trabaja con nosotros!"}
-                  <span className="bg-yellow-400 text-teal-800 text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase animate-pulse">
-                    {language === "en" ? "New" : "Nuevo"}
-                  </span>
-                </Link>
-              </div>
+              {/* Left spacer to keep logo centered */}
+              <div className="hidden md:flex items-center w-8"></div>
               <div className="md:hidden w-8"></div>
 
               {/* Header Logo - appears when scrolled */}
@@ -1011,16 +1004,6 @@ export default function PacificoHomepage() {
                           </Link>
                         </div>
 
-                        <Link
-                          href="/careers"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2 flex items-center gap-2"
-                        >
-                          {language === "en" ? "Work With Us!" : "¡Trabaja con nosotros!"}
-                          <span className="bg-yellow-400 text-teal-800 text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase">
-                            {language === "en" ? "New" : "Nuevo"}
-                          </span>
-                        </Link>
                       </div>
 
                       <div className="border-t border-gray-200 pt-4">
@@ -2077,39 +2060,6 @@ export default function PacificoHomepage() {
                     : "Suscribirse"}
               </Button>
             </form>
-          </div>
-        </div>
-      </section>
-
-      {/* Work With Us Section */}
-      <section id="careers" className="py-16 bg-gradient-to-r from-amber-50 to-yellow-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">
-              {language === "en" ? "Work With Us!" : "¡Trabaja con nosotros!"}
-            </h2>
-            <p className="text-xl text-gray-700 mb-4">
-              {language === "en"
-                ? "We are growing and searching for Lead Teachers in"
-                : "Estamos creciendo y buscando Maestros Líderes en"}
-            </p>
-            <ul className="text-lg text-gray-600 space-y-2">
-              <li className="flex items-center justify-center gap-2">
-                <span className="text-amber-600">•</span>
-                {language === "en" ? "Early Childhood" : "Educación Temprana"}
-              </li>
-              <li className="flex items-center justify-center gap-2">
-                <span className="text-amber-600">•</span>
-                {language === "en" ? "Lower Grades" : "Grados Inferiores"}
-              </li>
-
-            </ul>
-            <p className="mt-6 text-gray-600">
-              {language === "en" ? "Interested? " : "¿Interesado? "}
-              <Link href="/careers" className="text-teal-600 hover:text-teal-700 font-medium underline">
-                {language === "en" ? "Learn more." : "Más información."}
-              </Link>
-            </p>
           </div>
         </div>
       </section>
