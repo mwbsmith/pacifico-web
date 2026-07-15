@@ -222,7 +222,10 @@ export default function TeamPage() {
       {
         name: "Carrie Lawson",
         image: "/images/faculty/carrie.jpeg",
-        position: { en: "Handwork teacher Grades 1-7", es: "Maestra de Manualidades de 1ero a 7mo grado" },
+        position: {
+          en: "Specialty Teacher - Handwork Grades 1-8",
+          es: "Maestra Especializada - Manualidades de 1ero a 8vo grado",
+        },
         bio: {
           en: "Carrie started teaching Waldorf handwork in 2018 at the Guanacaste Waldorf School and has a certification from Waldorf Handwork Educators. Through working with children, she has come to an understanding of the vital role that handwork plays in the brain development of each child. She has seen in her students and in her own children how beneficial handwork techniques are in developing mathematical, handwriting and problem solving skills. In her spare time she enjoys traveling and learning about textiles from around the world and creating handmade gifts and clothing.",
           es: "Carrie comenzó a enseñar manualidades Waldorf en 2018 en la Escuela Waldorf de Guanacaste y cuenta con una certificación de Waldorf Handwork Educators. A través del trabajo con niños, ha comprendido el papel fundamental que las manualidades juegan en el desarrollo cerebral de cada niño. Ha podido observar, tanto en sus estudiantes como en sus propios hijos, cuán beneficiosas son estas técnicas para el desarrollo de habilidades matemáticas, escritura y resolución de problemas. En su tiempo libre disfruta viajar, aprender sobre textiles de todo el mundo y crear regalos y prendas hechas a mano.",
