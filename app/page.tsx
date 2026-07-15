@@ -1150,11 +1150,13 @@ export default function PacificoHomepage() {
             </div>
 
             <div className="space-y-8">
-              {/* First Row: Robyn, Larissa */}
+              {/* First Row: Robyn, Claudia, Larissa, Hila */}
               <div className="flex justify-center gap-6 flex-wrap">
                 {[
                   { name: "Robyn", image: "/images/faculty/robyn.jpg" },
+                  { name: "Claudia", image: "/images/faculty/claudia.jpeg" },
                   { name: "Larissa", image: "/images/faculty/larissa.jpg" },
+                  { name: "Hila", image: "/images/faculty/hila.jpeg" },
                 ].map((faculty, index) => (
                   <Link
                     key={index}
@@ -1165,7 +1167,7 @@ export default function PacificoHomepage() {
                       <img
                         src={faculty.image || "/placeholder.svg"}
                         alt={faculty.name}
-                        className={`w-full h-full object-cover ${faculty.name === "Robyn" ? "object-top" : ""}`}
+                        className={`w-full h-full object-cover ${faculty.name === "Robyn" || faculty.name === "Claudia" || faculty.name === "Hila" ? "object-top" : ""}`}
                       />
                     </div>
                     <p className="text-lg font-semibold text-gray-800">{faculty.name}</p>
@@ -1173,13 +1175,14 @@ export default function PacificoHomepage() {
                 ))}
               </div>
 
-              {/* Second Row: Elvira, Karol, Ani, Cesar */}
+              {/* Second Row: Elvira, Katy, Karol, César, Ani */}
               <div className="flex justify-center gap-6 flex-wrap">
                 {[
                   { name: "Elvira", image: "/images/faculty/elvira.jpeg" },
+                  { name: "Katy", image: "/images/faculty/katy.jpeg" },
                   { name: "Karol", image: "/images/faculty/karol.jpg" },
-                  { name: "Ani", image: "/images/faculty/ani.jpg", anchor: "angelique" },
                   { name: "César", image: "/images/faculty/cesar.jpg" },
+                  { name: "Ani", image: "/images/faculty/ani.jpg", anchor: "angelique" },
                 ].map((faculty, index) => (
                   <Link
                     key={index}
@@ -1190,7 +1193,7 @@ export default function PacificoHomepage() {
                       <img
                         src={faculty.image || "/placeholder.svg"}
                         alt={faculty.name}
-                        className={`w-full h-full object-cover ${faculty.name === "Elvira" ? "object-top" : ""}`}
+                        className={`w-full h-full object-cover ${faculty.name === "Elvira" || faculty.name === "Katy" ? "object-top" : ""}`}
                       />
                     </div>
                     <p className="text-lg font-semibold text-gray-800">{faculty.name}</p>
@@ -1198,10 +1201,14 @@ export default function PacificoHomepage() {
                 ))}
               </div>
 
-              {/* Third Row: Carrie */}
+              {/* Third Row: Carrie, Jesua, Tyler, Oliver, Amrita */}
               <div className="flex justify-center gap-6 flex-wrap">
                 {[
                   { name: "Carrie", image: "/images/faculty/carrie.jpeg" },
+                  { name: "Jesua", image: "/images/faculty/jesua.jpg" },
+                  { name: "Tyler", image: "/images/faculty/tyler.jpeg" },
+                  { name: "Oliver", image: "/images/faculty/ollie.png" },
+                  { name: "Amrita", image: "/images/faculty/amrita.jpeg" },
                 ].map((faculty, index) => (
                   <Link
                     key={index}
@@ -1212,7 +1219,7 @@ export default function PacificoHomepage() {
                       <img
                         src={faculty.image || "/placeholder.svg"}
                         alt={faculty.name}
-                        className={`w-full h-full ${faculty.name === "Carrie" ? "object-cover object-top" : "object-cover"}`}
+                        className={`w-full h-full object-cover ${faculty.name === "Carrie" || faculty.name === "Jesua" || faculty.name === "Oliver" || faculty.name === "Amrita" ? "object-top" : faculty.name === "Tyler" ? "object-[75%_25%]" : ""}`}
                       />
                     </div>
                     <p className="text-lg font-semibold text-gray-800">{faculty.name}</p>
