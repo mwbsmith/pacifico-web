@@ -24,8 +24,6 @@ const translations = {
     explore: "Explore",
     insights: "Insights",
     news: "News",
-    workWithUs: "Work With Us!",
-    new: "New",
     language: "Language / Idioma",
   },
   es: {
@@ -36,8 +34,6 @@ const translations = {
     explore: "Explorar",
     insights: "Perspectivas",
     news: "Noticias",
-    workWithUs: "¡Trabaja con nosotros!",
-    new: "Nuevo",
     language: "Idioma / Language",
   },
 }
@@ -84,18 +80,8 @@ export default function SharedHeader({
 
   return (
     <>
-      {/* Left side - Work With Us link (hidden on mobile) */}
-      <div className="hidden md:flex items-center space-x-6">
-        <Link
-          href="/careers"
-          className="text-white hover:text-yellow-200 transition-colors drop-shadow-md flex items-center gap-1"
-        >
-          {t("workWithUs")}
-          <span className="bg-yellow-400 text-teal-800 text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase animate-pulse">
-            {t("new")}
-          </span>
-        </Link>
-      </div>
+      {/* Left side spacer to keep logo centered */}
+      <div className="hidden md:flex items-center space-x-6 w-8"></div>
       <div className="md:hidden w-8"></div>
 
       {/* Header Logo - appears when scrolled (or always on non-homepage) */}
@@ -282,16 +268,6 @@ export default function SharedHeader({
                   )}
                 </div>
 
-                <Link
-                  href="/careers"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block w-full text-left text-lg text-gray-800 hover:text-teal-600 transition-colors py-2 flex items-center gap-2"
-                >
-                  {t("workWithUs")}
-                  <span className="bg-yellow-400 text-teal-800 text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase">
-                    {t("new")}
-                  </span>
-                </Link>
               </div>
 
               <div className="border-t border-gray-200 pt-4">
