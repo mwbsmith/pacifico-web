@@ -3,7 +3,7 @@
 import type React from "react"
 import SharedFooter from "@/components/shared-footer" // Import SharedFooter component
 import SharedHeader from "@/components/shared-header" // Import SharedHeader component
-import { getMetaTracking } from "@/lib/meta"
+import { getMetaTracking, getLeadSource } from "@/lib/meta"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -258,7 +258,7 @@ export default function AdmissionsLandingPage() {
         },
         body: JSON.stringify({
           ...formData,
-          source: "google_ads",
+          source: getLeadSource(),
           landing_path: window.location.pathname,
           utm_source: urlParams.get("utm_source") || "",
           utm_medium: urlParams.get("utm_medium") || "",
