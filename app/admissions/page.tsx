@@ -3,6 +3,7 @@
 import type React from "react"
 import SharedFooter from "@/components/shared-footer" // Import SharedFooter component
 import SharedHeader from "@/components/shared-header" // Import SharedHeader component
+import { getMetaTracking } from "@/lib/meta"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -245,7 +246,10 @@ export default function AdmissionsLandingPage() {
 
       // Get UTM parameters from URL
       const urlParams = new URLSearchParams(window.location.search)
-      
+
+      // Unique event id shared between the browser Pixel and server-side Conversions API for deduplication
+      const eventId = crypto.randomUUID()
+
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/admissions-inquiries`, {
         method: "POST",
         headers: {
@@ -262,14 +266,16 @@ export default function AdmissionsLandingPage() {
           utm_term: urlParams.get("utm_term") || "",
           utm_content: urlParams.get("utm_content") || "",
           recaptcha_token: recaptchaToken,
+          event_id: eventId,
+          ...getMetaTracking(),
         }),
       })
 
       const result = await response.json()
 
       if (result?.ok === true) {
-        // Redirect to thank-you page on success
-        router.push("/admissions/thank-you")
+        // Redirect to thank-you page on success, passing the event id for Pixel deduplication
+        router.push(`/admissions/thank-you?eid=${encodeURIComponent(result.event_id ?? eventId)}`)
       } else {
         throw new Error(result?.message || "Failed to submit")
       }
