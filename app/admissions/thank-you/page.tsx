@@ -15,7 +15,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
+import { useSearchParams } from "next/navigation"
 import SharedFooter from "@/components/shared-footer" // Import SharedFooter
 import SharedHeader from "@/components/shared-header" // Import SharedHeader
 
@@ -23,6 +24,7 @@ import SharedHeader from "@/components/shared-header" // Import SharedHeader
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void
+    fbq?: (...args: unknown[]) => void
   }
 }
 
@@ -93,9 +95,11 @@ const translations = {
   },
 }
 
-export default function AdmissionsThankYouPage() {
+function AdmissionsThankYouContent() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [language, setLanguage] = useState<Language>("en")
+  const searchParams = useSearchParams()
+  const eventId = searchParams.get("eid") ?? undefined
 
   const t = (key: keyof typeof translations.en) => translations[language][key]
 
@@ -112,6 +116,13 @@ export default function AdmissionsThankYouPage() {
       })
     }
   }, [])
+
+  // Fire Meta Pixel Lead event, passing the event id for deduplication with the Conversions API
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("track", "Lead", {}, eventId ? { eventID: eventId } : undefined)
+    }
+  }, [eventId])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-100 via-emerald-50 to-amber-50">
@@ -222,5 +233,13 @@ export default function AdmissionsThankYouPage() {
       {/* Footer */}
       <SharedFooter language={language} />
     </div>
+  )
+}
+
+export default function AdmissionsThankYouPage() {
+  return (
+    <Suspense fallback={null}>
+      <AdmissionsThankYouContent />
+    </Suspense>
   )
 }
