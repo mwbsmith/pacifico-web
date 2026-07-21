@@ -200,7 +200,7 @@ export default function AdmissionsLandingPage() {
         (window as any).grecaptcha?.enterprise &&
         (window as any).grecaptcha.enterprise.ready
       ) {
-        ;(window as any).grecaptcha.enterprise.ready(() => {
+        ; (window as any).grecaptcha.enterprise.ready(() => {
           setIsRecaptchaReady(true)
         })
       }
