@@ -15,14 +15,17 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
+import { useSearchParams } from "next/navigation"
 import SharedFooter from "@/components/shared-footer" // Import SharedFooter component
 import SharedHeader from "@/components/shared-header" // Import SharedHeader component
+import { trackMetaLead } from "@/lib/meta"
 
-// Declare gtag for TypeScript
+// Declare gtag and fbq for TypeScript
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void
+    fbq?: (...args: unknown[]) => void
   }
 }
 
@@ -93,9 +96,11 @@ const translations = {
   },
 }
 
-export default function InternationalFamiliesThankYouPage() {
+function InternationalFamiliesThankYouContent() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [language, setLanguage] = useState<Language>("en")
+  const searchParams = useSearchParams()
+  const eventId = searchParams.get("eid") ?? undefined
 
   const t = (key: keyof typeof translations.en) => translations[language][key]
 
@@ -112,6 +117,12 @@ export default function InternationalFamiliesThankYouPage() {
       })
     }
   }, [])
+
+  // Fire Meta Pixel Lead event, passing the event id for deduplication with the Conversions API.
+  // trackMetaLead waits for fbq to load so a direct load/refresh never drops the event.
+  useEffect(() => {
+    return trackMetaLead(eventId)
+  }, [eventId])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-100 via-emerald-50 to-amber-50">
@@ -222,5 +233,13 @@ export default function InternationalFamiliesThankYouPage() {
       {/* Footer */}
       <SharedFooter language={language} />
     </div>
+  )
+}
+
+export default function InternationalFamiliesThankYouPage() {
+  return (
+    <Suspense fallback={null}>
+      <InternationalFamiliesThankYouContent />
+    </Suspense>
   )
 }

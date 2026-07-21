@@ -19,6 +19,7 @@ import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import SharedFooter from "@/components/shared-footer" // Import SharedFooter
 import SharedHeader from "@/components/shared-header" // Import SharedHeader
+import { trackMetaLead } from "@/lib/meta"
 
 // Declare gtag for TypeScript
 declare global {
@@ -117,11 +118,10 @@ function AdmissionsThankYouContent() {
     }
   }, [])
 
-  // Fire Meta Pixel Lead event, passing the event id for deduplication with the Conversions API
+  // Fire Meta Pixel Lead event, passing the event id for deduplication with the Conversions API.
+  // trackMetaLead waits for fbq to load so a direct load/refresh never drops the event.
   useEffect(() => {
-    if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("track", "Lead", {}, eventId ? { eventID: eventId } : undefined)
-    }
+    return trackMetaLead(eventId)
   }, [eventId])
 
   return (
