@@ -19,7 +19,7 @@ const translations = {
     admissions: "Admissions",
     schoolCalendar: "School Calendar",
     contact: "Contact",
-    familyHandbook: "Family Handbook 2025-2026",
+    familyHandbook: "Family Handbook 2026-27",
     connectWithUs: "Connect With Us",
   },
   es: {
@@ -30,7 +30,7 @@ const translations = {
     admissions: "Admisiones",
     schoolCalendar: "Calendario Escolar",
     contact: "Contacto",
-    familyHandbook: "Manual Familiar 2025-2026",
+    familyHandbook: "Manual Familiar 2026-27",
     connectWithUs: "Conéctate con Nosotros",
   },
 }
@@ -87,14 +87,28 @@ export default function SharedFooter({ language }: SharedFooterProps) {
                 </Link>
               </li>
               <li>
-                <a
-                  href="/documents/family-handbook-2025-2026.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-teal-300 transition-colors"
-                >
-                  {t("familyHandbook")}
-                </a>
+                <span className="text-gray-300">
+                  {t("familyHandbook")}{" "}
+                  <a
+                    href="/documents/family-handbook-2026-27-en.pdf"
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium underline hover:text-teal-300 transition-colors"
+                  >
+                    EN
+                  </a>
+                  {" | "}
+                  <a
+                    href="/documents/family-handbook-2026-27-es.pdf"
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium underline hover:text-teal-300 transition-colors"
+                  >
+                    ES
+                  </a>
+                </span>
               </li>
             </ul>
           </div>

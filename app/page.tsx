@@ -173,7 +173,7 @@ const translations = {
     aboutUs: "About Us",
     schoolNews: "School News",
     schoolCalendar: "School Calendar",
-    familyHandbook: "Family Handbook 2025-2026",
+    familyHandbook: "Family Handbook 2026-27",
     connectWithUs: "Connect With Us",
     footerCopyright: "Pacífico Internacional. All rights reserved. | Nurturing minds, hearts, and hands.",
 
@@ -307,7 +307,7 @@ const translations = {
     aboutUs: "Acerca de Nosotros",
     schoolNews: "Noticias de la Escuela",
     schoolCalendar: "Calendario Escolar",
-    familyHandbook: "Manual Familiar 2025-2026",
+    familyHandbook: "Manual Familiar 2026-27",
     connectWithUs: "Conéctate con Nosotros",
     footerCopyright: "Pacífico Internacional. Todos los derechos reservados. | Nutriendo mentes, corazones y manos.",
 
@@ -2159,16 +2159,30 @@ export default function PacificoHomepage() {
                     {t("contact")}
                   </Link>
                 </li>
-                <li>
+              <li>
+                <span className="text-gray-300">
+                  {t("familyHandbook")}{" "}
                   <a
-                    href="/documents/family-handbook-2025-2026.pdf"
+                    href="/documents/family-handbook-2026-27-en.pdf"
+                    download
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-teal-300 transition-colors"
+                    className="font-medium underline hover:text-teal-300 transition-colors"
                   >
-                    {t("familyHandbook")}
+                    EN
                   </a>
-                </li>
+                  {" | "}
+                  <a
+                    href="/documents/family-handbook-2026-27-es.pdf"
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium underline hover:text-teal-300 transition-colors"
+                  >
+                    ES
+                  </a>
+                </span>
+              </li>
               </ul>
             </div>
             <div>
