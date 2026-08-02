@@ -232,7 +232,7 @@ export default function TeamPage() {
         },
       },
       {
-        name: "Jesua Moises Esquivel Rodriguez",
+        name: "Jesua Moisés Esquivel Rodríguez",
         image: "/images/faculty/jesua.jpg",
         position: { en: "Specialty Teacher - Music", es: "Maestro Especializado - Música" },
         bio: {
