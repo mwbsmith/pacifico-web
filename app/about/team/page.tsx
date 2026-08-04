@@ -206,7 +206,7 @@ export default function TeamPage() {
         },
       },
       {
-        name: "Amrita",
+        name: "Amrita Shore",
         image: "/images/faculty/amrita.jpeg",
         position: {
           en: "English Teacher Middle School, Assistant Teacher Lower Grades",
